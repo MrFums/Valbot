@@ -25,6 +25,10 @@ Run this batch file as Administator to install the program. Works on Windows 10 
 
 # Help
 
+Make sure when installing python, you check the box next to "Add Python 3.8 to PATH"
+
+![1](https://cdn.discordapp.com/attachments/769626861046202429/769950787304423444/0001_add_Python_to_Path.png)
+
 Add my Discord if you want help or face any issues.
 
 Fums#0888
