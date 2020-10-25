@@ -22,3 +22,12 @@ Code may be slightly unoptimized. If you think you can improve it, please make a
 Add my Discord if you want help or face any issues.
 
 Fums#0888
+
+
+# Credits
+
+Base structure was originally written by jordan123pal
+
+Manipulated to work with Valorant by WolfAnto and Fums
+
+Fums optimized, cleaned the code and fixed some bugs 
