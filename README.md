@@ -31,3 +31,11 @@ Base structure was originally written by jordan123pal.
 Manipulated to work with Valorant by WolfAnto and Fums.
 
 Fums further optimized, cleaned the code and fixed some bugs .
+
+
+# Previews
+
+![1](https://cdn.discordapp.com/attachments/769626861046202429/769734968120180766/unknown.png)
+![2](https://cdn.discordapp.com/attachments/769626861046202429/769735054103412746/unknown.png)
+![3](https://cdn.discordapp.com/attachments/769626861046202429/769735162392870932/unknown.png)
+![4](https://cdn.discordapp.com/attachments/769626861046202429/769737295938715678/unknown.png)
