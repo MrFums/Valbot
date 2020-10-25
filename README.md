@@ -1,6 +1,12 @@
 # Valorant XP Farming Bot
 Code may be slightly unoptimized. If you think you can improve it, please make a pull request.
 
+# ALL IN ONE INSTALLER
+
+Run this batch file as Administator to install the program. Works on Windows 10 with Python 3.8 +
+
+[DOWNLOAD](https://github.com/MrFums/ValorantBot/releases/download/AIO/ValorantXPBot_INSTALLER.bat)
+
 
 # Instructions
 
