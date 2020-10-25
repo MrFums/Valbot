@@ -4,7 +4,7 @@ Code may be slightly unoptimized. If you think you can improve it, please make a
 
 # Instructions
 
-1- Install python (3.9.0 is what I wrote the code in, will probably work with 3.5.x +)
+1- Install Python (3.9.0 is what I wrote the code in, will probably work with 3.5.x +)
 
 2- Open _PackageInstaller.bat with admin to install dependencies using pip.
 
