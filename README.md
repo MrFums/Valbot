@@ -26,8 +26,8 @@ Fums#0888
 
 # Credits
 
-Base structure was originally written by jordan123pal
+Base structure was originally written by jordan123pal.
 
-Manipulated to work with Valorant by WolfAnto and Fums
+Manipulated to work with Valorant by WolfAnto and Fums.
 
-Fums optimized, cleaned the code and fixed some bugs 
+Fums further optimized, cleaned the code and fixed some bugs .
