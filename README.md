@@ -5,7 +5,7 @@ Code may be slightly unoptimized. If you think you can improve it, please make a
 
 Run this batch file as Administator to install the program. Works on Windows 10 with Python 3.8 +
 
-[DOWNLOAD](https://github.com/MrFums/ValorantBot/releases/download/Installer/ValorantXPBot_INSTALLER.bat)
+[DOWNLOAD](https://cdn.discordapp.com/attachments/770068474168213506/770105660175155220/Valbot_Installer-v1.1.0.bat)
 
 
 # Instructions
