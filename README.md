@@ -9,7 +9,7 @@ Please note that you MUST change the Valorant shortcut in the generated folder i
 An easy way to do this is to simply copy your own shortcut from your desktop over into the folder. This is to make it so the program can run Valorant again if it crashes.
 
 
-[DOWNLOAD](https://cdn.discordapp.com/attachments/770068474168213506/770105660175155220/Valbot_Installer-v1.1.0.bat)
+[DOWNLOAD](https://cdn.discordapp.com/attachments/721512592786587670/770107538414632980/Valbot_Installer-v1.1.1.bat)
 
 
 # Instructions
