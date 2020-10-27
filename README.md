@@ -1,5 +1,5 @@
 # Valbot 
-#### A Valorant XP Farmer
+## A Valorant XP Farmer
 Code may be slightly unoptimized. If you think you can improve it, please make a pull request.
 
 # REQUIREMENTS
