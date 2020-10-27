@@ -29,7 +29,7 @@ You also need a functioning brain, please have one of these. Don't be like this 
 
 6- Follow the instructions that will appear on screen if you haven't already.
 
-7- If you encounter issues please [create one](https://github.com/MrFums/ValorantBot/issues/new) or if you have suggestions please create a [pull request(https://github.com/MrFums/ValorantBot/compare)
+7- If you encounter issues please [create one](https://github.com/MrFums/ValorantBot/issues/new) or if you have suggestions please create a [pull request](https://github.com/MrFums/ValorantBot/compare)
 
 
 # Help
