@@ -220,10 +220,6 @@ class bot:
                 self.restart()
                 break
             
-            
-            skip = pyautogui.locateOnScreen("images/skip.png",grayscale = True)
-            skip2 = pyautogui.locateOnScreen("images/skip.png", confidence=0.6,grayscale = True)
-            
             playagain = pyautogui.locateOnScreen("images/playagain.png",grayscale = True)
             playagain2 = pyautogui.locateOnScreen("images/playagain.png", confidence=0.6,grayscale = True)
             
@@ -238,8 +234,6 @@ class bot:
                     time.sleep(.5)
                     pyautogui.click(x=960, y=540)
                     time.sleep(.5)
-                    pyautogui.click(playagain)
-                    time.sleep(.5)
                     self.inqueue2()
                     
                     
@@ -247,8 +241,6 @@ class bot:
                     pyautogui.click(playagain2)
                     time.sleep(.5)
                     pyautogui.click(x=960, y=540)
-                    time.sleep(.5)
-                    pyautogui.click(playagain2)
                     time.sleep(.5)
                     self.inqueue2()
     
@@ -324,7 +316,7 @@ class bot:
         
         print(Style.RESET_ALL)
         print(Fore.YELLOW+" Detecting if in queue")
-        time.sleep(3)
+        time.sleep(.1)
         now = time.time()
         
         future = now + 660
@@ -737,6 +729,6 @@ if __name__ == "__main__":
     bot = bot()
     
     #time.sleep(3) #comment this out if youre not testing functions
-    main()
+    bot.result()
 
 
