@@ -38,7 +38,6 @@ class bot:
         
     def playbutton(self):
         
-        
         now = time.time()
         
         future = now + 300
