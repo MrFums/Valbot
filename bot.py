@@ -19,25 +19,44 @@ class bot:
         self.restarted = 0
         self.gamesplayed = 0
     
-    def restart(self):
+    
+    
+    def valorantrunning(self):
+        found = False
+        print(Fore.YELLOW,"Detecting if Valorant is running")
+        print(Style.RESET_ALL)
+        time.sleep(2)
+
+        for proc in psutil.process_iter():
+            if proc.name() == "VALORANT-Win64-Shipping.exe":
+                found = True
+                
+        if found == False:
+            print(Fore.RED,"Can not find Valorant running")
+            print(Style.RESET_ALL)
+            self.startvalorant()
+        else:
+            print (Fore.GREEN,"Found Valorant running")
+            time.sleep(2)
+            self.playbutton()
+    
+    def startvalorant(self):
         
-        print(Style.RESET_ALL)
-        print(Fore.RED,"Restarting the game")
-        print(Style.RESET_ALL)
-        time.sleep(5)
-        self.restarted += 1
         for proc in psutil.process_iter():
             if proc.name() == "VALORANT-Win64-Shipping.exe":
                 proc.kill()
-        time.sleep(15)
-        os.startfile("Valorant.lnk") #change this to include the address of your valorant shortcut
-        time.sleep(5)
+                print (Fore.YELLOW,"Killing Valorant process")
+                time.sleep(10)
+        
+        print(Fore.YELLOW,"Restarting Valorant")
+        print(Style.RESET_ALL)
         os.startfile("Valorant.lnk")
-        time.sleep(2)
-        self.playbutton()
+        time.sleep(8)
+        self.restarted += 1
+        self.valorantrunning()
+    
         
     def playbutton(self):
-        
         
         now = time.time()
         
@@ -51,7 +70,7 @@ class bot:
                 #detects possible issue with valorant and restarts the game
                 print(Style.RESET_ALL)
                 print(Fore.RED+" Found a possible error with Valorant.")
-                self.restart()
+                self.startvalorant()
                 break
             
             play = pyautogui.locateOnScreen("images/play.png",grayscale = True)
@@ -99,7 +118,7 @@ class bot:
                 #detects possible issue with valorant and restarts the game
                 print(Style.RESET_ALL)
                 print(Fore.RED+" Found a possible error with Valorant.")
-                self.restart()
+                self.startvalorant()
                 break
         
             deathmatch = pyautogui.locateOnScreen("images/deathmatch.png",grayscale = True)
@@ -154,7 +173,7 @@ class bot:
                 #detects possible issue with valorant and restarts the game
                 print(Style.RESET_ALL)
                 print(Fore.RED+" Found a possible error with Valorant.")
-                self.restart()
+                self.startvalorant()
                 break
             
             
@@ -217,7 +236,7 @@ class bot:
                 #detects possible issue with valorant and restarts the game
                 print(Style.RESET_ALL)
                 print(Fore.RED+" Found a possible error with Valorant.")
-                self.restart()
+                self.startvalorant()
                 break
             
             playagain = pyautogui.locateOnScreen("images/playagain.png",grayscale = True)
@@ -264,7 +283,7 @@ class bot:
                 #detects possible issue with valorant and restarts the game
                 print(Style.RESET_ALL)
                 print(Fore.RED+" Found a possible error with Valorant.")
-                self.restart()
+                self.startvalorant()
                 break
             
             lobby = pyautogui.locateOnScreen("images/lobby.png",grayscale = True)
@@ -321,7 +340,7 @@ class bot:
                 #detects possible issue with valorant and restarts the game
                 print(Style.RESET_ALL)
                 print(Fore.RED+" Found a possible error with Valorant.")
-                self.restart()
+                self.startvalorant()
                 break
             
             
@@ -364,7 +383,7 @@ class bot:
                     #detects possible issue with valorant and restarts the game
                     print(Style.RESET_ALL)
                     print(Fore.RED+" Found a possible error with Valorant.")
-                    self.restart()
+                    self.startvalorant()
                     break
                 
                 
@@ -405,7 +424,7 @@ class bot:
                 #detects possible issue with valorant and restarts the game
                 print(Style.RESET_ALL)
                 print(Fore.RED+" Found a possible error with Valorant.")
-                self.restart()
+                self.startvalorant()
                 break
             
             ingame = pyautogui.locateOnScreen(banner)
@@ -438,7 +457,7 @@ class bot:
                 #detects possible issue with valorant and restarts the game
                 print(Style.RESET_ALL)
                 print(Fore.RED+" Found a possible error with Valorant.")
-                self.restart()
+                self.startvalorant()
                 break
             
             menu = pyautogui.locateOnScreen("images/menu.png",grayscale = True)
@@ -509,7 +528,7 @@ class bot:
                 #detects possible issue with valorant and restarts the game
                 print(Style.RESET_ALL)
                 print(Fore.RED+" Found a possible error with Valorant.")
-                self.restart()
+                self.startvalorant()
                 break
             
             xpscreen = pyautogui.locateOnScreen("images/menu.png",grayscale = True)
@@ -723,4 +742,5 @@ if __name__ == "__main__":
     
     #time.sleep(3) #comment this out if youre not testing functions
     main()
+
 
