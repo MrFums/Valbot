@@ -33,9 +33,7 @@ Make sure when installing python, you check the box next to "Add Python 3.8 to P
 
 ![1](https://cdn.discordapp.com/attachments/769626861046202429/769950787304423444/0001_add_Python_to_Path.png)
 
-Add my Discord if you want help or face any issues.
-
-Fums#0888
+Please raise an Issue [here](https://github.com/MrFums/ValorantBot/issues/new) if you have any problems. 
 
 
 # Credits
