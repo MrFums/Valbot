@@ -38,6 +38,7 @@ class bot:
         
     def playbutton(self):
         
+        
         now = time.time()
         
         future = now + 300
@@ -55,12 +56,15 @@ class bot:
             
             play = pyautogui.locateOnScreen("images/play.png",grayscale = True)
             play2 = pyautogui.locateOnScreen("images/play.png", confidence=0.6,grayscale = True)
+
             
             if play is not None or play2 is not None:
                 print(Style.RESET_ALL)
                 print(Fore.GREEN+" Detected play button")
                 
-                if play != None:            
+                if play != None:
+            
+                    
                     pyautogui.click(play)
                     time.sleep(1)
                     pyautogui.click(x=960, y=540)
@@ -83,14 +87,13 @@ class bot:
     def dmatch(self):
         
         print(Style.RESET_ALL)
-        print(Fore.YELLOW,"Searching for deathmatch button")
+        print(Fore.YELLOW," Searching for deathmatch button")
     
     
         time.sleep(1)
         now = time.time()
         
         future = now + 120
-    
     
         while True:
             
@@ -104,8 +107,6 @@ class bot:
             deathmatch = pyautogui.locateOnScreen("images/deathmatch.png",grayscale = True)
             deathmatch2 = pyautogui.locateOnScreen("images/deathmatch.png", confidence=0.6,grayscale = True)
                 
-            play = pyautogui.locateOnScreen("images/play.png",grayscale = True)
-            play2 = pyautogui.locateOnScreen("images/play.png", confidence=0.6,grayscale = True)
             
             
             if deathmatch is not None or deathmatch2 is not None:
@@ -139,11 +140,77 @@ class bot:
                 time.sleep(5)
             
     
+    
+    def skipbutton(self):
+                    
+        print(Style.RESET_ALL)
+        print(Fore.YELLOW+" Detecting a skip button")
+        time.sleep(8)
+        now = time.time()
+        
+        future = now + 30
+        
+        while True:
+            
+            if time.time() > future:
+                #detects possible issue with valorant and restarts the game
+                print(Style.RESET_ALL)
+                print(Fore.RED+" Found a possible error with Valorant.")
+                self.restart()
+                break
+            
+            
+            skip = pyautogui.locateOnScreen("images/skip.png",grayscale = True)
+            skip2 = pyautogui.locateOnScreen("images/skip.png",grayscale = True,confidence=0.6)  
+            
+
+            
+            if skip is not None or skip2 is not None:
+                
+                if skip is not None:
+                
+                    print(Style.RESET_ALL)
+                    print(Fore.RED+" Detected a skip button")
+                    time.sleep(1)
+                    pyautogui.click(skip)
+                    time.sleep(.5)
+                    pyautogui.click(x=960, y=540)
+                    time.sleep(1)
+                    pyautogui.click(skip)
+                    
+                    self.playagain()
+                    
+                if skip2 is not None:
+                    print(Style.RESET_ALL)
+                    print(Fore.RED+" Detected a skip button")
+                    time.sleep(1)
+                    pyautogui.click(skip2)
+                    time.sleep(.5)
+                    pyautogui.click(x=960, y=540)
+                    time.sleep(1)
+                    pyautogui.click(skip2)
+                    
+                    
+                    self.playagain()
+                
+            if skip is None or skip2 is None:
+                print(Style.RESET_ALL)
+                print(Fore.GREEN+" Detected no skip button")
+                time.sleep(1)
+            
+                self.playagain()
+
+
+
+
+
     def playagain(self):
+        time.sleep(1)
         now = time.time()
         
         future = now + 780
         
+        print(Style.RESET_ALL)
         print(Fore.YELLOW+" Waiting for play again button")
         while True:
             
@@ -166,71 +233,26 @@ class bot:
             if playagain is not None or playagain2 is not None:
                 print(Style.RESET_ALL)
                 print(Fore.GREEN+" Detected play again button")
-
-                if playagain != None:
                     
-                    if skip is not None or skip2 is not None:
-                        print(Style.RESET_ALL)
-                        print(Fore.GREEN+" Detected a skip button")
-                            
-                        if skip != None:
-                            pyautogui.click(skip)
-                            time.sleep(1)
-                            pyautogui.click(x=960, y=540)
-                            time.sleep(1)
-                            pyautogui.click(skip)
-                            time.sleep(1)
-                            pyautogui.click(playagain)
-                            self.inqueue2()
-                            
-                        
-                        if skip2 != None:
-                            pyautogui.click(skip2)
-                            time.sleep(1)
-                            pyautogui.click(x=960, y=540)
-                            time.sleep(1)
-                            pyautogui.click(skip2)
-                            time.sleep(1)
-                            pyautogui.click(playagain)
-                            self.inqueue2()
-                    else:
-                        pyautogui.click(playagain)
-                        self.inqueue2()
+                    
+                if playagain != None:
+                    pyautogui.click(playagain)
+                    time.sleep(.5)
+                    pyautogui.click(x=960, y=540)
+                    time.sleep(.5)
+                    pyautogui.click(playagain)
+                    time.sleep(.5)
+                    self.inqueue2()
                     
                     
                 if playagain2 != None:
-                    
-                    
-                    if skip is not None or skip2 is not None:
-                        print(Style.RESET_ALL)
-                        print(Fore.GREEN+" Detected a skip button")
-                            
-                        if skip != None:
-                            pyautogui.click(skip)
-                            time.sleep(1)
-                            pyautogui.click(x=960, y=540)
-                            time.sleep(1)
-                            pyautogui.click(skip)
-                            time.sleep(1)
-                            pyautogui.click(playagain2)
-                            self.inqueue2()
-                            
-                        
-                        if skip2 != None:
-                            pyautogui.click(skip2)
-                            time.sleep(1)
-                            pyautogui.click(x=960, y=540)
-                            time.sleep(1)
-                            pyautogui.click(skip2)
-                            time.sleep(1)
-                            pyautogui.click(playagain2)
-                            self.inqueue2()
-                    else:
-                        pyautogui.click(playagain2)
-                        self.inqueue2()
-        
-        
-    
+                    pyautogui.click(playagain2)
+                    time.sleep(.5)
+                    pyautogui.click(x=960, y=540)
+                    time.sleep(.5)
+                    pyautogui.click(playagain2)
+                    time.sleep(.5)
+                    self.inqueue2()
     
     def firststart(self):
         
@@ -373,7 +395,7 @@ class bot:
                     print(Fore.RED+" Detected not in queue after game")
                     time.sleep(1)
                 
-                    self.playagain()        
+                    self.skipbutton()        
         
         
         
@@ -510,15 +532,16 @@ class bot:
                 self.gamesplayed += 1
                 self.xpamount += 900
                 print(Style.RESET_ALL)
-                print(Fore.MAGENTA+"Earned",self.xpamount,"XP in total.")
-                print ("Bot has been running for",datetime.now()-start)
-                print ("Bot was started at",start)
-                print("Played",self.gamesplayed,"games")
-                print ("Valorant has been restarted",self.restarted,"times")
+                print(Fore.MAGENTA+" Earned",self.xpamount,"XP in total.")
+                print (" Bot has been running for",datetime.now()-start)
+                print (" Bot was started at",start)
+                print(" Played",self.gamesplayed,"games")
+                print (" Valorant has been restarted",self.restarted,"times")
                 print(Style.RESET_ALL)
                 time.sleep(4)
-                #pyautogui.click(x=960, y=540)
-                self.playagain()
+                pyautogui.click(x=960, y=540)
+                time.sleep(1)
+                self.skipbutton()
                 
 
 
@@ -711,3 +734,4 @@ if __name__ == "__main__":
     
     #time.sleep(3) #comment this out if youre not testing functions
     main()
+
