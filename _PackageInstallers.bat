@@ -4,4 +4,5 @@ py -m pip install pyautogui
 py -m pip install opencv-python
 py -m pip install psutil
 py -m pip install colorama
-pause
+py -m pip install winshell
+py -m pip install pypiwin32
