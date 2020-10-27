@@ -34,7 +34,7 @@ You also need a functioning brain, please have one of these. Don't be like this 
 
 7- If you encounter issues please [create one](https://github.com/MrFums/ValorantBot/issues/new) or if you have suggestions please create a [pull request](https://github.com/MrFums/ValorantBot/compare)
 
-# DOWNLOAD
+# Download
 
 Click on releases [(or click here)](https://github.com/MrFums/ValorantBot/releases/tag/v1.2) and download. If you also want the shortcut maker, download that too and edit it to your liking; I will not offer support for this as it is optional and not a dependency.
 
