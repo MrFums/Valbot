@@ -1,16 +1,17 @@
-# Valorant XP Farming Bot
+# Valbot - a Valorant XP Farmer
 Code may be slightly unoptimized. If you think you can improve it, please make a pull request.
 
-# ALL IN ONE INSTALLER
+# REQUIREMENTS
 
-Run this batch file as Administator to install the program. Works on Windows 10 with Python 3.8 +
+Run the batch file as Administator to install the dependencies. 
+Works on 64bit Windows 10 with Python 3.8 +
 
-Please note that you MUST change the Valorant shortcut in the generated folder in your root drive. Usually `C:\ValorantXPBot\`
-An easy way to do this is to simply copy your own shortcut from your desktop over into the folder. This is to make it so the program can run Valorant again if it crashes.
+Install Python 3.8.0 (here)[https://www.python.org/ftp/python/3.8.0/python-3.8.0-amd64.exe]
+Install Python 3.9.0 (here)[https://www.python.org/ftp/python/3.8.0/python-3.9.0-amd64.exe]
 
+For the program to function properly, please copy and paste your OWN Valorant shortcut, like this one, (1)[https://cdn.discordapp.com/attachments/748559485643259944/770482798867775498/unknown.png] for the program to function properly. This makes it so if Valorant encounters any issues when AFK, it can restart the game. You should not need to edit any code.
 
-[DOWNLOAD](https://cdn.discordapp.com/attachments/721512592786587670/770107538414632980/Valbot_Installer-v1.1.1.bat)
-
+You also need a functioning brain, please have one of these. Don't be like this guy ![1](https://cdn.discordapp.com/attachments/721512592786587670/770483689632825384/unknown.png)
 
 # Instructions
 
@@ -18,13 +19,16 @@ An easy way to do this is to simply copy your own shortcut from your desktop ove
 
 2- Open _PackageInstaller.bat as admin to install dependencies using pip.
 
-3- Open Valorant, go to PLAY and then click on DEATHMATCH.
+3- Close Valorant and then reopen it and leave it on the home menu, do not click anything else.
 
-4- Open bot and then press 1.
+4- Open bot and navigate the menu (advised to read the information).
 
 5- Choose which Player Card you want to use, change to that one in game and then select it in the bot console.
+  You can either use the default Valorant Player Card or the Beta Pioneer Card (recommended)
 
-6- Follow instructions that will appear on screen if you haven't already.
+6- Follow the instructions that will appear on screen if you haven't already.
+
+7- If you encounter issues please [create one](https://github.com/MrFums/ValorantBot/issues/new) or if you have suggestions please create a [pull request(https://github.com/MrFums/ValorantBot/compare)
 
 
 # Help
@@ -42,7 +46,7 @@ Base structure was originally written by jordan123pal.
 
 Manipulated to work with Valorant by WolfAnto and Fums.
 
-Fums further optimized, cleaned the code and fixed some bugs .
+Fums further optimized, cleaned the code and fixed some bugs.
 
 
 # Previews
