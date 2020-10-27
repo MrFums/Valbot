@@ -10,7 +10,7 @@ Works on 64bit Windows 10 with Python 3.8 +
 Install Python 3.8.0 [here](https://www.python.org/ftp/python/3.8.0/python-3.8.0-amd64.exe)
 Install Python 3.9.0 [here](https://www.python.org/ftp/python/3.8.0/python-3.9.0-amd64.exe)
 
-For the program to function properly, please copy and paste your OWN Valorant shortcut, like this one, ![valorant](https://cdn.discordapp.com/attachments/748559485643259944/770482798867775498/unknown.png "Valorant Shortcut") for the program to function properly. This makes it so if Valorant encounters any issues when AFK, it can restart the game. You should not need to edit any code.
+For the program to function properly, please copy and paste your OWN Valorant shortcut for the program to function properly. This makes it so if Valorant encounters any issues when AFK, it can restart the game. You should not need to edit any code.
 
 You also need a functioning brain, please have one of these. Don't be like this guy:
 
