@@ -2,7 +2,7 @@
 ## A Valorant XP Farmer
 Code may be slightly unoptimized. If you think you can improve it, please make a pull request.
 
-# REQUIREMENTS
+# Requirements
 
 Run the batch file as Administator to install the dependencies. 
 Works on 64bit Windows 10 with Python 3.8 +
