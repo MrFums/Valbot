@@ -155,20 +155,79 @@ class bot:
                 self.restart()
                 break
             
+            
+            skip = pyautogui.locateOnScreen("images/skip.png",grayscale = True)
+            skip2 = pyautogui.locateOnScreen("images/skip.png", confidence=0.6,grayscale = True)
+            
             playagain = pyautogui.locateOnScreen("images/playagain.png",grayscale = True)
             playagain2 = pyautogui.locateOnScreen("images/playagain.png", confidence=0.6,grayscale = True)
+            
             
             if playagain is not None or playagain2 is not None:
                 print(Style.RESET_ALL)
                 print(Fore.GREEN+" Detected play again button")
-                
-                if playagain != None:            
-                    pyautogui.click(playagain2)
-                    self.inqueue2()
+
+                if playagain != None:
+                    
+                    if skip is not None or skip2 is not None:
+                        print(Style.RESET_ALL)
+                        print(Fore.GREEN+" Detected a skip button")
+                            
+                            if skip != None:
+                                pyautogui.click(skip)
+                                time.sleep(1)
+                                pyautogui.click(x=960, y=540)
+                                time.sleep(1)
+                                pyautogui.click(skip)
+                                time.sleep(1)
+                                pyautogui.click(playagain)
+                                self.inqueue2()
+                                
+                            
+                            if skip2 != None:
+                                pyautogui.click(skip2)
+                                time.sleep(1)
+                                pyautogui.click(x=960, y=540)
+                                time.sleep(1)
+                                pyautogui.click(skip2)
+                                time.sleep(1)
+                                pyautogui.click(playagain)
+                                self.inqueue2()
+                    else:
+                        pyautogui.click(playagain)
+                        self.inqueue2()
+                    
                     
                 if playagain2 != None:
-                    pyautogui.click(playagain2)
-                    self.inqueue2()
+                    
+                    
+                    if skip is not None or skip2 is not None:
+                        print(Style.RESET_ALL)
+                        print(Fore.GREEN+" Detected a skip button")
+                            
+                            if skip != None:
+                                pyautogui.click(skip)
+                                time.sleep(1)
+                                pyautogui.click(x=960, y=540)
+                                time.sleep(1)
+                                pyautogui.click(skip)
+                                time.sleep(1)
+                                pyautogui.click(playagain2)
+                                self.inqueue2()
+                                
+                            
+                            if skip2 != None:
+                                pyautogui.click(skip2)
+                                time.sleep(1)
+                                pyautogui.click(x=960, y=540)
+                                time.sleep(1)
+                                pyautogui.click(skip2)
+                                time.sleep(1)
+                                pyautogui.click(playagain2)
+                                self.inqueue2()
+                    else:
+                        pyautogui.click(playagain2)
+                        self.inqueue2()
         
         
     
