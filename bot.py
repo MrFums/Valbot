@@ -63,8 +63,6 @@ class bot:
                 print(Fore.GREEN+" Detected play button")
                 
                 if play != None:
-            
-                    
                     pyautogui.click(play)
                     time.sleep(1)
                     pyautogui.click(x=960, y=540)
@@ -87,7 +85,7 @@ class bot:
     def dmatch(self):
         
         print(Style.RESET_ALL)
-        print(Fore.YELLOW," Searching for deathmatch button")
+        print(Fore.YELLOW,"Searching for deathmatch button")
     
     
         time.sleep(1)
@@ -342,15 +340,21 @@ class bot:
             
             
             q = pyautogui.locateOnScreen("images/inqueue.png",grayscale = True)  
+            q2 = pyautogui.locateOnScreen("images/inqueue.png",grayscale = True,confidence=0.6)  
 
             
-            if q is not None:
-                
-                print(Style.RESET_ALL)
-                print(Fore.GREEN+" Detected in queue")
-                time.sleep(1)
-                self.game()
-                
+            if q is not None or q2 is not None:
+                if q is not None:
+                    print(Style.RESET_ALL)
+                    print(Fore.GREEN+" Detected in queue")
+                    time.sleep(1)
+                    self.game()
+                if q2 is not None:
+                    print(Style.RESET_ALL)
+                    print(Fore.GREEN+" Detected in queue")
+                    time.sleep(1)
+                    self.game()
+            
             if q is None:
                 print(Style.RESET_ALL)
                 print(Fore.RED+" Detected not in queue")
@@ -734,4 +738,5 @@ if __name__ == "__main__":
     
     #time.sleep(3) #comment this out if youre not testing functions
     main()
+
 
