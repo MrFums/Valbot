@@ -231,17 +231,11 @@ class bot:
                     
                 if playagain != None:
                     pyautogui.click(playagain)
-                    time.sleep(.5)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(.5)
                     self.inqueue2()
                     
                     
                 if playagain2 != None:
                     pyautogui.click(playagain2)
-                    time.sleep(.5)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(.5)
                     self.inqueue2()
     
     def firststart(self):
@@ -359,7 +353,7 @@ class bot:
             
             print(Style.RESET_ALL)
             print(Fore.YELLOW+" Detecting if in queue after game")
-            time.sleep(3)
+            time.sleep(.2)
             now = time.time()
             
             future = now + 660
@@ -383,7 +377,6 @@ class bot:
                     
                     print(Style.RESET_ALL)
                     print(Fore.GREEN+" Detected in queue after game")
-                    time.sleep(1)
                     self.game()
                     
                 if q is None or q2 is None:
@@ -520,7 +513,7 @@ class bot:
                 break
             
             xpscreen = pyautogui.locateOnScreen("images/menu.png",grayscale = True)
-            xpscreen = pyautogui.locateOnScreen("images/menu.png", confidence=0.6,grayscale = True)
+            xpscreen2 = pyautogui.locateOnScreen("images/menu.png", confidence=0.6,grayscale = True)
             if xpscreen is not None or xpscreen2 is not None:
                 print(Style.RESET_ALL)
                 print(Fore.GREEN+" Detected XP screen")
@@ -729,6 +722,5 @@ if __name__ == "__main__":
     bot = bot()
     
     #time.sleep(3) #comment this out if youre not testing functions
-    bot.result()
-
+    main()
 
