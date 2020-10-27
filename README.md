@@ -1,4 +1,5 @@
-# Valbot - a Valorant XP Farmer
+# Valbot 
+#### A Valorant XP Farmer
 Code may be slightly unoptimized. If you think you can improve it, please make a pull request.
 
 # REQUIREMENTS
@@ -6,8 +7,8 @@ Code may be slightly unoptimized. If you think you can improve it, please make a
 Run the batch file as Administator to install the dependencies. 
 Works on 64bit Windows 10 with Python 3.8 +
 
-Install Python 3.8.0 (here)[https://www.python.org/ftp/python/3.8.0/python-3.8.0-amd64.exe]
-Install Python 3.9.0 (here)[https://www.python.org/ftp/python/3.8.0/python-3.9.0-amd64.exe]
+Install Python 3.8.0 [here](https://www.python.org/ftp/python/3.8.0/python-3.8.0-amd64.exe)
+Install Python 3.9.0 [here](https://www.python.org/ftp/python/3.8.0/python-3.9.0-amd64.exe)
 
 For the program to function properly, please copy and paste your OWN Valorant shortcut, like this one, (1)[https://cdn.discordapp.com/attachments/748559485643259944/770482798867775498/unknown.png] for the program to function properly. This makes it so if Valorant encounters any issues when AFK, it can restart the game. You should not need to edit any code.
 
@@ -40,6 +41,7 @@ Make sure when installing python, you check the box next to "Add Python 3.8 to P
 
 Please raise an Issue [here](https://github.com/MrFums/ValorantBot/issues/new) if you have any problems. 
 
+Please know that I will not be wasting time helping you if you can't read requirements or need help with Python or installing it (lol).
 
 # Credits
 
