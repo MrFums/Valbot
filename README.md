@@ -7,7 +7,7 @@ ONLY WORKS ON WINDOWS 10!
 If you want a very good battlepass tracker for Act III in Excel, [download this](https://cdn.discordapp.com/attachments/655191989305737256/770803460038983701/Valorant20Battlepass20Tracker20-20E1A3.xlsx).  (I didn't make it).
 
 
-# Requirements
+## Requirements
 
 Run the batch file as Administator to install the dependencies. 
 Works on 64bit Windows 10 with Python 3.8 +
@@ -22,7 +22,7 @@ You also need a functioning brain, please have one of these. Don't be like this 
 
 ![retard](https://cdn.discordapp.com/attachments/721512592786587670/770483689632825384/unknown.png "A retard")
 
-# Instructions
+## Instructions
 
 1- Install Python (3.9.0 is what I wrote the code in, will probably work with 3.5.x +)
 
@@ -39,11 +39,11 @@ You also need a functioning brain, please have one of these. Don't be like this 
 
 7- If you encounter issues please [create one](https://github.com/MrFums/ValorantBot/issues/new) or if you have suggestions please create a [pull request](https://github.com/MrFums/ValorantBot/compare)
 
-# Download
+## Download
 
 Click on releases [(or click here)](https://github.com/MrFums/ValorantBot/releases/tag/v1.2) and download. If you also want the shortcut maker, download that too and edit it to your liking; I will not offer support for this as it is optional and not a dependency.
 
-# Help
+## Help
 
 Make sure when installing python, you check the box next to "Add Python 3.8 to PATH"
 
@@ -53,7 +53,7 @@ Please raise an Issue [here](https://github.com/MrFums/ValorantBot/issues/new) i
 
 Please know that I will not be wasting time helping you if you can't read requirements or need help with Python or installing it (lol).
 
-# Credits
+## Credits
 
 Base structure was originally written by jordan123pal.
 
@@ -62,7 +62,7 @@ Manipulated to work with Valorant by WolfAnto and Fums.
 Fums further optimized, cleaned the code and fixed some bugs.
 
 
-# Previews
+## Previews
 
 ![1](https://cdn.discordapp.com/attachments/769626861046202429/770698480720805938/unknown.png)
 ![2](https://cdn.discordapp.com/attachments/769626861046202429/770698603546673172/unknown.png)
