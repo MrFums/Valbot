@@ -41,7 +41,7 @@ You also need a functioning brain, please have one of these. Don't be like this 
 
 ## Download
 
-Click on releases [(or click here)](https://github.com/MrFums/ValorantBot/releases/tag/v1.2) and download. If you also want the shortcut maker, download that too and edit it to your liking; I will not offer support for this as it is optional and not a dependency.
+Click on releases and download the latest version. If you also want the shortcut maker, download that too and edit it to your liking; I will not offer support for this as it is optional and not a dependency.
 
 ## Help
 
