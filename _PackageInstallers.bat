@@ -8,3 +8,4 @@ py -m pip install psutil
 py -m pip install colorama
 py -m pip install winshell
 py -m pip install pypiwin32
+py -m pip install discord_webhook
