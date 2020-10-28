@@ -12,8 +12,8 @@ If you want a very good battlepass tracker for Act III in Excel, [download this]
 Run the batch file as Administator to install the dependencies. 
 Works on 64bit Windows 10 with Python 3.8 +
 
-Install Python 3.8.0 [here](https://www.python.org/ftp/python/3.8.0/python-3.8.0-amd64.exe)
-Install Python 3.9.0 [here](https://www.python.org/ftp/python/3.8.0/python-3.9.0-amd64.exe)
+Install Python 3.8.0 [here](https://www.python.org/downloads/release/python-380/)
+Install Python 3.9.0 [here](https://www.python.org/downloads/release/python-390/)
 
 For the program to function properly, please copy and paste your OWN Valorant shortcut for the program to function properly. This makes it so if Valorant encounters any issues when AFK, it can restart the game. You should not need to edit any code.
 
