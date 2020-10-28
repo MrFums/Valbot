@@ -59,7 +59,7 @@ Base structure was originally written by jordan123pal.
 
 Manipulated to work with Valorant by WolfAnto and Fums.
 
-Fums further optimized, cleaned the code and fixed some bugs.
+Fums is now the main developer of the bot.
 
 
 ## Previews
