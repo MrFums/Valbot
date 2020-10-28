@@ -4,6 +4,9 @@ Code may be slightly unoptimized. If you think you can improve it, please make a
 
 ONLY WORKS ON WINDOWS 10!
 
+If you want a very good battlepass tracker for Act III in Excel, [download this](https://cdn.discordapp.com/attachments/655191989305737256/770803460038983701/Valorant20Battlepass20Tracker20-20E1A3.xlsx).  (I didn't make it).
+
+
 # Requirements
 
 Run the batch file as Administator to install the dependencies. 
