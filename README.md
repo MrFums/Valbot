@@ -7,6 +7,16 @@ ONLY WORKS ON WINDOWS 10!
 If you want a very good battlepass tracker for Act III in Excel, [download this](https://cdn.discordapp.com/attachments/655191989305737256/770803460038983701/Valorant20Battlepass20Tracker20-20E1A3.xlsx).  (I didn't make it).
 
 
+## Features
+
+* Fully AFK XP farmer
+* Discord webhook support
+* Optimized and has fail safes for events that may happen during runtime of the game
+* Restarts Valorant if detects an issue with it / detects that it isn't running
+* Undetected
+* Easy navigation
+
+
 ## Requirements
 
 Run the batch file as Administator to install the dependencies. 
