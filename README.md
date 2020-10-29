@@ -75,6 +75,14 @@ Manipulated to work with Valorant by WolfAnto and Fums.
 Fums is now the main developer of the bot.
 
 
+## Thank you!
+
+Thank you to all the support you have all given. It is appreciated <3
+
+![1](https://cdn.discordapp.com/attachments/748559485643259944/771174248907669525/unknown.png)
+![2](https://cdn.discordapp.com/attachments/748559485643259944/771174320449257492/unknown.png)
+
+
 ## Previews
 
 ![1](https://cdn.discordapp.com/attachments/769626861046202429/770698480720805938/unknown.png)
