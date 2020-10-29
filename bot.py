@@ -431,9 +431,10 @@ class bot:
             ingame = pyautogui.locateOnScreen(banner)
             ingame2 = pyautogui.locateOnScreen(banner, confidence=0.6)
             
+            defaultcard = pyautogui.locateOnScreen("images/defaultcard.png",grayscale = True)
+            defaultcard2 = pyautogui.locateOnScreen("images/defaultcard.png",grayscale = True,confidence=0.6)
             
-            
-            if ingame is not None or ingame2 is not None:
+            if ingame is not None or ingame2 is not None or defaultcard is not None or defaultcard2 is not None:
                 print(Style.RESET_ALL)
                 print(Fore.GREEN+" [√] Detected in game")
                 time.sleep(1)
