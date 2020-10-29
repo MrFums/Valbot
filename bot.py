@@ -5,6 +5,7 @@ from colorama import init
 from colorama import Fore, Back, Style
 from datetime import datetime
 from win32com.client import Dispatch
+from discord_webhook import DiscordWebhook, DiscordEmbed
 
 #---------------------------------------------------------------
 
@@ -539,12 +540,19 @@ class bot:
                 time.sleep(2)
                 self.gamesplayed += 1
                 self.xpamount += 900
+                
+                
                 runtime = datetime.now() - start
+                runtime = str(runtime)
+                runtime = runtime[:-7]
+                
                 exact = start.strftime("%H:%M:%S")
                 dat = start.strftime("%d %h %Y")
                 print(Style.RESET_ALL)
                 print(Style.RESET_ALL)
                 print(Style.RESET_ALL)
+                
+                
                 print(Style.RESET_ALL+Fore.YELLOW+"———————————————————————————————————————————————————————————————————————————————")
                 print(Style.RESET_ALL)
                 print(Fore.YELLOW+" Earned",Style.BRIGHT+Fore.YELLOW+str(self.xpamount)+" XP"+Style.RESET_ALL+Fore.YELLOW,"in total")
@@ -555,9 +563,45 @@ class bot:
                 print(Style.RESET_ALL)
                 print(Style.RESET_ALL+Fore.YELLOW+"———————————————————————————————————————————————————————————————————————————————")
                 print(Style.RESET_ALL)
-                print(Fore.YELLOW+"                                 Valbot v1.3")
+                print(Fore.YELLOW+"                                 Valbot v1.4")
                 print(Style.RESET_ALL)
                 print(Style.RESET_ALL)
+                
+                try:
+                    f = open('webhook.save', 'r')
+                    line = f.readline()
+                    f.close()
+                    found = True
+                except Exception:
+                    found = False
+
+
+                if found == True:
+
+                    webhook = DiscordWebhook(url=line)
+
+                    # create embed object for webhook
+
+
+                    embed = DiscordEmbed(title='Match Completed', color=242424)
+                    embed.set_author(name='Valbot', url='https://github.com/MrFums/ValorantBot', icon_url='https://raw.githubusercontent.com/MrFums/ValorantBot/main/Valbot.png')
+                    embed.set_footer(text='Valbot v1.4')
+                    embed.set_timestamp()
+                    embed.add_embed_field(name='Total XP', value=self.xpamount)
+                    embed.add_embed_field(name='Time Elapsed', value=runtime)
+                    embed.add_embed_field(name='Games Played', value=self.gamesplayed)
+
+
+
+                    webhook.add_embed(embed)
+                    response = webhook.execute()
+                else:
+                    print(Style.RESET_ALL)
+                    print(Fore.RED+" [!] Discord webhook is not setup. Set it up in the menu.")
+                    print(Style.RESET_ALL)
+
+                                
+                                
                 time.sleep(4)
                 pyautogui.click(x=960, y=540)
                 time.sleep(1)
@@ -633,7 +677,7 @@ def main():
 
 
 
-    print(Fore.RED + "                         v1.3"+Style.RESET_ALL,"-"+Fore.RED,Style.BRIGHT+"by Fums and WolfAnto")
+    print(Fore.RED + "                         v1.4"+Style.RESET_ALL,"-"+Fore.RED,Style.BRIGHT+"by Fums and WolfAnto")
     print("")
     print(Style.RESET_ALL)
     print(Fore.RED + "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄")
@@ -644,7 +688,9 @@ def main():
     print("")
     print(Fore.WHITE+" 2)",Fore.YELLOW+"Help + Information")
     print("")
-    print(Fore.WHITE+" 3)",Fore.YELLOW+"Exit Bot")
+    print(Fore.WHITE+" 3)",Fore.YELLOW+"Manage Webhook")
+    print("")
+    print(Fore.WHITE+" 4)",Fore.YELLOW+"Exit Bot")
     print("")
     print(Style.BRIGHT + Fore.GREEN+"")
     
@@ -728,6 +774,60 @@ def main():
 
 
         elif menu == 3:
+            print(Style.RESET_ALL)
+            print(Fore.RED + " WEBHOOK MANAGER")
+            print(Style.RESET_ALL)
+            print(Fore.WHITE + " 1)",Fore.CYAN +"Open Discord, go to a server where you have permission to create and manage a webhook")
+            print("")
+            print(Fore.WHITE + " 2)",Fore.CYAN +"Either create and / or edit an existing channel and go to 'Integrations'")
+            print("")
+            print(Fore.WHITE + " 3)",Fore.CYAN +"Click webhooks and then click 'Create Webhook', select the right channel,")
+            print(Fore.CYAN,"edit the name and image if you wish, and then click 'Copy Webhook URL'")
+            print("")
+            print(Fore.WHITE + " 4)",Fore.CYAN +"Paste your webhook below with nothing else, make sure there are no spaces")
+            print(Style.RESET_ALL)
+            print(Style.BRIGHT + Fore.GREEN+"")
+            
+            
+            if os.path.exists("webhook.save"):
+                os.remove("webhook.save")
+                f = open("webhook.save", "a+")
+                inputwebhook = input(" > ")
+                print(Style.RESET_ALL)
+                f.write(inputwebhook)
+                f.close()
+                time.sleep(1)
+                print(Style.RESET_ALL)
+                print(Fore.GREEN+" [√] Webhook added. Please make sure that it is correct:")
+                print(Style.BRIGHT + Fore.RED,inputwebhook)
+                print(Style.RESET_ALL+ Fore.RED)
+                print(" Input anything to return to the menu...")
+                print(Style.RESET_ALL)
+                print(Style.BRIGHT + Fore.GREEN+"")
+                menu = str(input(" > "))
+                main()
+                
+                
+            else:
+                f = open("webhook.save", "a+")
+                inputwebhook = input(" > ")
+                print(Style.RESET_ALL)
+                f.write(inputwebhook)
+                f.close()
+                time.sleep(1)
+                print(Style.RESET_ALL)
+                print(Fore.GREEN+" [√] Webhook added. Please make sure that it is correct:")
+                print(Style.BRIGHT + Fore.RED,inputwebhook)
+                print(Style.RESET_ALL+ Fore.RED)
+                print(" Input anything to return to the menu...")
+                print(Style.RESET_ALL)
+                print(Style.BRIGHT + Fore.GREEN+"")
+                menu = str(input(" > "))
+                main()
+
+            
+
+        elif menu == 4:
             print(Style.BRIGHT + Fore.RED+" Ok, closing. Thanks for using!")
             time.sleep(1)
             quit()
@@ -749,5 +849,4 @@ if __name__ == "__main__":
     
     #time.sleep(3) #comment this out if youre not testing functions
     main()
-
 
