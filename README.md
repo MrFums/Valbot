@@ -32,6 +32,7 @@ You also need a functioning brain, please have one of these. Don't be like this 
 
 ![retard](https://cdn.discordapp.com/attachments/721512592786587670/770483689632825384/unknown.png "A retard")
 
+
 ## Instructions
 
 1- Install Python (The code usually works on 3.8.0 but I wrote the code in 3.9.0. Many people seem to have problems with 3.9.0 (usually when running the bat file).
@@ -49,9 +50,11 @@ You also need a functioning brain, please have one of these. Don't be like this 
 
 7- If you encounter issues please [create one](https://github.com/MrFums/ValorantBot/issues/new) or if you have suggestions please create a [pull request](https://github.com/MrFums/ValorantBot/compare)
 
+
 ## Download
 
 Click on releases and download the latest version. If you also want the shortcut maker, download that too and edit it to your liking; I will not offer support for this as it is optional and not a dependency.
+
 
 ## Help
 
