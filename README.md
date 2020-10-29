@@ -1,5 +1,5 @@
-# Valbot 
-## A Valorant XP Farmer
+# Valbot - Valorant XP Farmer
+
 Code may be slightly unoptimized. If you think you can improve it, please make a pull request.
 
 ONLY WORKS ON WINDOWS 10!
