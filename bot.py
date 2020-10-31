@@ -1,4 +1,4 @@
-import pyautogui, time, os, winshell, psutil
+import pyautogui, time, os, winshell, psutil, math
 from random import randint
 from time import sleep
 from colorama import init
@@ -6,21 +6,105 @@ from colorama import Fore, Back, Style
 from datetime import datetime
 from win32com.client import Dispatch
 from discord_webhook import DiscordWebhook, DiscordEmbed
+from pathlib import Path
+import sys
 
 #---------------------------------------------------------------
 
-
 start=datetime.now()
-banner = "images/1.png" #this is a fail safe
+banner = "images/1.png" # this is a fail safe for testing purposes, ignore it.
 pyautogui.FAILSAFE = False
+
+
 
 class bot:
     def __init__(self):
         self.xpamount = 0
         self.restarted = 0
         self.gamesplayed = 0
-    
-    
+
+    def inqueue2(self):
+            
+            print(Style.RESET_ALL)
+            print(Fore.YELLOW+" [-] Detecting if in queue after game")
+            time.sleep(.2)
+            now = time.time()
+            
+            future = now + 660
+            
+            while True:
+                
+                if time.time() > future:
+                    #detects possible issue with valorant and restarts the game
+                    print(Style.RESET_ALL)
+                    print(Fore.RED+" [!] Found a possible error with Valorant.")
+                    self.startvalorant()
+                    break
+                
+                
+                q = pyautogui.locateOnScreen("images/inqueue2.png",grayscale = True)
+                q2 = pyautogui.locateOnScreen("images/inqueue2.png",grayscale = True,confidence=0.6)  
+
+
+                
+                if q is not None or q2 is not None:
+                    
+                    print(Style.RESET_ALL)
+                    print(Fore.GREEN+" [√] Detected in queue after game")
+                    self.game()
+                    
+                if q is None or q2 is None:
+                    print(Style.RESET_ALL)
+                    print(Fore.RED+" [!] Detected not in queue after game")
+                    time.sleep(1)
+                    
+                    self.skipbutton()        
+
+    def playagain(self):
+        time.sleep(1)
+        now = time.time()
+        
+        future = now + 780
+        
+        print(Style.RESET_ALL)
+        print(Fore.YELLOW+" [-] Waiting for play again button")
+        while True:
+            
+            
+            if time.time() > future:
+                #detects possible issue with valorant and restarts the game
+                print(Style.RESET_ALL)
+                print(Fore.RED+" [!] Found a possible error with Valorant.")
+                self.startvalorant()
+                break
+            
+            playagain = pyautogui.locateOnScreen("images/playagain.png",grayscale = True)
+            playagain2 = pyautogui.locateOnScreen("images/playagain.png", confidence=0.6,grayscale = True)
+            
+            
+            if playagain is not None or playagain2 is not None:
+                print(Style.RESET_ALL)
+                print(Fore.GREEN+" [√] Detected play again button")
+                    
+                    
+                if playagain != None:
+                    pyautogui.click(playagain)
+                    time.sleep(1)
+                    pyautogui.click(x=960, y=540)
+                    time.sleep(1)
+                    pyautogui.click(playagain)
+                    
+                    self.inqueue2()
+                    
+                    
+                if playagain2 != None:
+                    pyautogui.click(playagain2)
+                    time.sleep(1)
+                    pyautogui.click(x=960, y=540)
+                    time.sleep(1)
+                    pyautogui.click(playagain2)
+                    self.inqueue2()
+
     
     def valorantrunning(self):
         found = False
@@ -41,7 +125,7 @@ class bot:
             time.sleep(2)
             self.playbutton()
     
-    def startvalorant(self):
+    def startvalorant(self): 
         
         for proc in psutil.process_iter():
             if proc.name() == "VALORANT-Win64-Shipping.exe":
@@ -53,9 +137,8 @@ class bot:
         print(Style.RESET_ALL)
         os.startfile("Valorant.lnk")
         time.sleep(8)
-        self.restarted += 1
+        restarted += 1
         self.valorantrunning()
-    
         
     def playbutton(self):
         
@@ -63,7 +146,9 @@ class bot:
         
         future = now + 300
         
+        print(Style.RESET_ALL)        
         print(Fore.YELLOW+" [-] Waiting for play button")
+        time.sleep(8)
         while True:
             
             
@@ -163,7 +248,7 @@ class bot:
                     
         print(Style.RESET_ALL)
         print(Fore.YELLOW+" [-] Detecting a skip button")
-        time.sleep(8)
+        time.sleep(3)
         now = time.time()
         
         future = now + 30
@@ -182,7 +267,6 @@ class bot:
             skip2 = pyautogui.locateOnScreen("images/skip.png",grayscale = True,confidence=0.6)  
             
 
-            
             if skip is not None or skip2 is not None:
                 
                 if skip is not None:
@@ -217,51 +301,13 @@ class bot:
                 time.sleep(1)
             
                 self.playagain()
-
-
-
-
-
-    def playagain(self):
-        time.sleep(1)
-        now = time.time()
-        
-        future = now + 780
-        
-        print(Style.RESET_ALL)
-        print(Fore.YELLOW+" [-] Waiting for play again button")
-        while True:
-            
-            
-            if time.time() > future:
-                #detects possible issue with valorant and restarts the game
-                print(Style.RESET_ALL)
-                print(Fore.RED+" [!] Found a possible error with Valorant.")
-                self.startvalorant()
-                break
-            
-            playagain = pyautogui.locateOnScreen("images/playagain.png",grayscale = True)
-            playagain2 = pyautogui.locateOnScreen("images/playagain.png", confidence=0.6,grayscale = True)
-            
-            
-            if playagain is not None or playagain2 is not None:
-                print(Style.RESET_ALL)
-                print(Fore.GREEN+" [√] Detected play again button")
-                    
-                    
-                if playagain != None:
-                    pyautogui.click(playagain)
-                    self.inqueue2()
-                    
-                    
-                if playagain2 != None:
-                    pyautogui.click(playagain2)
-                    self.inqueue2()
     
     def firststart(self):
         
         print(Style.RESET_ALL)
         print(Fore.RED,Style.BRIGHT+"[!] Bot will start in 10 seconds. Make sure you are in the menu.")
+        print(Style.RESET_ALL)
+        print(Fore.RED,Style.BRIGHT+"[!] It is advised to try and restart the bot every 4 - 6 hours.")
         print(Style.RESET_ALL)
         time.sleep(10)
         
@@ -367,47 +413,7 @@ class bot:
                 time.sleep(1)
             
                 self.lobby()
-                
-                
-    def inqueue2(self):
-            
-            print(Style.RESET_ALL)
-            print(Fore.YELLOW+" [-] Detecting if in queue after game")
-            time.sleep(.2)
-            now = time.time()
-            
-            future = now + 660
-            
-            while True:
-                
-                if time.time() > future:
-                    #detects possible issue with valorant and restarts the game
-                    print(Style.RESET_ALL)
-                    print(Fore.RED+" [!] Found a possible error with Valorant.")
-                    self.startvalorant()
-                    break
-                
-                
-                q = pyautogui.locateOnScreen("images/inqueue2.png",grayscale = True)
-                q2 = pyautogui.locateOnScreen("images/inqueue2.png",grayscale = True,confidence=0.6)  
-
-
-                
-                if q is not None or q2 is not None:
-                    
-                    print(Style.RESET_ALL)
-                    print(Fore.GREEN+" [√] Detected in queue after game")
-                    self.game()
-                    
-                if q is None or q2 is None:
-                    print(Style.RESET_ALL)
-                    print(Fore.RED+" [!] Detected not in queue after game")
-                    time.sleep(1)
-                
-                    self.skipbutton()        
-        
-        
-        
+                   
     def game(self):
         time.sleep(1)
         print(Style.RESET_ALL)
@@ -524,6 +530,7 @@ class bot:
         
         future = now + 120
         
+        
         while True:
             
             if time.time() > future:
@@ -532,6 +539,7 @@ class bot:
                 print(Fore.RED+" [!] Found a possible error with Valorant.")
                 self.startvalorant()
                 break
+
             
             xpscreen = pyautogui.locateOnScreen("images/menu.png",grayscale = True)
             xpscreen2 = pyautogui.locateOnScreen("images/menu.png", confidence=0.6,grayscale = True)
@@ -542,13 +550,15 @@ class bot:
                 self.gamesplayed += 1
                 self.xpamount += 900
                 
-                
+
+
                 runtime = datetime.now() - start
                 runtime = str(runtime)
                 runtime = runtime[:-7]
                 
                 exact = start.strftime("%H:%M:%S")
                 dat = start.strftime("%d %h %Y")
+                embeddate = start.strftime
                 print(Style.RESET_ALL)
                 print(Style.RESET_ALL)
                 print(Style.RESET_ALL)
@@ -564,12 +574,12 @@ class bot:
                 print(Style.RESET_ALL)
                 print(Style.RESET_ALL+Fore.YELLOW+"———————————————————————————————————————————————————————————————————————————————")
                 print(Style.RESET_ALL)
-                print(Fore.YELLOW+"                                 Valbot v1.4")
+                print(Fore.YELLOW+"                                 Valbot v1.5")
                 print(Style.RESET_ALL)
                 print(Style.RESET_ALL)
-                
+                time.sleep(1)
                 try:
-                    f = open('webhook.save', 'r')
+                    f = open('webhook.txt', 'r')
                     line = f.readline()
                     f.close()
                     found = True
@@ -582,26 +592,23 @@ class bot:
                     webhook = DiscordWebhook(url=line)
 
                     # create embed object for webhook
-
-
+                    datet = (exact,"on the",dat)
                     embed = DiscordEmbed(title='Match Completed', color=242424)
                     embed.set_author(name='Valbot', url='https://github.com/MrFums/ValorantBot', icon_url='https://raw.githubusercontent.com/MrFums/ValorantBot/main/Valbot.png')
-                    embed.set_footer(text='Valbot v1.4')
+                    embed.set_footer(text='Valbot v1.5')
                     embed.set_timestamp()
                     embed.add_embed_field(name='Total XP', value=self.xpamount)
-                    embed.add_embed_field(name='Time Elapsed', value=runtime)
                     embed.add_embed_field(name='Games Played', value=self.gamesplayed)
+                    embed.add_embed_field(name='Bot Runtime', value=runtime)
 
-
-
+                    
+                    
+                
                     webhook.add_embed(embed)
                     response = webhook.execute()
                 else:
                     print(Style.RESET_ALL)
                     print(Fore.RED+" [!] Discord webhook is not setup. Set it up in the menu.")
-                    print(Style.RESET_ALL)
-
-                                
                                 
                 time.sleep(4)
                 pyautogui.click(x=960, y=540)
@@ -625,8 +632,8 @@ def select_banner():
     print (Fore.WHITE+" 3)",Fore.YELLOW+"Return to Menu",Style.RESET_ALL)
     print ("")
     print(Style.BRIGHT + Fore.GREEN+"")
-    banneroption = int(input(" > "))
     try:
+        banneroption = int(input(" > "))
         if banneroption == 1:
             banner = "images/1.png"
             print (Style.RESET_ALL)
@@ -678,20 +685,22 @@ def main():
 
 
 
-    print(Fore.RED + "                         v1.4"+Style.RESET_ALL,"-"+Fore.RED,Style.BRIGHT+"by Fums and WolfAnto")
+    print(Fore.RED + "                         v1.5"+Style.RESET_ALL,"-"+Fore.RED,Style.BRIGHT+"by Fums and WolfAnto")
     print("")
     print(Style.RESET_ALL)
     print(Fore.RED + "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄")
     print(Style.RESET_ALL)
     time.sleep(0.5)
     print (Style.BRIGHT + Fore.RED)
-    print(Fore.WHITE+" 1)",Fore.YELLOW+"Launch Bot")
+    print(Fore.WHITE+" 1)",Fore.YELLOW+"Start Bot")
     print("")
-    print(Fore.WHITE+" 2)",Fore.YELLOW+"Help + Information")
+    print(Fore.WHITE+" 2)",Fore.YELLOW+"Information")
     print("")
-    print(Fore.WHITE+" 3)",Fore.YELLOW+"Manage Webhook")
+    print(Fore.WHITE+" 3)",Fore.YELLOW+"Manage Discord Webhook")
     print("")
-    print(Fore.WHITE+" 4)",Fore.YELLOW+"Exit Bot")
+    print(Fore.WHITE+" 4)",Fore.YELLOW+"XP Calculator")
+    print("")
+    print(Fore.WHITE+" 5)",Fore.YELLOW+"Exit Bot")
     print("")
     print(Style.BRIGHT + Fore.GREEN+"")
     
@@ -713,9 +722,21 @@ def main():
             print("")
             print(Fore.RED + "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄")
             print(Style.RESET_ALL)
-            time.sleep(5)
+            
+            vallnk = Path("Valorant.lnk")
+            if vallnk.is_file():
+                # file exists
+                time.sleep(5)
 
-            bot.firststart()
+                bot.firststart()
+
+            else:
+                print(Fore.RED,'You do not have a Valorant shortcut named "Valorant.lnk" in the bots directory')
+                time.sleep(5)
+                print(Fore.RED,'Create one now. This is incase Valorant crashes, the game can be launched again')
+                print(Style.RESET_ALL)
+                time.sleep(5)
+                main()
             
             
         elif menu == 2:
@@ -787,48 +808,59 @@ def main():
             print("")
             print(Fore.WHITE + " 4)",Fore.CYAN +"Paste your webhook below with nothing else, make sure there are no spaces")
             print(Style.RESET_ALL)
+            print(Style.BRIGHT,Fore.RED)
+            print("")
+            print(" Input anything other than a discord webhook to return to the menu...")
+            print(Style.RESET_ALL)
             print(Style.BRIGHT + Fore.GREEN+"")
             
+            urlcheck = "https://discordapp.com/api/webhooks/"
+            inputwebhook = input(" > ")
             
-            if os.path.exists("webhook.save"):
-                os.remove("webhook.save")
-                f = open("webhook.save", "a+")
-                inputwebhook = input(" > ")
+            if urlcheck in inputwebhook:
                 print(Style.RESET_ALL)
+
+                if os.path.exists("webhook.txt"):
+                    os.remove("webhook.txt")
+      
+                f = open("webhook.txt", "a+")
                 f.write(inputwebhook)
                 f.close()
-                time.sleep(1)
                 print(Style.RESET_ALL)
-                print(Fore.GREEN+" [√] Webhook added. Please make sure that it is correct:")
-                print(Style.BRIGHT + Fore.RED,inputwebhook)
-                print(Style.RESET_ALL+ Fore.RED)
-                print(" Input anything to return to the menu...")
+                print(Fore.GREEN+" [√] Webhook added")
                 print(Style.RESET_ALL)
-                print(Style.BRIGHT + Fore.GREEN+"")
-                menu = str(input(" > "))
+                time.sleep(3)
                 main()
-                
-                
+            
             else:
-                f = open("webhook.save", "a+")
-                inputwebhook = input(" > ")
                 print(Style.RESET_ALL)
-                f.write(inputwebhook)
-                f.close()
-                time.sleep(1)
-                print(Style.RESET_ALL)
-                print(Fore.GREEN+" [√] Webhook added. Please make sure that it is correct:")
-                print(Style.BRIGHT + Fore.RED,inputwebhook)
-                print(Style.RESET_ALL+ Fore.RED)
-                print(" Input anything to return to the menu...")
+                print(Fore.RED+ " The input was not a webhook, returning to menu...")
+                time.sleep(3)
+                main()
+                
+                
+        elif menu == 4:
+            print(Style.RESET_ALL)
+            print (Style.RESET_ALL,Fore.YELLOW+Style.BRIGHT,"How much XP do you need to get to the item you want?")
+            try:
                 print(Style.RESET_ALL)
                 print(Style.BRIGHT + Fore.GREEN+"")
-                menu = str(input(" > "))
+                xpa = int(input(" > "))
+            except ValueError:
+                print (" Error 2: You must enter an integer!")
+                time.sleep(2)
                 main()
+                
 
+            xpa /= 900
+            xpau = (math.ceil(xpa))
+            print(Style.RESET_ALL + Style.BRIGHT + Fore.GREEN,"You need to complete",Style.RESET_ALL +Fore.GREEN+str(xpau),"deathmatch games",Style.BRIGHT + "to get the required XP")
             
-
-        elif menu == 4:
+            time.sleep(7)
+            print(Style.RESET_ALL)      
+            main()
+            
+        elif menu == 5:
             print(Style.BRIGHT + Fore.RED+" Ok, closing. Thanks for using!")
             time.sleep(1)
             quit()
@@ -849,5 +881,4 @@ if __name__ == "__main__":
     bot = bot()
     
     #time.sleep(3) #comment this out if youre not testing functions
-    main()
-
+    bot.result()
