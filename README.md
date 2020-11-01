@@ -35,7 +35,7 @@ You also need a functioning brain, please have one of these. Don't be like this 
 
 ## Instructions
 
-1- Install Python (The code usually works on 3.8.0 but I wrote the code in 3.9.0. Many people seem to have problems with 3.9.0 (usually when running the bat file).
+1- Install Python (The code usually works on 3.8.0 but I wrote the code in 3.9.0. Many people seem to have problems with 3.9.0 (usually when running the bat file)).
 
 2- Open _PackageInstaller.bat as admin to install dependencies using pip.
 
