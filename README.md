@@ -24,32 +24,28 @@ Seems to only work on 64bit Windows 10 with Python 3.8
 
 Install Python 3.8.0 [here](https://www.python.org/downloads/release/python-380/)
 
-
 For the program to function properly, please copy and paste your OWN Valorant shortcut for the program to function properly. This makes it so if Valorant encounters any issues when AFK, it can restart the game. You should not need to edit any code.
 
-You also need a functioning brain, please have one of these. Don't be like this guy:
-
-
-![retard](https://cdn.discordapp.com/attachments/721512592786587670/770483689632825384/unknown.png "A retard")
+You also need a functioning brain, please have one of these.
 
 
 ## Instructions
 
-1- Install Python (The code usually works on 3.8.0 but I wrote the code in 3.9.0. Many people seem to have problems with 3.9.0 (usually when running the bat file)).
+1- Install Python 3.8.0.
 
-2- Open _PackageInstaller.bat as admin to install dependencies using pip.
+2- Open _PackageInstaller.bat as admin to install dependencies using pip. Do this after every update.
 
-3- Close Valorant and then reopen it and leave it on the home menu, do not click anything else.
+3- If Valorant is open make sure it is on the menu and run the bot.
 
 4- Open bot and navigate the menu (advised to read the information).
 
-5- Choose which Player Card you want to use, change to that one in game and then select it in the bot console.
-  You can either use the default Valorant Player Card or the Beta Pioneer Card (recommended)
+5- Put your Valorant shortcut in the bots directory.
 
 6- Follow the instructions that will appear on screen if you haven't already.
 
 7- If you encounter issues please [create one](https://github.com/MrFums/ValorantBot/issues/new) or if you have suggestions please create a [pull request](https://github.com/MrFums/ValorantBot/compare)
 
+8- (Optional) Setup a Discord webhook to get updates to your discord server for when the bot has completed a game.
 
 ## Download
 
@@ -65,6 +61,7 @@ Make sure when installing python, you check the box next to "Add Python 3.8 to P
 Please raise an Issue [here](https://github.com/MrFums/ValorantBot/issues/new) if you have any problems. 
 
 Please know that I will not be wasting time helping you if you can't read requirements or need help with Python or installing it (lol).
+
 
 ## Credits
 
