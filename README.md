@@ -1,4 +1,6 @@
-# Valbot - Valorant XP Farmer
+# Valbot v1.7
+
+An XP bot
 
 Code may be slightly unoptimized. If you think you can improve it, please make a pull request.
 
