@@ -838,4 +838,4 @@ class bot:
 
 if __name__ == "__main__":
     bot = bot()
-    bot.xpscreen()
+    bot.firststart()
