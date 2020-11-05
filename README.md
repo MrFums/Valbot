@@ -2,8 +2,6 @@
 
 Valorant Deathmatch XP Bot
 
-Code may be slightly unoptimized. If you think you can improve it, please make a pull request.
-
 ONLY WORKS ON WINDOWS 10!
 
 If you want a very good battlepass tracker for Act III in Excel, [download this](https://cdn.discordapp.com/attachments/655191989305737256/770803460038983701/Valorant20Battlepass20Tracker20-20E1A3.xlsx).  (I didn't make it).
@@ -19,6 +17,7 @@ If you want a very good battlepass tracker for Act III in Excel, [download this]
 - Automated Bot Restarts - The bot now restarts itself every 2 hours
 - Optimized Code
 - Improved Error Checking - Additional checks to see if the function completed successfully 
+- Client Desync Protection
 
 #### Changed
 - Fixed typos 
