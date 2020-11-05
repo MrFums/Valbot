@@ -1,4 +1,4 @@
-# Valbot - Valorant XP Farmer
+# Valbot - BRANCH OUTDATED
 
 Code may be slightly unoptimized. If you think you can improve it, please make a pull request.
 
