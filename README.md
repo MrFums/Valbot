@@ -18,7 +18,7 @@ If you want a very good battlepass tracker for Act III in Excel, [download this]
 - Optimized Code
 - Improved Error Checking - Additional checks to see if the function completed successfully 
 - Client Desync Protection
-- Automatically mutes Valorant when in use. You must manually unmute it after use currently.
+- Automatically mutes Valorant when in queue and game.
 
 #### Changed
 - Fixed typos 
