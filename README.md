@@ -18,6 +18,7 @@ If you want a very good battlepass tracker for Act III in Excel, [download this]
 - Optimized Code
 - Improved Error Checking - Additional checks to see if the function completed successfully 
 - Client Desync Protection
+- Automatically mutes Valorant when in use. You must manually unmute it after use currently.
 
 #### Changed
 - Fixed typos 
@@ -27,10 +28,12 @@ If you want a very good battlepass tracker for Act III in Excel, [download this]
 ## Features
 
 * Fully AFK XP farmer
+* Discord RPC support
 * Discord webhook support
 * Optimized and has fail safes for events that may happen during runtime of the game
 * Restarts Valorant if detects an issue with it / detects that it isn't running
-* Undetected
+* Automated restarts to prevent script from ending prematurely 
+* Undetected / undetectable
 * Easy navigation
 
 
@@ -50,7 +53,7 @@ You also need a functioning brain, please have one of these.
 
 1- Install Python 3.8.0.
 
-2- Open _PackageInstaller.bat as admin to install dependencies using pip. Do this after every update.
+2- Open `Install_Packages.bat` as admin to install pakcages using pip. Do this after every update to maintain functionality.
 
 3- If Valorant is open make sure it is on the menu and run the bot.
 
@@ -82,11 +85,8 @@ Please know that I will not be wasting time helping you if you can't read requir
 
 ## Credits
 
-Base structure was originally written by jordan123pal.
-
-Manipulated to work with Valorant by WolfAnto and Fums.
-
-Fums is now the main developer of the bot.
+Initial idea and base code by WolfAnto. 
+Heavily edited and rewritten by Fums.
 
 
 ## Thank you!
