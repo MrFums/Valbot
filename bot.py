@@ -104,17 +104,18 @@ class bot:
         time.sleep(1)
         now = time.time()
 
-        future = now + 120
+        desynccheck = now + 30
 
         print(Style.RESET_ALL)
-        print(Fore.YELLOW + " [-] SEARCHING FOR PLAY BUTTON")
+        print(Fore.YELLOW + " [-] SEARCHING FOR PLAY AGAIN BUTTON")
         while True:
 
-            if time.time() > future:
-                # detects possible issue with valorant and restarts the game
+            if time.time() > desynccheck:
+                # detects possible server -> client desync so presses play button instead (thanks @guwopg0d for the idea)
+                # works by pressing the play button after 30 seconds
                 print(Style.RESET_ALL)
-                print(Fore.RED + " [!] FOUND A POSSIBLE ERROR WITH VALORANT")
-                self.startvalorant()
+                print(Fore.RED + " [!] FOUND A POSSIBLE SERVER DESYNC ISSUE")
+                self.playbutton()
                 break
 
             playagain = pyautogui.locateOnScreen("images/playagain.png", grayscale=True)
@@ -821,7 +822,7 @@ class bot:
 
                     # detects possible issue with valorant and restarts the game
                     print(Style.RESET_ALL)
-                    print(Fore.RED + " [!] BOT IS NOW RESTARTING AFTER 2 HOURS RUNTIME")
+                    print(Fore.RED + " [!] BOT IS NOW RESTARTING AFTER 2 HOURS OF RUNTIME")
                     restartbot()
                     break
 
