@@ -43,7 +43,7 @@ You also need a functioning brain, please have one of these.
 
 6- Follow the instructions that will appear on screen if you haven't already.
 
-7- If you encounter issues please [create one](https://github.com/MrFums/ValorantBot/issues/new) or if you have suggestions please create a [pull request](https://github.com/MrFums/ValorantBot/compare)
+7- If you encounter issues please [create one](https://github.com/MrFums/ValBot/issues/new) or if you have suggestions please create a [pull request](https://github.com/MrFums/ValBot/compare)
 
 8- (Optional) Setup a Discord webhook to get updates to your discord server for when the bot has completed a game.
 
@@ -58,7 +58,7 @@ Make sure when installing python, you check the box next to "Add Python 3.8 to P
 
 ![1](https://cdn.discordapp.com/attachments/769626861046202429/769950787304423444/0001_add_Python_to_Path.png)
 
-Please raise an Issue [here](https://github.com/MrFums/ValorantBot/issues/new) if you have any problems. 
+Please raise an Issue [here](https://github.com/MrFums/ValBot/issues/new) if you have any problems. 
 
 Please know that I will not be wasting time helping you if you can't read requirements or need help with Python or installing it (lol).
 
