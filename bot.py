@@ -780,23 +780,19 @@ class bot:
                 print(Style.RESET_ALL)
                 print(Style.RESET_ALL)
                 time.sleep(1)
+                found = False
                 if os.path.exists("webhook.config"):
                     try:
                         f = open('webhook.config', 'r')
-                        for i, line in enumerate(f):
-                            if i == 0:
-                                hook = f.readline()
-                                hook = hook.strip("discordwebhook=")
-                                f.close()
-                                found = True
+                        line = f.readline()
+                        f.close()
+                        found = True
                     except Exception:
                         found = False
-                else:
-                    found = False
 
                 if found is True:
 
-                    webhook = DiscordWebhook(url=hook)
+                    webhook = DiscordWebhook(url=line)
 
                     # create embed object for webhook
                     embed = DiscordEmbed(title='Match Completed', color=34343)
@@ -842,4 +838,4 @@ class bot:
 
 if __name__ == "__main__":
     bot = bot()
-    bot.firststart()
+    bot.xpscreen()
