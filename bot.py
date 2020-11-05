@@ -470,7 +470,7 @@ class bot:
         print(Style.RESET_ALL)
         print(Fore.RED, Style.BRIGHT + "[!] SCHEDULED TO RESTART EVERY 2 HOURS")
         print(Style.RESET_ALL)
-        time.sleep(10)
+        time.sleep(15)
 
         self.playbutton()
 
