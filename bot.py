@@ -1,674 +1,28 @@
-import pyautogui, time, os, winshell, psutil, math
+from datetime import datetime
 from random import randint
 from time import sleep
-from colorama import init
-from colorama import Fore, Back, Style
-from datetime import datetime
-from win32com.client import Dispatch
-from discord_webhook import DiscordWebhook, DiscordEmbed
 from pathlib import Path
-import sys
+from colorama import Fore, Style
+from colorama import init
+from discord_webhook import DiscordWebhook, DiscordEmbed
+from pycaw.pycaw import AudioUtilities
+from pypresence import Presence
 
-#---------------------------------------------------------------
+import psutil
+import pyautogui
+import pygetwindow as gw
+import os
+import time
 
-start=datetime.now()
-banner = "images/1.png" # this is a fail safe for testing purposes, ignore it.
+init()
+# test
+# ---------------------------------------------------------------
+
+start_time = time.time()
+start = datetime.now()
+
 pyautogui.FAILSAFE = False
-
-
-
-class bot:
-    def __init__(self):
-        self.xpamount = 0
-        self.restarted = 0
-        self.gamesplayed = 0
-
-    def inqueue2(self):
-            
-            print(Style.RESET_ALL)
-            print(Fore.YELLOW+" [-] Detecting if in queue after game")
-            time.sleep(.2)
-            now = time.time()
-            
-            future = now + 660
-            
-            while True:
-                
-                if time.time() > future:
-                    #detects possible issue with valorant and restarts the game
-                    print(Style.RESET_ALL)
-                    print(Fore.RED+" [!] Found a possible error with Valorant.")
-                    self.startvalorant()
-                    break
-                
-                
-                q = pyautogui.locateOnScreen("images/inqueue2.png",grayscale = True)
-                q2 = pyautogui.locateOnScreen("images/inqueue2.png",grayscale = True,confidence=0.6)  
-
-
-                
-                if q is not None or q2 is not None:
-                    
-                    print(Style.RESET_ALL)
-                    print(Fore.GREEN+" [√] Detected in queue after game")
-                    self.game()
-                    
-                if q is None or q2 is None:
-                    print(Style.RESET_ALL)
-                    print(Fore.RED+" [!] Detected not in queue after game")
-                    time.sleep(1)
-                    
-                    self.skipbutton()        
-
-    def playagain(self):
-        time.sleep(1)
-        now = time.time()
-        
-        future = now + 780
-        
-        print(Style.RESET_ALL)
-        print(Fore.YELLOW+" [-] Waiting for play again button")
-        while True:
-            
-            
-            if time.time() > future:
-                #detects possible issue with valorant and restarts the game
-                print(Style.RESET_ALL)
-                print(Fore.RED+" [!] Found a possible error with Valorant.")
-                self.startvalorant()
-                break
-            
-            playagain = pyautogui.locateOnScreen("images/playagain.png",grayscale = True)
-            playagain2 = pyautogui.locateOnScreen("images/playagain.png", confidence=0.6,grayscale = True)
-            
-            
-            if playagain is not None or playagain2 is not None:
-                print(Style.RESET_ALL)
-                print(Fore.GREEN+" [√] Detected play again button")
-                    
-                    
-                if playagain != None:
-                    pyautogui.click(playagain)
-                    time.sleep(1)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(1)
-                    pyautogui.click(playagain)
-                    
-                    self.inqueue2()
-                    
-                    
-                if playagain2 != None:
-                    pyautogui.click(playagain2)
-                    time.sleep(1)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(1)
-                    pyautogui.click(playagain2)
-                    self.inqueue2()
-
-    
-    def valorantrunning(self):
-        found = False
-        print(Fore.YELLOW,"[-] Detecting if Valorant is running")
-        print(Style.RESET_ALL)
-        time.sleep(2)
-
-        for proc in psutil.process_iter():
-            if proc.name() == "VALORANT-Win64-Shipping.exe":
-                found = True
-                
-        if found == False:
-            print(Fore.RED,"[!] Can not find Valorant running")
-            print(Style.RESET_ALL)
-            self.startvalorant()
-        else:
-            print (Fore.GREEN,"[√] Found Valorant running")
-            time.sleep(2)
-            self.playbutton()
-    
-    def startvalorant(self): 
-        
-        for proc in psutil.process_iter():
-            if proc.name() == "VALORANT-Win64-Shipping.exe":
-                proc.kill()
-                print (Fore.YELLOW,"[-] Killing Valorant process")
-                time.sleep(10)
-        
-        print(Fore.YELLOW,"[-] Restarting Valorant")
-        print(Style.RESET_ALL)
-        os.startfile("Valorant.lnk")
-        time.sleep(8)
-        restarted += 1
-        self.valorantrunning()
-        
-    def playbutton(self):
-        
-        now = time.time()
-        
-        future = now + 300
-        
-        print(Style.RESET_ALL)        
-        print(Fore.YELLOW+" [-] Waiting for play button")
-        time.sleep(8)
-        while True:
-            
-            
-            if time.time() > future:
-                #detects possible issue with valorant and restarts the game
-                print(Style.RESET_ALL)
-                print(Fore.RED+" [!] Found a possible error with Valorant.")
-                self.startvalorant()
-                break
-            
-            play = pyautogui.locateOnScreen("images/play.png",grayscale = True)
-            play2 = pyautogui.locateOnScreen("images/play.png", confidence=0.6,grayscale = True)
-
-            
-            if play is not None or play2 is not None:
-                print(Style.RESET_ALL)
-                print(Fore.GREEN+" [√] Detected play button")
-                
-                if play != None:
-                    pyautogui.click(play)
-                    time.sleep(1)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(1)
-                    pyautogui.click(play)
-                    self.dmatch()
-                    
-                if play2 != None:
-                    pyautogui.click(play2)
-                    time.sleep(1)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(1)
-                    pyautogui.click(play2)
-                    self.dmatch()
-                
-            
-    
-                
-                
-    def dmatch(self):
-        
-        print(Style.RESET_ALL)
-        print(Fore.YELLOW,"[-] Searching for deathmatch button")
-    
-    
-        time.sleep(1)
-        now = time.time()
-        
-        future = now + 120
-    
-        while True:
-            
-            if time.time() > future:
-                #detects possible issue with valorant and restarts the game
-                print(Style.RESET_ALL)
-                print(Fore.RED+" [!] Found a possible error with Valorant.")
-                self.startvalorant()
-                break
-        
-            deathmatch = pyautogui.locateOnScreen("images/deathmatch.png",grayscale = True)
-            deathmatch2 = pyautogui.locateOnScreen("images/deathmatch.png", confidence=0.6,grayscale = True)
-                
-            
-            
-            if deathmatch is not None or deathmatch2 is not None:
-                print(Style.RESET_ALL)
-                print(Fore.GREEN+" [√] Detected deathmatch button")
-                
-                if deathmatch != None:
-                    pyautogui.click(deathmatch)
-                    time.sleep(.5)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(.5)
-                    pyautogui.click(deathmatch)
-                    time.sleep(.5)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(.5)
-                    pyautogui.click(deathmatch)
-                    self.lobby()                    
-                    
-                if deathmatch2 != None:
-                    pyautogui.click(deathmatch2)
-                    time.sleep(.5)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(.5)
-                    pyautogui.click(deathmatch2)
-                    time.sleep(.5)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(.5)
-                    pyautogui.click(deathmatch2)
-                    self.lobby()
-                
-                time.sleep(5)
-            
-    
-    
-    def skipbutton(self):
-                    
-        print(Style.RESET_ALL)
-        print(Fore.YELLOW+" [-] Detecting a skip button")
-        time.sleep(3)
-        now = time.time()
-        
-        future = now + 30
-        
-        while True:
-            
-            if time.time() > future:
-                #detects possible issue with valorant and restarts the game
-                print(Style.RESET_ALL)
-                print(Fore.RED+" [!] Found a possible error with Valorant.")
-                self.startvalorant()
-                break
-            
-            
-            skip = pyautogui.locateOnScreen("images/skip.png",grayscale = True)
-            skip2 = pyautogui.locateOnScreen("images/skip.png",grayscale = True,confidence=0.6)  
-            
-
-            if skip is not None or skip2 is not None:
-                
-                if skip is not None:
-                
-                    print(Style.RESET_ALL)
-                    print(Fore.RED+" [!] Detected a skip button")
-                    time.sleep(1)
-                    pyautogui.click(skip)
-                    time.sleep(.5)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(1)
-                    pyautogui.click(skip)
-                    
-                    self.playagain()
-                    
-                if skip2 is not None:
-                    print(Style.RESET_ALL)
-                    print(Fore.RED+" [!] Detected a skip button")
-                    time.sleep(1)
-                    pyautogui.click(skip2)
-                    time.sleep(.5)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(1)
-                    pyautogui.click(skip2)
-                    
-                    
-                    self.playagain()
-                
-            if skip is None or skip2 is None:
-                print(Style.RESET_ALL)
-                print(Fore.GREEN+" [√] Detected no skip button")
-                time.sleep(1)
-            
-                self.playagain()
-    
-    def firststart(self):
-        
-        print(Style.RESET_ALL)
-        print(Fore.RED,Style.BRIGHT+"[!] Bot will start in 10 seconds. Make sure you are in the menu.")
-        print(Style.RESET_ALL)
-        print(Fore.RED,Style.BRIGHT+"[!] It is advised to try and restart the bot every 4 - 6 hours.")
-        print(Style.RESET_ALL)
-        time.sleep(10)
-        
-        self.playbutton()
-        
-        
-    def lobby(self):
-        
-        print(Style.RESET_ALL)
-        print(Fore.YELLOW+" [-] Waiting for menu")
-        
-        
-        
-        now = time.time()
-        
-        future = now + 120
-        
-        while True:
-            if time.time() > future:
-                #detects possible issue with valorant and restarts the game
-                print(Style.RESET_ALL)
-                print(Fore.RED+" Found a possible error with Valorant.")
-                self.startvalorant()
-                break
-            
-            lobby = pyautogui.locateOnScreen("images/lobby.png",grayscale = True)
-            lobby2 = pyautogui.locateOnScreen("images/lobby.png", confidence=0.6,grayscale = True)
-
-            again = pyautogui.locateOnScreen("images/playagain.png",grayscale = True)
-            again2 = pyautogui.locateOnScreen("images/playagain.png", confidence=0.6,grayscale = True)
-        
-
-            
-            if lobby is not None or lobby2 is not None or again is not None or again2 is not None:
-                print(Style.RESET_ALL)
-                print(Fore.GREEN+" [√] Detected at menu")
-                
-                if lobby != None:
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(.5)
-                    pyautogui.click(lobby)
-                    self.inqueue()
-                    
-                
-                if lobby2 != None:
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(.5)
-                    pyautogui.click(lobby2)
-                    self.inqueue()
-                    
-                if again != None:
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(.5)
-                    pyautogui.click(again2)
-                    self.inqueue()
-                    
-                if again2 != None:
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(.5)
-                    pyautogui.click(again2)
-                    self.inqueue()
-                
-                
-        
-    def inqueue(self):
-        
-        print(Style.RESET_ALL)
-        print(Fore.YELLOW+" [-] Detecting if in queue")
-        time.sleep(.1)
-        now = time.time()
-        
-        future = now + 660
-        
-        while True:
-            
-            if time.time() > future:
-                #detects possible issue with valorant and restarts the game
-                print(Style.RESET_ALL)
-                print(Fore.RED+" [!] Found a possible error with Valorant.")
-                self.startvalorant()
-                break
-            
-            
-            q = pyautogui.locateOnScreen("images/inqueue.png",grayscale = True)  
-            q2 = pyautogui.locateOnScreen("images/inqueue.png",grayscale = True,confidence=0.6)  
-
-            
-            if q is not None or q2 is not None:
-                if q is not None:
-                    print(Style.RESET_ALL)
-                    print(Fore.GREEN+" [√] Detected in queue")
-                    time.sleep(1)
-                    self.game()
-                if q2 is not None:
-                    print(Style.RESET_ALL)
-                    print(Fore.GREEN+" [√] Detected in queue")
-                    time.sleep(1)
-                    self.game()
-            
-            if q is None:
-                print(Style.RESET_ALL)
-                print(Fore.RED+" [!] Detected not in queue")
-                time.sleep(1)
-            
-                self.lobby()
-                   
-    def game(self):
-        time.sleep(1)
-        print(Style.RESET_ALL)
-        print(Fore.YELLOW+" [-] Waiting for a game")
-        
-        
-        now = time.time()
-        
-        future = now + 660
-        
-        
-        while True:
-            
-            if time.time() > future:
-                #detects possible issue with valorant and restarts the game
-                print(Style.RESET_ALL)
-                print(Fore.RED+" [!] Found a possible error with Valorant.")
-                self.startvalorant()
-                break
-            
-            ingame = pyautogui.locateOnScreen(banner)
-            ingame2 = pyautogui.locateOnScreen(banner, confidence=0.6)
-            
-            defaultcard = pyautogui.locateOnScreen("images/defaultcard.png",grayscale = True)
-            defaultcard2 = pyautogui.locateOnScreen("images/defaultcard.png",grayscale = True,confidence=0.6)
-            
-            if ingame is not None or ingame2 is not None or defaultcard is not None or defaultcard2 is not None:
-                print(Style.RESET_ALL)
-                print(Fore.GREEN+" [√] Detected in game")
-                time.sleep(1)
-                print(Style.RESET_ALL)
-                print(Fore.YELLOW+" [-] Waiting for the game to end")
-                time.sleep(2)
-            
-                self.endofgame()
-    
-    
-    def endofgame(self):
-        
-        now = time.time()
-        
-        future = now + 780
-        
-        time.sleep(5)
-        
-        while True:
-            
-            if time.time() > future:
-                #detects possible issue with valorant and restarts the game
-                print(Style.RESET_ALL)
-                print(Fore.RED+" [!] Found a possible error with Valorant.")
-                self.startvalorant()
-                break
-            
-            menu = pyautogui.locateOnScreen("images/menu.png",grayscale = True)
-            menu2 = pyautogui.locateOnScreen("images/menu.png", confidence=0.6,grayscale = True)
-            
-            if menu is not None or menu2 is not None:
-                print(Style.RESET_ALL)
-                print(Fore.GREEN+" [√] Detected that the game has ended")
-                time.sleep(2)
-                self.result()
-            
-            else:
-                self.antiafk()
-    
-    
-    def antiafk(self):
-        time.sleep(5)
-        n = randint(20,35)
-        a = 0
-        while a <= n:
-            a += 1
-            n2 = randint(1,6)
-            if n2 == 1:
-                pyautogui.keyDown('w')
-                sleep(randint(2,6)/10)
-                
-            if n2 == 2:
-                pyautogui.keyUp('w')
-                pyautogui.keyDown('d')
-                pyautogui.click()
-                
-            if n2 == 3:
-                pyautogui.keyDown('a')
-                sleep(randint(1,3)/10)
-                pyautogui.keyDown('a')
-                pyautogui.click()
-                sleep(randint(2,4)/10)
-                
-            if n2 == 4:
-                pyautogui.keyUp('d')
-                pyautogui.keyDown('s')
-                sleep(randint(2,5)/10)
-                
-            if n2 == 5:
-                pyautogui.keyUp('s')
-                sleep(randint(4,6)/10)
-                
-            if n2 == 6:
-                pyautogui.keyDown('w')
-                sleep(randint(2,4)/10)
-                pyautogui.keyUp('w')
-        self.endofgame()
-    
-    
-    def result(self):
-        print(Style.RESET_ALL)
-        print(Fore.YELLOW+" [-] Waiting for an XP screen")
-        
-        time.sleep(3)
-        
-        now = time.time()
-        
-        future = now + 120
-        
-        
-        while True:
-            
-            if time.time() > future:
-                #detects possible issue with valorant and restarts the game
-                print(Style.RESET_ALL)
-                print(Fore.RED+" [!] Found a possible error with Valorant.")
-                self.startvalorant()
-                break
-
-            
-            xpscreen = pyautogui.locateOnScreen("images/menu.png",grayscale = True)
-            xpscreen2 = pyautogui.locateOnScreen("images/menu.png", confidence=0.6,grayscale = True)
-            if xpscreen is not None or xpscreen2 is not None:
-                print(Style.RESET_ALL)
-                print(Fore.GREEN+" [√] Detected XP screen")
-                time.sleep(2)
-                self.gamesplayed += 1
-                self.xpamount += 900
-                
-
-
-                runtime = datetime.now() - start
-                runtime = str(runtime)
-                runtime = runtime[:-7]
-                
-                exact = start.strftime("%H:%M:%S")
-                dat = start.strftime("%d %h %Y")
-                embeddate = start.strftime
-                print(Style.RESET_ALL)
-                print(Style.RESET_ALL)
-                print(Style.RESET_ALL)
-                
-                
-                print(Style.RESET_ALL+Fore.YELLOW+"———————————————————————————————————————————————————————————————————————————————")
-                print(Style.RESET_ALL)
-                print(Fore.YELLOW+" Earned",Style.BRIGHT+Fore.YELLOW+str(self.xpamount)+" XP"+Style.RESET_ALL+Fore.YELLOW,"in total")
-                print (Fore.YELLOW+" Bot has been running for",Style.BRIGHT+Fore.YELLOW+str(runtime)+Style.RESET_ALL+Fore.YELLOW)
-                print (Fore.YELLOW+" Bot was started at",Style.BRIGHT+Fore.YELLOW+str(exact),Style.RESET_ALL+Fore.YELLOW+"on the"+Style.BRIGHT+Fore.YELLOW,(dat)+Style.RESET_ALL+Fore.YELLOW)
-                print(Fore.YELLOW+" Played",Style.BRIGHT+Fore.YELLOW+str(self.gamesplayed),"games"+Style.RESET_ALL+Fore.YELLOW)
-                print (" Valorant has been",Style.BRIGHT+Fore.YELLOW+"restarted",self.restarted,"times")
-                print(Style.RESET_ALL)
-                print(Style.RESET_ALL+Fore.YELLOW+"———————————————————————————————————————————————————————————————————————————————")
-                print(Style.RESET_ALL)
-                print(Fore.YELLOW+"                                 Valbot v1.5")
-                print(Style.RESET_ALL)
-                print(Style.RESET_ALL)
-                time.sleep(1)
-                try:
-                    f = open('webhook.txt', 'r')
-                    line = f.readline()
-                    f.close()
-                    found = True
-                except Exception:
-                    found = False
-
-
-                if found == True:
-
-                    webhook = DiscordWebhook(url=line)
-
-                    # create embed object for webhook
-                    datet = (exact,"on the",dat)
-                    embed = DiscordEmbed(title='Match Completed', color=242424)
-                    embed.set_author(name='Valbot', url='https://github.com/MrFums/ValorantBot', icon_url='https://raw.githubusercontent.com/MrFums/ValorantBot/main/Valbot.png')
-                    embed.set_footer(text='Valbot v1.5')
-                    embed.set_timestamp()
-                    embed.add_embed_field(name='Total XP', value=self.xpamount)
-                    embed.add_embed_field(name='Games Played', value=self.gamesplayed)
-                    embed.add_embed_field(name='Bot Runtime', value=runtime)
-
-                    
-                    
-                
-                    webhook.add_embed(embed)
-                    response = webhook.execute()
-                else:
-                    print(Style.RESET_ALL)
-                    print(Fore.RED+" [!] Discord webhook is not setup. Set it up in the menu.")
-                                
-                time.sleep(4)
-                pyautogui.click(x=960, y=540)
-                time.sleep(1)
-                self.skipbutton()
-                
-
-
-
-def select_banner():
-    global banner
-    print ("")
-    print (Style.RESET_ALL,Fore.YELLOW+"Make sure you have read the information about the bot before continuing")
-    print(Style.RESET_ALL,Fore.YELLOW+"Please select a Player Card and equip that EXACT one in game: ")
-    
-    print(Style.RESET_ALL)
-    print (Style.BRIGHT,Fore.WHITE+"1)",Fore.YELLOW+"Beta Pioneer Player Card")
-    print("")
-    print (Fore.WHITE+" 2)",Fore.YELLOW+"Valorant Card Player Card")
-    print ("")
-    print (Fore.WHITE+" 3)",Fore.YELLOW+"Return to Menu",Style.RESET_ALL)
-    print ("")
-    print(Style.BRIGHT + Fore.GREEN+"")
-    try:
-        banneroption = int(input(" > "))
-        if banneroption == 1:
-            banner = "images/1.png"
-            print (Style.RESET_ALL)
-            print (Fore.WHITE+" Selected the Beta Pioneer Player Card")
-        
-        elif banneroption == 2:
-            banner = "images/2.png"
-            print (Style.RESET_ALL)
-            print (Fore.WHITE+" Selected the Valorant Card Player Card")
-        
-        elif banneroption == 3:
-            main()
-       
-        else:
-            print (Fore.RED+" [!] Error 1: Enter a valid integer within the range 1 - 3!")
-            time.sleep(2)
-            main()
-    
-    
-    except ValueError:
-        print (" Error 2: You must enter an integer!")
-        time.sleep(2)
-        main()
-
-
-
-def main():
-
-    from colorama import init
-    from colorama import Fore, Back, Style
-    init()
-    
-    print(Fore.RED + "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄")
-
-    print (Style.BRIGHT + Fore.RED + """
+print(Style.BRIGHT + Fore.RED + """
                                    
                                                                         
     8b           d8              88  88                                 
@@ -681,205 +35,799 @@ def main():
           `8'        `"8bbdP"Y8  88  8Y"Ybbd8"'    `"YbbdP"'     "Y888  
                                                                          
                                                                         """)
+
+print(Style.RESET_ALL)
+print(Fore.RED + "                         v1.7" + Style.RESET_ALL, "-" + Fore.RED,
+      Style.BRIGHT + "by Fums and WolfAnto")
+print(Style.RESET_ALL + Fore.RED + "———————————————————————————————————————————————————————————————————————————————")
+print(Style.RESET_ALL + Style.BRIGHT + Fore.RED)
+
+
+def restartbot():
     print(Style.RESET_ALL)
+    print(Fore.RED + " [!] Restarting the bot")
+    time.sleep(1)
+    os.startfile("restart.py")
+    quit()
 
 
+class bot:
+    def __init__(self):
 
-    print(Fore.RED + "                         v1.5"+Style.RESET_ALL,"-"+Fore.RED,Style.BRIGHT+"by Fums and WolfAnto")
-    print("")
-    print(Style.RESET_ALL)
-    print(Fore.RED + "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄")
-    print(Style.RESET_ALL)
-    time.sleep(0.5)
-    print (Style.BRIGHT + Fore.RED)
-    print(Fore.WHITE+" 1)",Fore.YELLOW+"Start Bot")
-    print("")
-    print(Fore.WHITE+" 2)",Fore.YELLOW+"Information")
-    print("")
-    print(Fore.WHITE+" 3)",Fore.YELLOW+"Manage Discord Webhook")
-    print("")
-    print(Fore.WHITE+" 4)",Fore.YELLOW+"XP Calculator")
-    print("")
-    print(Fore.WHITE+" 5)",Fore.YELLOW+"Exit Bot")
-    print("")
-    print(Style.BRIGHT + Fore.GREEN+"")
-    
-    
-    menu = int(input(" > "))
-    
-    try:
-        if menu == 1:
-            select_banner()
-            
-            print (Style.RESET_ALL)
-            time.sleep(2)
-            print(Fore.WHITE + " 1)",Fore.CYAN +"Make sure Valorant is focused and click",Fore.BLUE +"HOME",Fore.CYAN +"and leave it on that screen", Style.RESET_ALL)
-            print("")
-            print(Fore.WHITE + " 2)",Fore.CYAN +"Wait around",Fore.BLUE +"10 seconds",Fore.CYAN +"and do not click anything", Style.RESET_ALL)
-            print("")
-            print(Fore.WHITE + " 3)",Fore.CYAN +"Let the bot do the rest!", Style.RESET_ALL)
-            print(Style.RESET_ALL)
-            print("")
-            print(Fore.RED + "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄")
-            print(Style.RESET_ALL)
-            
-            vallnk = Path("Valorant.lnk")
-            if vallnk.is_file():
-                # file exists
-                time.sleep(5)
+        self.xpamount = 0
+        self.restarted = 0
+        self.gamesplayed = 0
+        self.restarted = 0
 
-                bot.firststart()
+        try:
+            self.RPC = Presence(client_id="772841390467711041")
 
-            else:
-                print(Fore.RED,'You do not have a Valorant shortcut named "Valorant.lnk" in the bots directory')
-                time.sleep(5)
-                print(Fore.RED,'Create one now. This is incase Valorant crashes, the game can be launched again')
+            self.RPC.connect()
+
+            self.version = "Valbot v1.7"
+        except Exception:
+            pass
+
+    def inqueue2(self):
+
+        print(Style.RESET_ALL)
+        print(Fore.YELLOW + " [-] Detecting if in queue after game")
+        time.sleep(.2)
+        now = time.time()
+
+        future = now + 120
+
+        while True:
+
+            if time.time() > future:
+                # detects possible issue with valorant and restarts the game
                 print(Style.RESET_ALL)
-                time.sleep(5)
-                main()
-            
-            
-        elif menu == 2:
-            print(Style.BRIGHT + Fore.RED + "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄")
-            print(Style.RESET_ALL+"")
-            print(Fore.RED + " HOW TO RUN THE BOT")
-            print("")
-            print(Fore.WHITE + " 1)",Fore.CYAN +"Open Valorant and click",Fore.BLUE +"PLAY",Fore.CYAN +"and then click",Fore.BLUE+"DEATHMATCH", Style.RESET_ALL)
-            print("")
-            print(Fore.WHITE + " 2)",Fore.CYAN +"Run the bot by selecting",Fore.BLUE +"1",Fore.CYAN +"in the main menu")
-            print("")
-            print(Fore.WHITE + " 3)",Fore.CYAN +"Change your player banner to either")
-            print(Fore.BLUE +" Beta Pioneer Banner",Fore.CYAN +"or the",Fore.BLUE +"Valorant Card Banner",Fore.CYAN)
-            print("")
-            print(Fore.WHITE + " 4)",Fore.CYAN +"Select the banner you have selected in the",Fore.BLUE +"bot console",Fore.CYAN)
-            print(Fore.CYAN +" You will be reminded of the next set of instructions again")
-            print("")
-            print(Fore.WHITE + " 5)",Fore.CYAN +"Let the game run and try not to touch your mouse / allow anything")
-            print(Fore.CYAN +" to interrupt the process")
-            print("")
-            print(Fore.CYAN +" If you wish to stop the bot",Fore.BLUE +"simply close this window",Fore.CYAN)
-            print("")
-            print("")
-            print(Fore.RED + " OTHER PRECAUTIONS AND INFORMATION")
-            print("")
-            print(Fore.CYAN +" This code is not optimised very well")
-            print(Fore.CYAN +" It may stutter or crash if used for a large amount of time")
-            print(Fore.CYAN +" XP gain is quite slow. This is due to the Deathmatch queue")
-            print(Fore.CYAN +" If you can't find a game, change servers")
-            print(Fore.CYAN +" It is advised to turn the Name Hide option on in",Fore.BLUE +"Settings > Privacy",Fore.CYAN)
-            print(Fore.CYAN +" If you use",Fore.BLUE+"720p",Fore.CYAN+"move the images from",Fore.BLUE+"720 folder",Fore.CYAN+"into the",Fore.BLUE+"ImageChecks",Fore.CYAN+"folder")
-            print("")
-            print("") 
-            print(Fore.RED + " XP GAIN")
-            print("")
-            print(Fore.CYAN +" Minimum XP gain are as follows")
-            print(Fore.WHITE +" 1 hour:",Fore.MAGENTA +"3,600 XP")
-            print(Fore.WHITE +" 8 hours:",Fore.MAGENTA +"28,800 XP")
-            print(Fore.WHITE +" 24 hours:",Fore.MAGENTA +"86,400 XP")
-            print("")
-            print("")
-            print(Fore.RED + " CREDITS AND CONTACT")
-            print("")
-            print(Fore.CYAN +" Base code originally written by",Fore.BLUE +"jordan123pal",Fore.CYAN +"and heavily edited by",Fore.BLUE +"WolfAnto",Fore.CYAN +"and",Fore.BLUE +"Fums",Fore.CYAN +"to work with Valorant")
-            print(Fore.CYAN +" This version of the bot is maintained by",Fore.BLUE +"Fums")
-            print(Fore.BLUE +" Discord :",Fore.YELLOW+ "Fums#0888",Fore.CYAN+ "| ",Fore.BLUE + "Github :",Fore.YELLOW+ "https://github.com/MrFums",Style.RESET_ALL)
-            print(Style.RESET_ALL)
-            print(Fore.RED + "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄")
-            print(Style.BRIGHT,Fore.RED)
-            print("")
-            print(" Input anything to return to the menu...")
-            print(Style.RESET_ALL)
-            print(Style.BRIGHT + Fore.GREEN+"")
-            menu = str(input(" > "))
-            main()
-            
+                print(Fore.RED + " [!] Found a possible error with Valorant.")
+                self.startvalorant()
+                break
 
+            q = pyautogui.locateOnScreen("images/inqueue2.png", grayscale=True)
+            q2 = pyautogui.locateOnScreen("images/inqueue2.png", grayscale=True, confidence=0.6)
 
-        elif menu == 3:
-            print(Style.RESET_ALL)
-            print(Fore.RED + " WEBHOOK MANAGER")
-            print(Style.RESET_ALL)
-            print(Fore.WHITE + " 1)",Fore.CYAN +"Open Discord, go to a server where you have permission to create and manage a webhook")
-            print("")
-            print(Fore.WHITE + " 2)",Fore.CYAN +"Either create and / or edit an existing channel and go to 'Integrations'")
-            print("")
-            print(Fore.WHITE + " 3)",Fore.CYAN +"Click webhooks and then click 'Create Webhook', select the right channel,")
-            print(Fore.CYAN,"edit the name and image if you wish, and then click 'Copy Webhook URL'")
-            print("")
-            print(Fore.WHITE + " 4)",Fore.CYAN +"Paste your webhook below with nothing else, make sure there are no spaces")
-            print(Style.RESET_ALL)
-            print(Style.BRIGHT,Fore.RED)
-            print("")
-            print(" Input anything other than a discord webhook to return to the menu...")
-            print(Style.RESET_ALL)
-            print(Style.BRIGHT + Fore.GREEN+"")
-            
-            urlcheck = "https://discordapp.com/api/webhooks/"
-            inputwebhook = input(" > ")
-            
-            if urlcheck in inputwebhook:
+            if q is not None or q2 is not None:
                 print(Style.RESET_ALL)
+                print(Fore.GREEN + " [√] Detected in queue after game")
+                self.ingame()
 
-                if os.path.exists("webhook.txt"):
-                    os.remove("webhook.txt")
-      
-                f = open("webhook.txt", "a+")
-                f.write(inputwebhook)
-                f.close()
+            if q is None or q2 is None:
                 print(Style.RESET_ALL)
-                print(Fore.GREEN+" [√] Webhook added")
-                print(Style.RESET_ALL)
-                time.sleep(3)
-                main()
-            
-            else:
-                print(Style.RESET_ALL)
-                print(Fore.RED+ " The input was not a webhook, returning to menu...")
-                time.sleep(3)
-                main()
-                
-                
-        elif menu == 4:
-            print(Style.RESET_ALL)
-            print (Style.RESET_ALL,Fore.YELLOW+Style.BRIGHT,"How much XP do you need to get to the item you want?")
-            try:
-                print(Style.RESET_ALL)
-                print(Style.BRIGHT + Fore.GREEN+"")
-                xpa = int(input(" > "))
-            except ValueError:
-                print (" Error 2: You must enter an integer!")
-                time.sleep(2)
-                main()
-                
+                print(Fore.RED + " [!] Detected not in queue after game")
+                time.sleep(1)
 
-            xpa /= 900
-            xpau = (math.ceil(xpa))
-            print(Style.RESET_ALL + Style.BRIGHT + Fore.GREEN,"You need to complete",Style.RESET_ALL +Fore.GREEN+str(xpau),"deathmatch games",Style.BRIGHT + "to get the required XP")
-            
-            time.sleep(7)
-            print(Style.RESET_ALL)      
-            main()
-            
-        elif menu == 5:
-            print(Style.BRIGHT + Fore.RED+" Ok, closing. Thanks for using!")
-            time.sleep(1)
-            quit()
+                self.skiprewardbutton()
 
-            
-        else:
-            print (" Error 1: Enter a valid integer within the range 1 - 3!")
-            time.sleep(2)
-            main()
-    
-    
-    except ValueError:
-        print (" Error 2: You must enter an integer!")
+    def playagain(self):
+        time.sleep(1)
+        now = time.time()
+
+        future = now + 120
+
+        print(Style.RESET_ALL)
+        print(Fore.YELLOW + " [-] Waiting for play again button")
+        while True:
+
+            if time.time() > future:
+                # detects possible issue with valorant and restarts the game
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] Found a possible error with Valorant.")
+                self.startvalorant()
+                break
+
+            playagain = pyautogui.locateOnScreen("images/playagain.png", grayscale=True)
+            playagain2 = pyautogui.locateOnScreen("images/playagain.png", confidence=0.6, grayscale=True)
+
+            if playagain is not None or playagain2 is not None:
+                print(Style.RESET_ALL)
+                print(Fore.GREEN + " [√] Detected play again button")
+
+                if playagain is not None:
+                    pyautogui.click(playagain)
+                    time.sleep(1)
+                    pyautogui.click(x=960, y=540)
+                    time.sleep(1)
+                    pyautogui.click(playagain)
+
+                    self.inqueue2()
+
+                if playagain2 is not None:
+                    pyautogui.click(playagain2)
+                    time.sleep(1)
+                    pyautogui.click(x=960, y=540)
+                    time.sleep(1)
+                    pyautogui.click(playagain2)
+                    self.inqueue2()
+
+    def valorantrunning(self):
+        found = False
+        print(Fore.YELLOW, "[-] Detecting if Valorant is running")
+        print(Style.RESET_ALL)
         time.sleep(2)
-        main()
+
+        for proc in psutil.process_iter():
+            if proc.name() == "VALORANT-Win64-Shipping.exe":
+                found = True
+                break
+
+        if not found:
+            print(Fore.RED, "[!] Can not find Valorant running")
+            print(Style.RESET_ALL)
+            self.startvalorant()
+        else:
+            print(Fore.GREEN, "[√] Found Valorant running")
+            time.sleep(2)
+            self.playbutton()
+
+    def startvalorant(self):
+
+        activeactivity = "Starting Valorant"
+
+        earned = "{:,}".format(self.xpamount)
+
+        try:
+
+            self.RPC.update(state=("Earned " + earned + " XP"), start=start_time, large_image="valbot",
+                            large_text=self.version, details=activeactivity)
+
+        except Exception:
+            pass
+
+        for proc in psutil.process_iter():
+            if proc.name() == "VALORANT-Win64-Shipping.exe":
+                proc.kill()
+                print(Fore.YELLOW, "[-] Killing Valorant process")
+                time.sleep(10)
+
+        print(Style.RESET_ALL + Fore.YELLOW, "[-] Starting Valorant")
+        print(Style.RESET_ALL)
+        vallnk = Path("Valorant.lnk")
+        if vallnk.is_file():
+            # file exists
+            time.sleep(5)
+            os.startfile("Valorant.lnk")
+
+        else:
+            print(Style.RESET_ALL, Fore.RED, "You do not have a Valorant shortcut in the bots directory!")
+        time.sleep(8)
+        self.restarted += 1
+        self.valorantrunning()
+
+    def playbutton(self):
+
+        now = time.time()
+
+        future = now + 720
+
+        activeactivity = "In pre-game lobby"
+
+        earned = "{:,}".format(self.xpamount)
+
+        try:
+
+            self.RPC.update(state=("Earned " + earned + " XP"), start=start_time, large_image="valbot",
+                            large_text=self.version, details=activeactivity)
+
+        except Exception:
+            pass
+        print(Style.RESET_ALL)
+        print(Fore.YELLOW + " [-] Waiting for play button")
+        time.sleep(2)
+        while True:
+
+            if time.time() > future:
+                # detects possible issue with valorant and restarts the game
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] Found a possible error with Valorant.")
+                self.startvalorant()
+                break
+
+            play = pyautogui.locateOnScreen("images/play.png", grayscale=True)
+            play2 = pyautogui.locateOnScreen("images/play.png", confidence=0.6, grayscale=True)
+
+            if play is not None or play2 is not None:
+                print(Style.RESET_ALL)
+                print(Fore.GREEN + " [√] Detected play button")
+
+                if play is not None:
+                    time.sleep(1)
+                    pyautogui.click(play)
+                    time.sleep(2)
+                    self.playbuttonclicked()
+
+                if play2 is not None:
+                    time.sleep(1)
+                    pyautogui.click(play2)
+                    time.sleep(2)
+                    self.playbuttonclicked()
+
+    def deathmatchbutton(self):
+
+        print(Style.RESET_ALL)
+        print(Fore.YELLOW, "[-] Searching for deathmatch button")
+
+        time.sleep(1)
+        now = time.time()
+
+        future = now + 45
+
+        while True:
+
+            if time.time() > future:
+                # detects possible issue with valorant and restarts the game
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] Found a possible error with Valorant.")
+                self.startvalorant()
+                break
+
+            deathmatch = pyautogui.locateOnScreen("images/deathmatch.png", grayscale=True)
+            deathmatch2 = pyautogui.locateOnScreen("images/deathmatch.png", confidence=0.6, grayscale=True)
+
+            if deathmatch is not None or deathmatch2 is not None:
+                print(Style.RESET_ALL)
+                print(Fore.GREEN + " [√] Detected deathmatch button")
+
+                if deathmatch is not None:
+                    pyautogui.click(deathmatch)
+                    time.sleep(.5)
+                    pyautogui.click(x=960, y=540)
+                    self.deathmatchbuttonclicked()
+
+                if deathmatch2 is not None:
+                    pyautogui.click(deathmatch2)
+                    time.sleep(.5)
+                    pyautogui.click(x=960, y=540)
+                    self.deathmatchbuttonclicked()
+
+                time.sleep(5)
+
+    def skiprewardbutton(self):
+
+        print(Style.RESET_ALL)
+        print(Fore.YELLOW + " [-] Detecting a skip button")
+        time.sleep(3)
+        now = time.time()
+
+        future = now + 120
+
+        while True:
+
+            if time.time() > future:
+                # detects possible issue with valorant and restarts the game
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] Found a possible error with Valorant.")
+                self.startvalorant()
+                break
+
+            skip = pyautogui.locateOnScreen("images/skip.png", grayscale=True)
+            skip2 = pyautogui.locateOnScreen("images/skip.png", grayscale=True, confidence=0.6)
+
+            if skip is not None or skip2 is not None:
+
+                if skip is not None:
+                    print(Style.RESET_ALL)
+                    print(Fore.RED + " [!] Detected a skip button")
+                    time.sleep(1)
+                    pyautogui.click(skip)
+                    time.sleep(.5)
+                    pyautogui.click(x=960, y=540)
+                    time.sleep(1)
+                    pyautogui.click(skip)
+
+                    self.playagain()
+
+                if skip2 is not None:
+                    print(Style.RESET_ALL)
+                    print(Fore.RED + " [!] Detected a skip button")
+                    time.sleep(1)
+                    pyautogui.click(skip2)
+                    time.sleep(.5)
+                    pyautogui.click(x=960, y=540)
+                    time.sleep(1)
+                    pyautogui.click(skip2)
+
+                    self.playagain()
+
+            if skip is None or skip2 is None:
+                print(Style.RESET_ALL)
+                print(Fore.GREEN + " [√] Detected no skip button")
+                time.sleep(1)
+
+                self.playagain()
+
+    def deathmatchbuttonclicked(self):
+
+        print(Style.RESET_ALL)
+        print(Fore.YELLOW + " [-] Detecting if deathmatch is selected")
+        time.sleep(1)
+        now = time.time()
+
+        future = now + 120
+
+        while True:
+
+            if time.time() > future:
+                # detects possible issue with valorant and restarts the game
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] Found a possible error with Valorant.")
+                self.startvalorant()
+                break
+
+            ondeathmatch = pyautogui.locateOnScreen("images/ondeathmatch.png", grayscale=True)
+            ondeathmatch2 = pyautogui.locateOnScreen("images/ondeathmatch.png", grayscale=True, confidence=0.8)
+
+            if ondeathmatch is not None or ondeathmatch2 is not None:
+
+                if ondeathmatch is not None:
+                    print(Style.RESET_ALL)
+                    print(Fore.GREEN + " [√] Detected that deathmatch is selected")
+                    time.sleep(1)
+                    self.searchforgame()
+
+                if ondeathmatch2 is not None:
+                    print(Style.RESET_ALL)
+                    print(Fore.GREEN + " [√] Detected that deathmatch is selected")
+                    time.sleep(1)
+                    self.searchforgame()
+
+            if ondeathmatch is None or ondeathmatch2 is None:
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] Detected that deathmatch is not selected")
+                time.sleep(1)
+                self.deathmatchbutton()
+
+    def playbuttonclicked(self):
+
+        print(Style.RESET_ALL)
+        print(Fore.YELLOW + " [-] Detecting if play is selected")
+        time.sleep(1)
+        now = time.time()
+
+        future = now + 120
+
+        while True:
+
+            if time.time() > future:
+                # detects possible issue with valorant and restarts the game
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] Found a possible error with Valorant.")
+                self.startvalorant()
+                break
+
+            onplay = pyautogui.locateOnScreen("images/onplay.png", grayscale=True)
+            onplay2 = pyautogui.locateOnScreen("images/onplay.png", grayscale=True, confidence=0.8)
+
+            if onplay is not None or onplay2 is not None:
+
+                if onplay is not None:
+                    print(Style.RESET_ALL)
+                    print(Fore.GREEN + " [√] Detected that play is selected")
+                    time.sleep(1)
+                    self.deathmatchbutton()
+
+                if onplay2 is not None:
+                    print(Style.RESET_ALL)
+                    print(Fore.GREEN + " [√] Detected that play is selected")
+                    time.sleep(1)
+                    self.deathmatchbutton()
+
+            if onplay is None or onplay2 is None:
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] Detected that play is not selected")
+                time.sleep(1)
+                self.playbutton()
+
+    def firststart(self):
+        if os.path.exists("runtime_values"):
+            try:
+                f = open('runtime_values', 'r')
+                for i, line in enumerate(f):
+                    if i == 0:
+                        self.xpamount = int(line.strip())
+                    elif i == 1:
+                        self.gamesplayed = int(line.strip())
+                    elif i == 2:
+                        self.restarted = int(line.strip())
+                f.close()
+
+                if os.path.exists("runtime_values"):
+                    os.remove("runtime_values")
+
+            except Exception:
+                pass
+
+        foundval = False
+        for proc in psutil.process_iter():
+            if proc.name() == "VALORANT-Win64-Shipping.exe":
+                window = gw.getWindowsWithTitle('Valorant')[0]
+                foundval = True
+
+                sessions = AudioUtilities.GetAllSessions()
+                for session in sessions:
+                    volume = session.SimpleAudioVolume
+                    if session.Process and session.Process.name() == "VALORANT-Win64-Shipping.exe":
+                        volume.SetMute(1, None)
+                break
+
+        if not foundval:
+            self.startvalorant()
+
+        if not window.isMaximized:
+            window.maximize()
+            self.firststart()
+
+        activeactivity = "Loading bot"
+
+        earned = "{:,}".format(self.xpamount)
+
+        try:
+
+            self.RPC.update(state=("Earned " + earned + " XP"), start=start_time, large_image="valbot",
+                            large_text=self.version, details=activeactivity)
+
+        except Exception:
+            pass
+
+        print(Style.RESET_ALL)
+        print(Fore.RED, Style.BRIGHT + "[!] Bot will start in 10 seconds")
+        print(Style.RESET_ALL)
+        print(Fore.RED, Style.BRIGHT + "[!] The bot will automatically restart every 2 hours")
+        print(Style.RESET_ALL)
+        time.sleep(10)
+
+        self.playbutton()
+
+    def searchforgame(self):
+
+        print(Style.RESET_ALL)
+        print(Fore.YELLOW + " [-] Waiting for start button")
+
+        now = time.time()
+
+        future = now + 240
+
+        while True:
+            if time.time() > future:
+                # detects possible issue with valorant and restarts the game
+                print(Style.RESET_ALL)
+                print(Fore.RED + " Found a possible error with Valorant.")
+                self.startvalorant()
+                break
+
+            startbutton = pyautogui.locateOnScreen("images/start.png", grayscale=True)
+            start2 = pyautogui.locateOnScreen("images/start.png", confidence=0.6, grayscale=True)
+
+            again = pyautogui.locateOnScreen("images/playagain.png", grayscale=True)
+            again2 = pyautogui.locateOnScreen("images/playagain.png", confidence=0.6, grayscale=True)
+
+            if startbutton is not None or start2 is not None or again is not None or again2 is not None:
+                print(Style.RESET_ALL)
+                print(Fore.GREEN + " [√] Detected start button")
+
+                if startbutton is not None:
+                    pyautogui.click(x=960, y=540)
+                    time.sleep(.5)
+                    pyautogui.click(startbutton)
+                    self.inqueue()
+
+                if start2 is not None:
+                    pyautogui.click(x=960, y=540)
+                    time.sleep(.5)
+                    pyautogui.click(start2)
+                    self.inqueue()
+
+                if again is not None:
+                    pyautogui.click(x=960, y=540)
+                    time.sleep(.5)
+                    pyautogui.click(again2)
+                    self.inqueue()
+
+                if again2 is not None:
+                    pyautogui.click(x=960, y=540)
+                    time.sleep(.5)
+                    pyautogui.click(again2)
+                    self.inqueue()
+
+    def inqueue(self):
+
+        print(Style.RESET_ALL)
+        print(Fore.YELLOW + " [-] Detecting if in queue")
+        time.sleep(.1)
+        now = time.time()
+
+        future = now + 240
+
+        while True:
+
+            if time.time() > future:
+                # detects possible issue with valorant and restarts the game
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] Found a possible error with Valorant.")
+                self.startvalorant()
+                break
+
+            q = pyautogui.locateOnScreen("images/inqueue.png", grayscale=True)
+            q2 = pyautogui.locateOnScreen("images/inqueue.png", grayscale=True, confidence=0.6)
+
+            if q is not None or q2 is not None:
+                if q is not None:
+                    print(Style.RESET_ALL)
+                    print(Fore.GREEN + " [√] Detected in queue")
+                    time.sleep(1)
+                    self.ingame()
+                if q2 is not None:
+                    print(Style.RESET_ALL)
+                    print(Fore.GREEN + " [√] Detected in queue")
+                    time.sleep(1)
+                    self.ingame()
+
+            if q is None:
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] Detected not in queue")
+                time.sleep(1)
+
+                self.searchforgame()
+
+    def ingame(self):
+        time.sleep(1)
+        print(Style.RESET_ALL)
+
+        activeactivity = "In a queue"
+
+        earned = "{:,}".format(self.xpamount)
+
+        try:
+
+            self.RPC.update(state=("Earned " + earned + " XP"), start=start_time, large_image="valbot",
+                            large_text=self.version, details=activeactivity)
+
+        except Exception:
+            pass
+        print(Fore.YELLOW + " [-] Waiting for a game")
+
+        now = time.time()
+
+        future = now + 900  # if not in game after 15 mins, restart valorant as there may be an error. Change this if
+        # your servers are bad (in seconds)
+
+        while True:
+
+            if time.time() > future:
+                # detects possible issue with valorant and restarts the game
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] Found a possible error with Valorant.")
+                self.startvalorant()
+                break
+
+            ingame = pyautogui.locateOnScreen("images/playercard.png")
+            ingame2 = pyautogui.locateOnScreen("images/playercard.png", confidence=0.6)
+
+            defaultcard = pyautogui.locateOnScreen("images/defaultcard.png", grayscale=True)
+            defaultcard2 = pyautogui.locateOnScreen("images/defaultcard.png", grayscale=True, confidence=0.6)
+
+            if ingame is not None or ingame2 is not None or defaultcard is not None or defaultcard2 is not None:
+                print(Style.RESET_ALL)
+                print(Fore.GREEN + " [√] Detected in game")
+                pyautogui.click(x=960, y=540)
+                activeactivity = "In a game"
+
+                earned = "{:,}".format(self.xpamount)
+
+                try:
+
+                    self.RPC.update(state=("Earned " + earned + " XP"), start=start_time, large_image="valbot",
+                                    large_text=self.version, details=activeactivity)
+
+                except Exception:
+                    pass
+
+                time.sleep(1)
+                print(Style.RESET_ALL)
+                print(Fore.YELLOW + " [-] Waiting for the game to end")
+                time.sleep(2)
+
+                self.endofgame()
+
+    def endofgame(self):
+
+        now = time.time()
+
+        future = now + 780
+
+        time.sleep(5)
+
+        while True:
+
+            if time.time() > future:
+                # detects possible issue with valorant and restarts the game
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] Found a possible error with Valorant.")
+                self.startvalorant()
+                break
+
+            menu = pyautogui.locateOnScreen("images/menu.png", grayscale=True)
+            menu2 = pyautogui.locateOnScreen("images/menu.png", confidence=0.6, grayscale=True)
+
+            if menu is not None or menu2 is not None:
+                self.gamesplayed += 1
+                self.xpamount += 900
+
+                print(Style.RESET_ALL)
+                print(Fore.GREEN + " [√] Detected that the game has ended")
+                activeactivity = "In pre-game lobby"
+
+                earned = "{:,}".format(self.xpamount)
+
+                try:
+
+                    self.RPC.update(state=("Earned " + earned + " XP"), start=start_time, large_image="valbot",
+                                    large_text=self.version, details=activeactivity)
+
+                except Exception:
+                    pass
+
+                time.sleep(2)
+                self.xpscreen()
+
+            else:
+                self.antiafk()
+
+    def antiafk(self):
+        time.sleep(5)
+        n = randint(20, 35)
+        a = 0
+        while a <= n:
+            a += 1
+            n2 = randint(1, 6)
+            if n2 == 1:
+                pyautogui.keyDown('w')
+                sleep(randint(2, 6) / 10)
+
+            if n2 == 2:
+                pyautogui.keyUp('w')
+                pyautogui.keyDown('d')
+                pyautogui.click()
+
+            if n2 == 3:
+                pyautogui.keyDown('a')
+                sleep(randint(1, 3) / 10)
+                pyautogui.keyDown('a')
+                pyautogui.click()
+                sleep(randint(2, 4) / 10)
+
+            if n2 == 4:
+                pyautogui.keyUp('d')
+                pyautogui.keyDown('s')
+                sleep(randint(2, 5) / 10)
+
+            if n2 == 5:
+                pyautogui.keyUp('s')
+                sleep(randint(4, 6) / 10)
+
+            if n2 == 6:
+                pyautogui.keyDown('w')
+                sleep(randint(2, 4) / 10)
+                pyautogui.keyUp('w')
+        self.endofgame()
+
+    def xpscreen(self):
+        global line
+        print(Style.RESET_ALL)
+        print(Fore.YELLOW + " [-] Waiting for an XP screen")
+
+        time.sleep(3)
+
+        now = time.time()
+
+        future = now + 600
+
+        twohour = start_time + 7200
+
+        while True:
+
+            if time.time() > future:
+                # detects possible issue with valorant and restarts the game
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] Found a possible error with Valorant.")
+                self.startvalorant()
+                break
+
+            xpscreen = pyautogui.locateOnScreen("images/menu.png", grayscale=True)
+            xpscreen2 = pyautogui.locateOnScreen("images/menu.png", confidence=0.6, grayscale=True)
+            if xpscreen is not None or xpscreen2 is not None:
+                print(Style.RESET_ALL)
+                print(Fore.GREEN + " [√] Detected XP screen")
+                time.sleep(2)
+
+                runtime = datetime.now() - start
+                runtime = str(runtime)
+                runtime = runtime[:-7]
+
+                exact = start.strftime("%H:%M:%S")
+                dat = start.strftime("%d %h %Y")
+                print(Style.RESET_ALL)
+                print(Style.RESET_ALL)
+
+                print(
+                    Style.RESET_ALL + Fore.YELLOW + "———————————————————————————————————————————————————————————————————————————————")
+                print(Style.RESET_ALL)
+                print(Fore.YELLOW + " Earned",
+                      Style.BRIGHT + Fore.YELLOW + str(self.xpamount) + " XP" + Style.RESET_ALL + Fore.YELLOW,
+                      "in total")
+                print(Fore.YELLOW + " Bot has been running for",
+                      Style.BRIGHT + Fore.YELLOW + str(runtime) + Style.RESET_ALL + Fore.YELLOW)
+                print(Fore.YELLOW + " Bot was started at", Style.BRIGHT + Fore.YELLOW + str(exact),
+                      Style.RESET_ALL + Fore.YELLOW + "on the" + Style.BRIGHT + Fore.YELLOW,
+                      dat + Style.RESET_ALL + Fore.YELLOW)
+                print(Fore.YELLOW + " Played", Style.BRIGHT + Fore.YELLOW + str(self.gamesplayed),
+                      "games" + Style.RESET_ALL + Fore.YELLOW)
+                print(" Valorant has been", Style.BRIGHT + Fore.YELLOW + "restarted", self.restarted, "times")
+                print(Style.RESET_ALL)
+                print(
+                    Style.RESET_ALL + Fore.YELLOW + "———————————————————————————————————————————————————————————————————————————————")
+                print(Style.RESET_ALL)
+                print(Fore.YELLOW + "                                 Valbot v1.7")
+                print(Style.RESET_ALL)
+                print(Style.RESET_ALL)
+                time.sleep(1)
+                try:
+                    f = open('webhook.txt', 'r')
+                    line = f.readline()
+                    line = line.strip()
+                    f.close()
+                    found = True
+                except Exception:
+                    found = False
+
+                if found is True:
+
+                    webhook = DiscordWebhook(url=line)
+
+                    # create embed object for webhook
+                    embed = DiscordEmbed(title='Match Completed', color=34343)
+                    embed.set_author(name='Valbot', url='https://github.com/MrFums/Valbot',
+                                     icon_url='https://raw.githubusercontent.com/MrFums/Valbot/main/Valbot.png')
+                    embed.set_footer(text='Valbot v1.7')
+                    embed.set_timestamp()
+                    embed.add_embed_field(name='Total XP', value=self.xpamount)
+                    embed.add_embed_field(name='Games Played', value=self.gamesplayed)
+                    embed.add_embed_field(name='Current Bot Runtime', value=runtime)
+                    webhook.add_embed(embed)
+                    response = webhook.execute()
+
+                else:
+                    print(Style.RESET_ALL)
+                    print(Fore.RED + " [!] Discord webhook is not setup. Set it up in the menu.")
+
+                time.sleep(4)
+                pyautogui.click(x=960, y=540)
+                time.sleep(1)
+
+                if time.time() > twohour:
+
+                    if os.path.exists("runtime_values"):
+                        os.remove("runtime_values")
+
+                    f = open("runtime_values", "a+")
+                    f.write(str(self.xpamount))
+                    f.write("\n")
+                    f.write(str(self.gamesplayed))
+                    f.write("\n")
+                    f.write(str(self.restarted))
+                    f.close()
+
+                    # detects possible issue with valorant and restarts the game
+                    print(Style.RESET_ALL)
+                    print(Fore.RED + " [!] Restarting bot after 2 hours runtime")
+                    restartbot()
+                    break
+
+                self.skiprewardbutton()
+
 
 if __name__ == "__main__":
     bot = bot()
-    
-    #time.sleep(3) #comment this out if youre not testing functions
-    main()
-
+    bot.firststart()
