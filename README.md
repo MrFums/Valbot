@@ -15,13 +15,14 @@ If you want a very good battlepass tracker for Act III in Excel, [download this]
 
 #### Added
 
-- Danish translation from [@frederikspang](https://github.com/frederikspang).
-- Georgian translation from [@tatocaster ](https://github.com/tatocaster).
-- Changelog inconsistency section in Bad Practices
+- Discord Rich Presence - Easy way to monitor what you are doing when away from your computer
+- Automated Bot Restarts - The bot now restarts itself every 2 hours
+- Optimized Code
+- Improved Error Checking - Additional checks to see if the function completed successfully 
 
 #### Changed
-- Fixed typos in Italian translation from [@lorenzo-arena](https://github.com/lorenzo-arena).
-- Fixed typos in Indonesian translation from [@ekojs](https://github.com/ekojs).
+- Fixed typos 
+- Made instructions clearer
 
 
 ## Features
