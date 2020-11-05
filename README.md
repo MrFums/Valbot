@@ -1,6 +1,6 @@
 # Valbot v1.7
 
-An XP bot
+Valorant Deathmatch XP Bot
 
 Code may be slightly unoptimized. If you think you can improve it, please make a pull request.
 
