@@ -9,6 +9,21 @@ ONLY WORKS ON WINDOWS 10!
 If you want a very good battlepass tracker for Act III in Excel, [download this](https://cdn.discordapp.com/attachments/655191989305737256/770803460038983701/Valorant20Battlepass20Tracker20-20E1A3.xlsx).  (I didn't make it).
 
 
+## Changelog
+
+### [1.7.0] - 2020-11-05
+
+#### Added
+
+- Danish translation from [@frederikspang](https://github.com/frederikspang).
+- Georgian translation from [@tatocaster ](https://github.com/tatocaster).
+- Changelog inconsistency section in Bad Practices
+
+#### Changed
+- Fixed typos in Italian translation from [@lorenzo-arena](https://github.com/lorenzo-arena).
+- Fixed typos in Indonesian translation from [@ekojs](https://github.com/ekojs).
+
+
 ## Features
 
 * Fully AFK XP farmer
