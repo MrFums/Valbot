@@ -1,18 +1,18 @@
+import os
+import time
 from datetime import datetime
+from pathlib import Path
 from random import randint
 from time import sleep
-from pathlib import Path
+
+import psutil
+import pyautogui
+import pygetwindow as gw
 from colorama import Fore, Style
 from colorama import init
 from discord_webhook import DiscordWebhook, DiscordEmbed
 from pycaw.pycaw import AudioUtilities
 from pypresence import Presence
-
-import psutil
-import pyautogui
-import pygetwindow as gw
-import os
-import time
 
 init()
 
@@ -91,7 +91,7 @@ class bot:
             if q is not None or q2 is not None:
                 print(Style.RESET_ALL)
                 print(Fore.GREEN + " [√] DETECTED IN QUEUE")
-                self.ingame()
+                self.waitingforgame()
 
             if q is None or q2 is None:
                 print(Style.RESET_ALL)
@@ -446,13 +446,6 @@ class bot:
                 window = gw.getWindowsWithTitle('Valorant')[0]
                 foundval = True
 
-                sessions = AudioUtilities.GetAllSessions()
-                for session in sessions:
-                    volume = session.SimpleAudioVolume
-                    if session.Process and session.Process.name() == "VALORANT-Win64-Shipping.exe":
-                        volume.SetMute(1, None)
-                break
-
         if not foundval:
             self.startvalorant()
 
@@ -473,7 +466,7 @@ class bot:
             pass
 
         print(Style.RESET_ALL)
-        print(Fore.RED, Style.BRIGHT + "[!] BOT WILL BEGIN IN 10 SECONDS")
+        print(Fore.RED, Style.BRIGHT + "[!] BOT WILL BEGIN IN 15 SECONDS")
         print(Style.RESET_ALL)
         print(Fore.RED, Style.BRIGHT + "[!] SCHEDULED TO RESTART EVERY 2 HOURS")
         print(Style.RESET_ALL)
@@ -558,12 +551,12 @@ class bot:
                     print(Style.RESET_ALL)
                     print(Fore.GREEN + " [√] DETECTED IN QUEUE")
                     time.sleep(1)
-                    self.ingame()
+                    self.waitingforgame()
                 if q2 is not None:
                     print(Style.RESET_ALL)
                     print(Fore.GREEN + " [√] DETECTED IN QUEUE")
                     time.sleep(1)
-                    self.ingame()
+                    self.waitingforgame()
 
             if q is None:
                 print(Style.RESET_ALL)
@@ -572,9 +565,15 @@ class bot:
 
                 self.searchforgame()
 
-    def ingame(self):
+    def waitingforgame(self):
         time.sleep(1)
         print(Style.RESET_ALL)
+
+        sessions = AudioUtilities.GetAllSessions()
+        for session in sessions:
+            volume = session.SimpleAudioVolume
+            if session.Process and session.Process.name() == "VALORANT-Win64-Shipping.exe":
+                volume.SetMute(1, None)
 
         activeactivity = "In a queue"
 
@@ -587,7 +586,7 @@ class bot:
 
         except Exception:
             pass
-        print(Fore.YELLOW + " [-] Waiting for a game")
+        print(Fore.YELLOW + " [-] WAITING FOR A GAME")
 
         now = time.time()
 
@@ -658,6 +657,13 @@ class bot:
 
                 print(Style.RESET_ALL)
                 print(Fore.GREEN + " [√] DETECTED AT END GAME SCREEN")
+
+                sessions = AudioUtilities.GetAllSessions()
+                for session in sessions:
+                    volume = session.SimpleAudioVolume
+                    if session.Process and session.Process.name() == "VALORANT-Win64-Shipping.exe":
+                        volume.SetMute(0, None)
+
                 activeactivity = "In pre-game lobby"
 
                 earned = "{:,}".format(self.xpamount)
@@ -774,18 +780,23 @@ class bot:
                 print(Style.RESET_ALL)
                 print(Style.RESET_ALL)
                 time.sleep(1)
-                try:
-                    f = open('webhook.txt', 'r')
-                    line = f.readline()
-                    line = line.strip()
-                    f.close()
-                    found = True
-                except Exception:
+                if os.path.exists("webhook.config"):
+                    try:
+                        f = open('webhook.config', 'r')
+                        for i, line in enumerate(f):
+                            if i == 0:
+                                hook = f.readline()
+                                hook = hook.strip("discordwebhook=")
+                                f.close()
+                                found = True
+                    except Exception:
+                        found = False
+                else:
                     found = False
 
                 if found is True:
 
-                    webhook = DiscordWebhook(url=line)
+                    webhook = DiscordWebhook(url=hook)
 
                     # create embed object for webhook
                     embed = DiscordEmbed(title='Match Completed', color=34343)
