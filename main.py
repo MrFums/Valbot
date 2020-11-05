@@ -177,10 +177,11 @@ def main():
             if urlcheck in inputwebhook:
                 print(Style.RESET_ALL)
 
-                if os.path.exists("webhook.txt"):
-                    os.remove("webhook.txt")
+                if os.path.exists("webhook.config"):
+                    os.remove("webhook.config")
 
-                f = open("webhook.txt", "a+")
+                f = open("webhook.config", "a+")
+                f.write("discordwebhook=")
                 f.write(inputwebhook)
                 f.close()
                 print(Style.RESET_ALL)
@@ -194,7 +195,6 @@ def main():
                 print(Fore.RED + " The input was not a webhook, returning to menu...")
                 time.sleep(3)
                 main()
-
 
         elif menu == 4:
             print(Style.RESET_ALL)
