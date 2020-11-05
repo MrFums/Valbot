@@ -59,7 +59,7 @@ def main():
                   Fore.CYAN + Style.RESET_ALL)
             print("")
             print(Fore.WHITE + " 3)",
-                  Fore.CYAN + "Let the bot do the rest! If you have set it up properly, it should auto manage processes",
+                  Fore.CYAN + "The bot should now run by itself, do not interrupt it unless you want to stop the bot",
                   Style.RESET_ALL)
             print(Style.RESET_ALL)
             print("")
@@ -76,7 +76,7 @@ def main():
             else:
                 print(Fore.RED, 'You do not have a Valorant shortcut named "Valorant" in the bots directory')
                 time.sleep(5)
-                print(Fore.RED, 'Create one now. This is incase Valorant crashes, the game can be launched again')
+                print(Fore.RED, 'Create on now; the bot will not continue until you do so')
                 print(Style.RESET_ALL)
                 if os.path.exists("runtime_values"):
                     os.remove("runtime_values")
@@ -91,13 +91,13 @@ def main():
             print(Fore.RED + " HOW TO RUN THE BOT")
             print("")
             print(Fore.WHITE + " 1)",
-                  Fore.CYAN + "Run the script, The bot will open Valorant if it is not already open.", Style.RESET_ALL)
+                  Fore.CYAN + "Setup your Valorant shortcut and discord webhook (optional)", Style.RESET_ALL)
             print("")
             print(Fore.WHITE + " 2)", Fore.CYAN + "Run the bot by selecting", Fore.BLUE + "1",
                   Fore.CYAN + "in the main menu")
             print("")
-            print(Fore.WHITE + " 3)", Fore.CYAN + "Change your player banner to the",
-                  Fore.BLUE + "Valorant Card Banner", Fore.CYAN)
+            print(Fore.WHITE + " 3)", Fore.CYAN + "Change your player card to the",
+                  Fore.BLUE + "Valorant Card Player Card", Fore.CYAN)
             print("")
             print(Fore.WHITE + " 4)", Fore.CYAN + "Follow the instructions in the ", Fore.BLUE + "bot console",
                   Fore.CYAN)
@@ -123,14 +123,13 @@ def main():
             print("")
             print(Fore.CYAN + " Average XP gains are as follows")
             print(Fore.WHITE + " 1 hour:", Fore.MAGENTA + "3,600 XP")
-            print(Fore.WHITE + " 8 hours:", Fore.MAGENTA + "28800 XP")
-            print(Fore.WHITE + " 24 hours:", Fore.MAGENTA + "86400 XP")
+            print(Fore.WHITE + " 8 hours:", Fore.MAGENTA + "28,800 XP")
+            print(Fore.WHITE + " 24 hours:", Fore.MAGENTA + "86,400 XP")
             print("")
             print("")
             print(Fore.RED + " CREDITS AND CONTACT")
             print("")
-            print(Fore.CYAN + " Base code originally written by", Fore.BLUE + "jordan123pal",
-                  Fore.CYAN + "and heavily edited by", Fore.BLUE + "WolfAnto", Fore.CYAN + "and", Fore.BLUE + "Fums",
+            print(Fore.CYAN + " Bot is written by and managed by", Fore.BLUE + "Fums",
                   Fore.CYAN + "to work with Valorant")
             print(Fore.CYAN + " This version of the bot is maintained by", Fore.BLUE + "Fums")
             print(Fore.CYAN + " Help will not be given if it isn't regarding the bots code or a bug")
@@ -227,7 +226,7 @@ def main():
             os.startfile("restart.py")
 
         elif menu == 6:
-            print(Style.BRIGHT + Fore.RED + " Ok, closing. Thanks for using!")
+            print(Style.BRIGHT + Fore.RED + " Closing the bot")
             time.sleep(1)
             quit()
 
