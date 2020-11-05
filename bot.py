@@ -816,13 +816,13 @@ class bot:
                     f.write("\n")
                     f.write(str(self.gamesplayed))
                     f.write("\n")
-                    f.write(str(self.restarted))`
+                    f.write(str(self.restarted))
                     f.close()
 
                     # detects possible issue with valorant and restarts the game
                     print(Style.RESET_ALL)
                     print(Fore.RED + " [!] Restarting bot after 2 hours runtime")
-                    restartbot()`
+                    restartbot()
                     break
 
                 self.skiprewardbutton()
