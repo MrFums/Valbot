@@ -25,7 +25,7 @@ def main():
                                                                         """)
 
     print(Style.RESET_ALL)
-    print(Fore.RED + "                         v1.7" + Style.RESET_ALL, "-" + Fore.RED,
+    print(Fore.RED + "                         v1.7.1" + Style.RESET_ALL, "-" + Fore.RED,
           Style.BRIGHT + "by Fums and WolfAnto")
     print(
         Style.RESET_ALL + Fore.RED + "———————————————————————————————————————————————————————————————————————————————")
@@ -171,8 +171,11 @@ def main():
             print(Style.RESET_ALL)
             print(Style.BRIGHT + Fore.GREEN + "")
 
-            urlcheck = "https://discordapp.com/api/webhooks/"
+            urlcheck = "https://discord.com/api/webhooks/"
+
             inputwebhook = input(" > ")
+            inputwebhook = inputwebhook.replace("https://discordapp.com/api/webhooks/",
+                                                "https://discord.com/api/webhooks/")
 
             if urlcheck in inputwebhook:
                 print(Style.RESET_ALL)
@@ -181,6 +184,7 @@ def main():
                     os.remove("webhook.config")
 
                 f = open("webhook.config", "a+")
+                f.write("discordwebhook=")
                 f.write(inputwebhook)
                 f.close()
                 print(Style.RESET_ALL)
