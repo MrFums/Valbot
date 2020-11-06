@@ -39,18 +39,10 @@ print(Style.BRIGHT + Fore.RED + """
                                                                         """)
 
 print(Style.RESET_ALL)
-print(Fore.RED + "                         v1.7" + Style.RESET_ALL, "-" + Fore.RED,
+print(Fore.RED + "                         v1.7.2" + Style.RESET_ALL, "-" + Fore.RED,
       Style.BRIGHT + "by Fums and WolfAnto")
 print(Style.RESET_ALL + Fore.RED + "———————————————————————————————————————————————————————————————————————————————")
 print(Style.RESET_ALL + Style.BRIGHT + Fore.RED)
-
-
-def restartbot():  # restarts the bot after 2 hours
-    print(Style.RESET_ALL)
-    print(Fore.RED + " [!] BOT IS RESTARTING AFTER 2 HOURS")
-    time.sleep(1)
-    os.startfile("restart.py")  # starts the restart script which reopens this script
-    quit()  # quits this runtime of the script
 
 
 class bot:
@@ -65,9 +57,17 @@ class bot:
 
             self.RPC.connect()  # connects to rpc
 
-            self.version = "Valbot v1.7"  # varible str to change valbot version name in outputs
+            self.version = "Valbot v1.7.2"  # varible str to change valbot version name in outputs
         except Exception:
             pass
+
+    def restartbot(self):  # restarts the bot after 2 hours
+        print(Style.RESET_ALL)
+        print(Fore.RED + " [!] BOT IS RESTARTING AFTER 2 HOURS")
+        self.RPC.close()
+        time.sleep(1)
+        os.startfile("restart.py")  # starts the restart script which reopens this script
+        quit()  # quits this runtime of the script
 
     def inqueue2(self):  # if in queue after the game (due to different in queue buttons)
 
@@ -772,7 +772,7 @@ class bot:
                 print(
                     Style.RESET_ALL + Fore.YELLOW + "———————————————————————————————————————————————————————————————————————————————")
                 print(Style.RESET_ALL)
-                print(Fore.YELLOW + "                                 Valbot v1.7")
+                print(Fore.YELLOW + "                                 Valbot v1.7.2")
                 print(Style.RESET_ALL)
                 print(Style.RESET_ALL)
                 time.sleep(1)
@@ -794,7 +794,7 @@ class bot:
                     embed = DiscordEmbed(title='Match Completed', color=34343)
                     embed.set_author(name='Valbot', url='https://github.com/MrFums/Valbot',
                                      icon_url='https://raw.githubusercontent.com/MrFums/Valbot/main/valbot')
-                    embed.set_footer(text='Valbot v1.7')
+                    embed.set_footer(text='Valbot v1.7.2')
                     embed.set_timestamp()
                     embed.add_embed_field(name='Total XP', value=self.xpamount)
                     embed.add_embed_field(name='Games Played', value=self.gamesplayed)
@@ -826,7 +826,7 @@ class bot:
                     # detects possible issue with valorant and restarts the game
                     print(Style.RESET_ALL)
                     print(Fore.RED + " [!] BOT IS NOW RESTARTING AFTER 2 HOURS OF RUNTIME")
-                    restartbot()
+                    self.restartbot()
                     break
 
                 self.skiprewardbutton()
