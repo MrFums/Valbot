@@ -25,7 +25,7 @@ def main():
                                                                         """)
 
     print(Style.RESET_ALL)
-    print(Fore.RED + "                         v1.7.1" + Style.RESET_ALL, "-" + Fore.RED,
+    print(Fore.RED + "                         v1.7.2" + Style.RESET_ALL, "-" + Fore.RED,
           Style.BRIGHT + "by Fums and WolfAnto")
     print(
         Style.RESET_ALL + Fore.RED + "———————————————————————————————————————————————————————————————————————————————")
