@@ -171,7 +171,7 @@ def main():
             print(Style.RESET_ALL)
             print(Style.BRIGHT + Fore.GREEN + "")
 
-            urlcheck = "https://discordapp.com/api/webhooks/"
+            urlcheck = "https://discord.com/api/webhooks/"
             inputwebhook = input(" > ")
 
             if urlcheck in inputwebhook:
