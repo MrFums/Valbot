@@ -184,7 +184,6 @@ def main():
                     os.remove("webhook.config")
 
                 f = open("webhook.config", "a+")
-                f.write("discordwebhook=")
                 f.write(inputwebhook)
                 f.close()
                 print(Style.RESET_ALL)

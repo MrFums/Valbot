@@ -21,8 +21,6 @@ init()
 start_time = time.time()
 start = datetime.now()
 
-
-
 pyautogui.FAILSAFE = False
 print(Style.BRIGHT + Fore.RED + """
                                    
@@ -172,7 +170,8 @@ class bot:
 
         try:
 
-            self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",large_text=self.version, details=activeactivity)
+            self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",
+                            large_text=self.version, details=activeactivity)
 
         except Exception:
             pass
@@ -210,7 +209,8 @@ class bot:
 
         try:
 
-            self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",large_text=self.version, details=activeactivity)
+            self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",
+                            large_text=self.version, details=activeactivity)
 
         except Exception:
             pass
@@ -459,7 +459,8 @@ class bot:
 
         try:
 
-            self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",large_text=self.version, details=activeactivity)
+            self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",
+                            large_text=self.version, details=activeactivity)
 
         except Exception:
             pass
@@ -580,7 +581,8 @@ class bot:
 
         try:
 
-            self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",large_text=self.version, details=activeactivity)
+            self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",
+                            large_text=self.version, details=activeactivity)
 
         except Exception:
             pass
@@ -616,7 +618,8 @@ class bot:
 
                 try:
 
-                    self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",large_text=self.version, details=activeactivity)
+                    self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",
+                                    large_text=self.version, details=activeactivity)
 
                 except Exception:
                     pass
@@ -667,7 +670,8 @@ class bot:
 
                 try:
 
-                    self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",large_text=self.version, details=activeactivity)
+                    self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",
+                                    large_text=self.version, details=activeactivity)
 
                 except Exception:
                     pass
@@ -834,4 +838,4 @@ class bot:
 
 if __name__ == "__main__":
     bot = bot()
-    bot.firststart()
+    bot.xpscreen()
