@@ -1,4 +1,4 @@
-# Valbot v1.7
+# Valbot
 
 Valorant Deathmatch XP Bot
 
