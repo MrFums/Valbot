@@ -21,6 +21,8 @@ init()
 start_time = time.time()
 start = datetime.now()
 
+
+
 pyautogui.FAILSAFE = False
 print(Style.BRIGHT + Fore.RED + """
                                    
@@ -170,8 +172,7 @@ class bot:
 
         try:
 
-            self.RPC.update(state=("Earned " + earned + " XP"), start=start_time, large_image="valbot.png",
-                            large_text=self.version, details=activeactivity)
+            self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",large_text=self.version, details=activeactivity)
 
         except Exception:
             pass
@@ -209,8 +210,7 @@ class bot:
 
         try:
 
-            self.RPC.update(state=("Earned " + earned + " XP"), start=start_time, large_image="valbot.png",
-                            large_text=self.version, details=activeactivity)
+            self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",large_text=self.version, details=activeactivity)
 
         except Exception:
             pass
@@ -459,8 +459,7 @@ class bot:
 
         try:
 
-            self.RPC.update(state=("Earned " + earned + " XP"), start=start_time, large_image="valbot.png",
-                            large_text=self.version, details=activeactivity)
+            self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",large_text=self.version, details=activeactivity)
 
         except Exception:
             pass
@@ -581,8 +580,7 @@ class bot:
 
         try:
 
-            self.RPC.update(state=("Earned " + earned + " XP"), start=start_time, large_image="valbot.png",
-                            large_text=self.version, details=activeactivity)
+            self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",large_text=self.version, details=activeactivity)
 
         except Exception:
             pass
@@ -618,8 +616,7 @@ class bot:
 
                 try:
 
-                    self.RPC.update(state=("Earned " + earned + " XP"), start=start_time, large_image="valbot.png",
-                                    large_text=self.version, details=activeactivity)
+                    self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",large_text=self.version, details=activeactivity)
 
                 except Exception:
                     pass
@@ -670,8 +667,7 @@ class bot:
 
                 try:
 
-                    self.RPC.update(state=("Earned " + earned + " XP"), start=start_time, large_image="valbot.png",
-                                    large_text=self.version, details=activeactivity)
+                    self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbot",large_text=self.version, details=activeactivity)
 
                 except Exception:
                     pass
@@ -797,7 +793,7 @@ class bot:
                     # create embed object for webhook
                     embed = DiscordEmbed(title='Match Completed', color=34343)
                     embed.set_author(name='Valbot', url='https://github.com/MrFums/Valbot',
-                                     icon_url='https://raw.githubusercontent.com/MrFums/Valbot/main/Valbot.png')
+                                     icon_url='https://raw.githubusercontent.com/MrFums/Valbot/main/valbot')
                     embed.set_footer(text='Valbot v1.7')
                     embed.set_timestamp()
                     embed.add_embed_field(name='Total XP', value=self.xpamount)
