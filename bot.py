@@ -8,6 +8,7 @@ from time import sleep
 import psutil
 import pyautogui
 import pygetwindow as gw
+import requests
 from colorama import Fore, Style
 from colorama import init
 from discord_webhook import DiscordWebhook, DiscordEmbed
@@ -22,47 +23,81 @@ start_time = time.time()
 start = datetime.now()
 
 pyautogui.FAILSAFE = False
-print(Style.BRIGHT + Fore.RED + """
-                                   
-                                                                        
-    8b           d8              88  88                                 
-    `8b         d8'              88  88                          ,d     
-     `8b       d8'               88  88                          88     
-      `8b     d8'    ,adPPYYba,  88  88,dPPYba,    ,adPPYba,   MM88MMM  
-       `8b   d8'     ""     `Y8  88  88P'    "8a  a8"     "8a    88     
-        `8b d8'      ,adPPPPP88  88  88       d8  8b       d8    88     
-         `888'       88,    ,88  88  88b,   ,a8"  "8a,   ,a8"    88,    
-          `8'        `"8bbdP"Y8  88  8Y"Ybbd8"'    `"YbbdP"'     "Y888  
-                                                                         
-                                                                        """)
-
-print(Style.RESET_ALL)
-print(Fore.RED + "                         v1.7.2" + Style.RESET_ALL, "-" + Fore.RED,
-      Style.BRIGHT + "by Fums and WolfAnto")
-print(Style.RESET_ALL + Fore.RED + "———————————————————————————————————————————————————————————————————————————————")
-print(Style.RESET_ALL + Style.BRIGHT + Fore.RED)
 
 
 class bot:
     def __init__(self):
-
         self.xpamount = 0  # how much xp the bot has earnt during runtime
         self.restarted = 0  # how many times the bot has restarted during runtime
         self.gamesplayed = 0  # num of games played during runtime
 
+        self.foundwebhook = False
+        if os.path.exists("webhook.config"):
+            try:
+                f = open('webhook.config', 'r')
+                self.hookline = f.readline()
+                f.close()
+                self.foundwebhook = True
+            except Exception:
+                self.foundwebhook = False
+
         try:  # if cant connect to discord (if it isnt open for example), bot doesnt crash
             self.RPC = Presence(client_id="772841390467711041")  # discord rpc client id
 
+            try:
+                self.RPC.close()
+            except Exception:
+                pass
             self.RPC.connect()  # connects to rpc
 
-            self.version = "Valbot v1.7.2"  # varible str to change valbot version name in outputs
+            self.version = "Valbot v1.7.3"  # varible str to change valbot version name in outputs
         except Exception:
             pass
+
+        print(Style.BRIGHT + Fore.RED + """
+
+
+            8b           d8              88  88                                 
+            `8b         d8'              88  88                          ,d     
+             `8b       d8'               88  88                          88     
+              `8b     d8'    ,adPPYYba,  88  88,dPPYba,    ,adPPYba,   MM88MMM  
+               `8b   d8'     ""     `Y8  88  88P'    "8a  a8"     "8a    88     
+                `8b d8'      ,adPPPPP88  88  88       d8  8b       d8    88     
+                 `888'       88,    ,88  88  88b,   ,a8"  "8a,   ,a8"    88,    
+                  `8'        `"8bbdP"Y8  88  8Y"Ybbd8"'    `"YbbdP"'     "Y888  
+
+                                                                                """)
+
+        print(Style.RESET_ALL)
+        print(Fore.RED + "                         " + self.version + Style.RESET_ALL, "-" + Fore.RED,
+              Style.BRIGHT + "by Fums and WolfAnto")
+        print(
+            Style.RESET_ALL + Fore.RED + "———————————————————————————————————————————————————————————————————————————————")
+        print(Style.RESET_ALL + Style.BRIGHT + Fore.RED)
 
     def restartbot(self):  # restarts the bot after 2 hours
         print(Style.RESET_ALL)
         print(Fore.RED + " [!] BOT IS RESTARTING AFTER 2 HOURS")
         self.RPC.close()
+        if self.foundwebhook == True:
+            try:
+                webhook = DiscordWebhook(
+                    url=self.hookline,
+                    username="Valbot")
+                embed = DiscordEmbed(color=0xFF0000, title="Restart Notification",
+                                     description="Bot has been running for more than 2 hours\nBot will now be restarted\nThis is to prevent crashes")
+
+                embed.set_author(
+                    name=self.version,
+                    url="https://github.com/MrFums/Valbot",
+                    icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbotsmall.png",
+                )
+                embed.set_footer(text=self.version.replace("Valbot", ""))
+                embed.set_timestamp()
+                webhook.add_embed(embed)
+                webhook.execute()
+            except Exception:
+                pass
         time.sleep(1)
         os.startfile("restart.py")  # starts the restart script which reopens this script
         quit()  # quits this runtime of the script
@@ -464,12 +499,76 @@ class bot:
 
         except Exception:
             pass
+        response = requests.get("https://api.github.com/repos/MrFums/Valbot/releases/latest")
+        latest2 = response.json()["name"]
+        changelog = response.json()["body"]
 
+        latest = latest2.replace("Valbot v", "")
+        latest = latest.replace(".", "")
+        latest = int(latest)
+
+        version = self.version.replace("Valbot v", "")
+        version = version.replace(".", "")
+        version = int(version)
+
+        if version < latest:
+            print(Style.RESET_ALL)
+            print(Fore.RED, "[!] YOUR VERSION OF VALBOT (" + self.version.replace("Valbot v", "") + ") IS OUTDATED")
+            print(Style.RESET_ALL)
+            print(Fore.RED,
+                  "[!] PLEASE DOWNLOAD THE LATEST VERSION (" + latest2.replace("Valbot v", "") + ") FROM THE REPO")
+            print(Style.RESET_ALL)
+            print(Fore.RED, "[!] LATEST CHANGELOG:", Fore.RED + Style.BRIGHT + changelog)
+            print(Style.RESET_ALL)
+            if self.foundwebhook == True:
+                try:
+                    webhook = DiscordWebhook(
+                        url=self.hookline,
+                        username="Valbot")
+                    embed = DiscordEmbed(color=0xFF0000, title="Version Notification",
+                                         description="Your version of Valbot is outdated\nPlease download the newer version from the repo\nhttps://github.com/MrFums/Valbot")
+
+                    embed.set_author(
+                        name=self.version,
+                        url="https://github.com/MrFums/Valbot",
+                        icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbotsmall.png",
+                    )
+                    embed.set_footer(text=self.version.replace("Valbot", ""))
+                    embed.set_timestamp()
+                    webhook.add_embed(embed)
+                    webhook.execute()
+                except Exception:
+                    pass
+
+            time.sleep(5)
+        else:
+            print(Style.RESET_ALL)
+            print(Fore.GREEN, "[√] RUNNING LATEST VERSION (" + self.version.replace("Valbot v", "") + ") OF VALBOT")
         print(Style.RESET_ALL)
         print(Fore.RED, Style.BRIGHT + "[!] BOT WILL BEGIN IN 15 SECONDS")
         print(Style.RESET_ALL)
         print(Fore.RED, Style.BRIGHT + "[!] SCHEDULED TO RESTART EVERY 2 HOURS")
         print(Style.RESET_ALL)
+        if self.foundwebhook == True:
+            try:
+                webhook = DiscordWebhook(
+                    url=self.hookline,
+                    username="Valbot")
+                embed = DiscordEmbed(color=0xFFD700, title="Start Notification",
+                                     description="Bot is starting in 15 seconds")
+
+                embed.set_author(
+                    name=self.version,
+                    url="https://github.com/MrFums/Valbot",
+                    icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbotsmall.png",
+                )
+                embed.set_footer(text=self.version.replace("Valbot", ""))
+                embed.set_timestamp()
+                webhook.add_embed(embed)
+                webhook.execute()
+            except Exception:
+                pass
+
         time.sleep(15)
 
         self.playbutton()
@@ -776,35 +875,38 @@ class bot:
                 print(
                     Style.RESET_ALL + Fore.YELLOW + "———————————————————————————————————————————————————————————————————————————————")
                 print(Style.RESET_ALL)
-                print(Fore.YELLOW + "                                 Valbot v1.7.2")
+                print(Fore.YELLOW + "                                 " + self.version)
                 print(Style.RESET_ALL)
                 print(Style.RESET_ALL)
                 time.sleep(1)
-                found = False
-                if os.path.exists("webhook.config"):
-                    try:
-                        f = open('webhook.config', 'r')
-                        line = f.readline()
-                        f.close()
-                        found = True
-                    except Exception:
-                        found = False
 
-                if found is True:
+                if self.foundwebhook is True:
+                    restartstring = (str(self.restarted) + " times")
+                    if self.restarted == 0:
+                        restartstring = "Not yet restarted"
+                    elif self.restarted == 1:
+                        restartstring = "1 time"
+                    webhook = DiscordWebhook(
+                        url=self.hookline,
+                        username="Valbot")
 
-                    webhook = DiscordWebhook(url=line)
-
-                    # create embed object for webhook
-                    embed = DiscordEmbed(title='Match Completed', color=34343)
-                    embed.set_author(name='Valbot', url='https://github.com/MrFums/Valbot',
-                                     icon_url='https://raw.githubusercontent.com/MrFums/Valbot/main/valbot')
-                    embed.set_footer(text='Valbot v1.7.2')
+                    embed = DiscordEmbed(color=34343)
+                    embed.set_author(
+                        name=self.version,
+                        url="https://github.com/MrFums/Valbot",
+                        icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbotsmall.png",
+                    )
+                    embed.set_footer(text=self.version.replace("Valbot", ""))
                     embed.set_timestamp()
-                    embed.add_embed_field(name='Total XP', value=self.xpamount)
-                    embed.add_embed_field(name='Games Played', value=self.gamesplayed)
-                    embed.add_embed_field(name='Current Bot Runtime', value=runtime)
+                    embed.set_thumbnail(url='https://raw.githubusercontent.com/MrFums/ValbotAssets/main/bg.png')
+
+                    embed.add_embed_field(name="Total XP", value=self.xpamount, inline=False)
+                    embed.add_embed_field(name="Games Played", value=self.gamesplayed, inline=False)
+                    embed.add_embed_field(name="Current Runtime", value=runtime, inline=False)
+                    embed.add_embed_field(name="Valorant Restarted", value=restartstring, inline=False)
+
                     webhook.add_embed(embed)
-                    response = webhook.execute()
+                    webhook.execute()
 
                 else:
                     print(Style.RESET_ALL)
