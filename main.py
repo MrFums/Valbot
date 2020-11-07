@@ -25,7 +25,7 @@ def main():
                                                                         """)
 
     print(Style.RESET_ALL)
-    print(Fore.RED + "                         v1.7.2" + Style.RESET_ALL, "-" + Fore.RED,
+    print(Fore.RED + "                         v1.7.3" + Style.RESET_ALL, "-" + Fore.RED,
           Style.BRIGHT + "by Fums and WolfAnto")
     print(
         Style.RESET_ALL + Fore.RED + "———————————————————————————————————————————————————————————————————————————————")
@@ -63,7 +63,6 @@ def main():
                   Style.RESET_ALL)
             print(Style.RESET_ALL)
             print("")
-            print(Fore.RED + "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄")
             print(Style.RESET_ALL)
 
             vallnk = Path("Valorant.lnk")
@@ -85,8 +84,6 @@ def main():
 
 
         elif menu == 2:
-            print(
-                Style.BRIGHT + Fore.RED + "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄")
             print(Style.RESET_ALL + "")
             print(Fore.RED + " HOW TO RUN THE BOT")
             print("")
@@ -137,7 +134,6 @@ def main():
             print(Fore.BLUE + " Discord :", Fore.YELLOW + "Fums#0888", Fore.CYAN + "| ", Fore.BLUE + "Github :",
                   Fore.YELLOW + "https://github.com/MrFums", Style.RESET_ALL)
             print(Style.RESET_ALL)
-            print(Fore.RED + "▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄")
             print(Style.BRIGHT, Fore.RED)
             print("")
             print(" Input anything to return to the menu...")
