@@ -9,20 +9,15 @@ If you want a very good battlepass tracker for Act III in Excel, [download this]
 
 ## Changelog
 
-### [1.7.0] - 2020-11-05
+### [1.7.3] - 2020-11-07
 
 #### Added
 
-- Discord Rich Presence - Easy way to monitor what you are doing when away from your computer
-- Automated Bot Restarts - The bot now restarts itself every 2 hours
-- Optimized Code
-- Improved Error Checking - Additional checks to see if the function completed successfully 
-- Client Desync Protection
-- Automatically mutes Valorant when in queue and game.
+- More Discord Webhook Support
+- Version Checking
 
 #### Changed
-- Fixed typos 
-- Made instructions clearer
+- Appearance of Result Webhook
 
 
 ## Features
