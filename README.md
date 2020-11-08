@@ -73,7 +73,7 @@ Make sure when installing python, you check the box next to "Add Python 3.8 to P
 
 ![1](https://cdn.discordapp.com/attachments/769626861046202429/769950787304423444/0001_add_Python_to_Path.png)
 
-Please raise an Issue [here](https://github.com/MrFums/ValBot/issues/new) if you have any problems. 
+Please raise an Issue [here](https://github.com/MrFums/ValBot/issues/new) if you have any problems. Do NOT message me on Discord, I will redirect you to the [issues](https://github.com/MrFums/ValBot/issues/new)
 
 Please know that I will not be wasting time helping you if you can't read requirements or need help with Python or installing it (lol).
 
