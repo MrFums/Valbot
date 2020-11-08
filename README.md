@@ -4,6 +4,9 @@ Valorant Deathmatch XP Bot
 
 ONLY WORKS ON WINDOWS 10!
 
+DO NOT ask for support if you have not read the following information. I am also not a Python tutor, I will not help you setup Python, PIP and how to edit the code.
+
+
 If you want a very good battlepass tracker for Act III in Excel, [download this](https://cdn.discordapp.com/attachments/655191989305737256/770803460038983701/Valorant20Battlepass20Tracker20-20E1A3.xlsx).  (I didn't make it).
 
 
