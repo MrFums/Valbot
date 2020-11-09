@@ -5,15 +5,15 @@
 
 ## Changelog
 
-### [1.7.3] - 2020-11-07
+### [1.7.4] - 2020-11-09
 
 #### Added
 
-- More Discord Webhook Support
-- Version Checking
+- Rich Presence in the console
 
 #### Changed
-- Appearance of Result Webhook
+- Fixed "1 crash"
+- Revamp of the GUI
 
 
 ## Features
@@ -71,24 +71,9 @@ Make sure when installing python, you check the box next to "Add Python 3.8 to P
 
 Please raise an Issue [here](https://github.com/MrFums/ValBot/issues/new) if you have any problems. Do NOT message me on Discord, I will redirect you to the [issues](https://github.com/MrFums/ValBot/issues/new)
 
-Please know that I will not be wasting time helping you if you can't read requirements or need help with Python or installing it (lol).
-
-
-## Credits
-
-Initial idea and base code by WolfAnto. 
-Heavily edited and rewritten by Fums.
-
-
-## Thank you!
-
-Thank you to all the support you have all given. It is appreciated <3
-
-![1](https://cdn.discordapp.com/attachments/748559485643259944/771174248907669525/unknown.png)
-![2](https://cdn.discordapp.com/attachments/748559485643259944/771174320449257492/unknown.png)
+Please know that I will not be wasting time helping you if you can't read requirements or need help with Python code or installing it, Google is your friend.
 
 
 ## Previews
 
-![1](https://cdn.discordapp.com/attachments/769626861046202429/770698480720805938/unknown.png)
-![2](https://cdn.discordapp.com/attachments/769626861046202429/770698603546673172/unknown.png)
+[1](https://cdn.discordapp.com/attachments/655191989305737256/775177788986359838/unknown.png)
