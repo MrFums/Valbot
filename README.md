@@ -1,5 +1,4 @@
 # Valbot
-[![pypresence](https://img.shields.io/badge/using-pypresence-00bb88.svg?style=for-the-badge&logo=discord&logoWidth=20)](https://github.com/qwertyquerty/pypresence)
 [![Issues](https://img.shields.io/github/issues/MrFums/Valbot)](https://github.com/MrFums/Valbot/issues)
 [![Forks](https://img.shields.io/github/forks/MrFums/Valbot)](https://github.com/MrFums/Valbot/network)
 [![Stars](https://img.shields.io/github/stars/MrFums/Valbot)](https://github.com/MrFums/Valbot/stargazers)
