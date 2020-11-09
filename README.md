@@ -3,6 +3,9 @@
 [![Forks](https://img.shields.io/github/forks/MrFums/Valbot)](https://github.com/MrFums/Valbot/network)
 [![Stars](https://img.shields.io/github/stars/MrFums/Valbot)](https://github.com/MrFums/Valbot/stargazers)
 
+If you have the crash when you load into the bot script / when you press 1 to begin the bot, you need to uninstall numpy ( `pip uninstall numpy` ) and install an older version of numpy: `pip install numpy==1.19.3`
+
+
 ## Changelog
 
 ### [1.7.4] - 2020-11-09
