@@ -8,15 +8,10 @@ If you have the crash when you load into the bot script / when you press 1 to be
 
 ## Changelog
 
-### [1.7.4] - 2020-11-09
-
-#### Added
-
-- Rich Presence in the console
+### [1.7.6] - 2020-11-10
 
 #### Changed
-- Fixed "1 crash"
-- Revamp of the GUI
+- Fixed wrong version error
 
 
 ## Features
