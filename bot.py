@@ -30,7 +30,7 @@ class bot:
         self.xpamount = 0  # how much xp the bot has earnt during runtime
         self.restarted = 0  # how many times the bot has restarted during runtime
         self.gamesplayed = 0  # num of games played during runtime
-        self.version = "Valbot v1.7.4"  # varible str to change valbot version name in outputs
+        self.version = "Valbot v1.7.6"  # varible str to change valbot version name in outputs
         self.foundwebhook = False
         if os.path.exists("webhook.config"):
             try:
