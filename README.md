@@ -49,7 +49,7 @@ You also need a functioning brain, please have one of these.
 
 2- Open `Install_Packages.bat` as admin to install pakcages using pip. Do this after every update to maintain functionality.
 
-3- Open `menu.py` and read the bot console.
+3- Open `main.py` and read the bot console.
 
 4- Navigate the menu and read the information.
 
