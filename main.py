@@ -18,7 +18,7 @@ def main():
     except Exception:
         pass
     
-    version = "Valbot v1.7.4"
+    version = "Valbot v1.7.6"
     versionstripped = version.replace("Valbot ", "")
 
 
