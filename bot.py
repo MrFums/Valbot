@@ -71,7 +71,10 @@ class bot:
     def restartbot(self):  # restarts the bot after 2 hours
         print(Style.RESET_ALL)
         print(Fore.RED + " [!] BOT IS RESTARTING AFTER 2 HOURS")
-        self.RPC.close()
+        try:
+            self.RPC.close()
+        except Exception:
+            pass
         if self.foundwebhook == True:
             try:
                 webhook = DiscordWebhook(
@@ -93,6 +96,7 @@ class bot:
                 print(Fore.RED + " [!] TRIED TO SEND A WEBHOOK BUT IT IS NOT SETUP")
         time.sleep(1)
         os.startfile("restart.py")  # starts the restart script which reopens this script
+        time.sleep(3)
         quit()  # quits this runtime of the script
 
     def inqueue2(self):  # if in queue after the game (due to different in queue buttons)
