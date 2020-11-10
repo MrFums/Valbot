@@ -227,12 +227,16 @@ class bot:
 
         except Exception:
             pass
-
+        PROCNAME = "VALORANT-Win64-Shipping.exe"
         for proc in psutil.process_iter():
-            if proc.name() == "VALORANT-Win64-Shipping.exe":
-                proc.kill()
-                print(Fore.YELLOW, "[-] KILLING THE VALORANT PROCESS")
-                time.sleep(10)
+            try:
+                if proc.name().lower() == PROCNAME.lower():
+                    proc.kill()
+                    print(Fore.YELLOW, "[-] KILLING THE VALORANT PROCESS")
+                    time.sleep(10)
+                    return True
+            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
+                return False
 
         print(Style.RESET_ALL + Fore.YELLOW, "[-] STARTING VALORANT")
         print(Style.RESET_ALL)
