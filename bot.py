@@ -237,6 +237,7 @@ class bot:
                     return True
             except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
                 return False
+                print(Fore.RED, "[!] COULD NOT KILL THE VALORANT PROCESS")
 
         print(Style.RESET_ALL + Fore.YELLOW, "[-] STARTING VALORANT")
         print(Style.RESET_ALL)
