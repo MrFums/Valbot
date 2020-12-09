@@ -5,6 +5,7 @@
 
 If you have the crash when you load into the bot script / when you press 1 to begin the bot, you need to uninstall numpy ( `pip uninstall numpy` ) and install an older version of numpy: `pip install numpy==1.19.3`
 
+## Support will not be given currently. Please check the read me and all issues if you have an error with the program
 
 ## Changelog
 
