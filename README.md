@@ -43,7 +43,7 @@ You also need a functioning brain, please have one of these.
 
 [Download here](https://github.com/MrFums/Valbot/releases/latest)
 
-Click on the zip file that says `Valbot-vX.X.X` and unzip to where you would like the bot to be stored. Be advised to not put this in an Admin only folder as the bot must write the folder it is in to store runtime data.
+Click on the zip file that says `Valbot-X.X.X` and unzip to where you would like the bot to be stored. Be advised to not put this in an Admin only folder as the bot must write the folder it is in to store runtime data.
 
 ## Instructions
 
