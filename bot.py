@@ -158,20 +158,21 @@ class bot:
                 print(Fore.GREEN + " [√] DETECTED PLAY AGAIN BUTTON")
 
                 if playagain is not None:
+                    pyautogui.moveTo(playagain)
                     pyautogui.click(playagain)
                     time.sleep(1)
                     pyautogui.click(x=960, y=540)
                     time.sleep(1)
-                    pyautogui.click(playagain)
 
                     self.inqueue2()
 
                 if playagain2 is not None:
+                    pyautogui.moveTo(playagain2)
                     pyautogui.click(playagain2)
                     time.sleep(1)
                     pyautogui.click(x=960, y=540)
                     time.sleep(1)
-                    pyautogui.click(playagain2)
+
                     self.inqueue2()
 
     def valorantrunning(self):
@@ -227,17 +228,12 @@ class bot:
 
         except Exception:
             pass
-        PROCNAME = "VALORANT-Win64-Shipping.exe"
+
         for proc in psutil.process_iter():
-            try:
-                if proc.name().lower() == PROCNAME.lower():
-                    proc.kill()
-                    print(Fore.YELLOW, "[-] KILLING THE VALORANT PROCESS")
-                    time.sleep(10)
-                    return True
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                return False
-                print(Fore.RED, "[!] COULD NOT KILL THE VALORANT PROCESS")
+            if proc.name() == "VALORANT-Win64-Shipping.exe":
+                proc.kill()
+                print(Fore.YELLOW, "[-] KILLING THE VALORANT PROCESS")
+                time.sleep(10)
 
         print(Style.RESET_ALL + Fore.YELLOW, "[-] STARTING VALORANT")
         print(Style.RESET_ALL)
@@ -292,15 +288,17 @@ class bot:
 
                 if play is not None:
                     time.sleep(1)
+                    pyautogui.moveTo(play)
                     pyautogui.click(play)
                     time.sleep(2)
-                    self.playbuttonclicked()
+                    self.deathmatchbutton()
 
                 if play2 is not None:
                     time.sleep(1)
+                    pyautogui.moveTo(play2)
                     pyautogui.click(play2)
                     time.sleep(2)
-                    self.playbuttonclicked()
+                    self.deathmatchbutton()
 
     def deathmatchbutton(self):
 
@@ -329,12 +327,14 @@ class bot:
                 print(Fore.GREEN + " [√] DETECTED DEATHMATCH BUTTON")
 
                 if deathmatch is not None:
+                    pyautogui.moveTo(deathmatch)
                     pyautogui.click(deathmatch)
                     time.sleep(.5)
                     pyautogui.click(x=960, y=540)
                     self.deathmatchbuttonclicked()
 
                 if deathmatch2 is not None:
+                    pyautogui.moveTo(deathmatch2)
                     pyautogui.click(deathmatch2)
                     time.sleep(.5)
                     pyautogui.click(x=960, y=540)
@@ -369,10 +369,12 @@ class bot:
                     print(Style.RESET_ALL)
                     print(Fore.RED + " [!] DETECTED A SKIP BUTTON")
                     time.sleep(1)
+                    pyautogui.moveTo(skip)
                     pyautogui.click(skip)
                     time.sleep(.5)
                     pyautogui.click(x=960, y=540)
                     time.sleep(1)
+                    pyautogui.moveTo(skip)
                     pyautogui.click(skip)
 
                     self.playagain()
@@ -381,10 +383,12 @@ class bot:
                     print(Style.RESET_ALL)
                     print(Fore.RED + " [!] DETECTED A SKIP BUTTON")
                     time.sleep(1)
+                    pyautogui.moveTo(skip2)
                     pyautogui.click(skip2)
                     time.sleep(.5)
                     pyautogui.click(x=960, y=540)
                     time.sleep(1)
+                    pyautogui.moveTo(skip2)
                     pyautogui.click(skip2)
 
                     self.playagain()
@@ -611,24 +615,28 @@ class bot:
                 if startbutton is not None:
                     pyautogui.click(x=960, y=540)
                     time.sleep(.5)
+                    pyautogui.moveTo(startbutton)
                     pyautogui.click(startbutton)
                     self.inqueue()
 
                 if start2 is not None:
                     pyautogui.click(x=960, y=540)
                     time.sleep(.5)
+                    pyautogui.moveTo(start2)
                     pyautogui.click(start2)
                     self.inqueue()
 
                 if again is not None:
                     pyautogui.click(x=960, y=540)
                     time.sleep(.5)
+                    pyautogui.moveTo(again2)
                     pyautogui.click(again2)
                     self.inqueue()
 
                 if again2 is not None:
                     pyautogui.click(x=960, y=540)
                     time.sleep(.5)
+                    pyautogui.moveTo(again2)
                     pyautogui.click(again2)
                     self.inqueue()
 
