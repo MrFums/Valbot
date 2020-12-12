@@ -291,14 +291,14 @@ class bot:
                     pyautogui.moveTo(play)
                     pyautogui.click(play)
                     time.sleep(2)
-                    self.deathmatchbutton()
+                    self.playbuttonclicked()
 
                 if play2 is not None:
                     time.sleep(1)
                     pyautogui.moveTo(play2)
                     pyautogui.click(play2)
                     time.sleep(2)
-                    self.deathmatchbutton()
+                    self.playbuttonclicked()
 
     def deathmatchbutton(self):
 
