@@ -5,7 +5,7 @@
 
 If you have the crash when you load into the bot script / when you press 1 to begin the bot, you need to uninstall numpy ( `pip uninstall numpy` ) and install an older version of numpy: `pip install numpy==1.19.3`
 
-## Support will not be given currently. Please check the read me and all issues if you have an error with the program
+## Support may not be given currently. Please check the read me and all issues if you have an error with the program
 
 ## Changelog
 
@@ -67,6 +67,8 @@ Click on releases and download the latest version. If you also want the shortcut
 Make sure when installing python, you check the box next to "Add Python 3.8 to PATH"
 
 ![1](https://cdn.discordapp.com/attachments/769626861046202429/769950787304423444/0001_add_Python_to_Path.png)
+
+In addition to this, if your program crashes and / or you have an error message that contains `psutil.AccessDenied`, you must download a different python version. ![image](https://user-images.githubusercontent.com/57535680/101982606-208ac800-3c6d-11eb-8a6a-964ae43c880b.png) [download here](https://www.python.org/ftp/python/3.8.0/python-3.8.0-amd64.exe)
 
 Please raise an Issue [here](https://github.com/MrFums/ValBot/issues/new) if you have any problems. Do NOT message me on Discord, I will redirect you to the [issues](https://github.com/MrFums/ValBot/issues/new)
 
