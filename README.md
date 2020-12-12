@@ -9,10 +9,10 @@ If you have the crash when you load into the bot script / when you press 1 to be
 
 ## Changelog
 
-### [1.7.6] - 2020-11-10
+### [1.7.7] - 2020-12-12
 
 #### Changed
-- Fixed wrong version error
+- Fixed bot not detecting / not clicking on play button and other buttons
 
 
 ## Features
@@ -39,6 +39,12 @@ For the program to function properly, please copy and paste your OWN Valorant sh
 You also need a functioning brain, please have one of these.
 
 
+## Download
+
+(Download here)[https://github.com/MrFums/Valbot/releases/latest]
+
+Click on the zip file that says `Valbot-vX.X.X` and unzip to where you would like the bot to be stored. Be advised to not put this in an Admin only folder as the bot must write the folder it is in to store runtime data.
+
 ## Instructions
 
 1- Install Python 3.8.0.
@@ -56,10 +62,6 @@ You also need a functioning brain, please have one of these.
 7- If you encounter issues please [create one](https://github.com/MrFums/ValBot/issues/new) or if you have suggestions please create a [pull request](https://github.com/MrFums/ValBot/compare)
 
 8- (Optional) Setup a Discord webhook to get updates to your discord server for when the bot has completed a game.
-
-## Download
-
-Click on releases and download the latest version. If you also want the shortcut maker, download that too and edit it to your liking; I will not offer support for this as it is optional and not a dependency.
 
 
 ## Help
