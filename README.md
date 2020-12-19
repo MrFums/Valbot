@@ -5,14 +5,12 @@
 
 If you have the crash when you load into the bot script / when you press 1 to begin the bot, you need to uninstall numpy ( `pip uninstall numpy` ) and install an older version of numpy: `pip install numpy==1.19.3`
 
-## Support may not be given currently. Do NOT add me on Discord for help at the moment. Please check the read me and all issues if you have an error with the program
-
 ## Changelog
 
-### [1.7.7] - 2020-12-12
+### [1.7.8] - 19th December 2020
 
 #### Changed
-- Fixed bot not detecting / not clicking on play button and other buttons
+- Bot will now find another game after completing the first match
 
 
 ## Features
