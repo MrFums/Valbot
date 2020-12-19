@@ -30,7 +30,7 @@ class bot:
         self.xpamount = 0  # how much xp the bot has earnt during runtime
         self.restarted = 0  # how many times the bot has restarted during runtime
         self.gamesplayed = 0  # num of games played during runtime
-        self.version = "Valbot v1.7.6"  # varible str to change valbot version name in outputs
+        self.version = "Valbot v1.7.8"  # varible str to change valbot version name in outputs
         self.foundwebhook = False
         if os.path.exists("webhook.config"):
             try:
@@ -50,7 +50,7 @@ class bot:
                 pass
             self.RPC.connect()  # connects to rpc
 
-            
+
         except Exception:
             pass
 
@@ -61,7 +61,7 @@ class bot:
            ║╚╝║ ║╚═╝║║║ ╔╗║╔═╗║║║ ║║  ║║  
            ╚╗╔╝ ║╔═╗║║╚═╝║║╚═╝║║╚═╝║  ║║  
             ╚╝  ╚╝ ╚╝╚═══╝╚═══╝╚═══╝  ╚╝
-                                   """ + Style.NORMAL + Fore.RED, self.version.replace("Valbot ","") + Style.RESET_ALL)
+                                   """ + Style.NORMAL + Fore.RED, self.version.replace("Valbot ", "") + Style.RESET_ALL)
 
         print(Style.RESET_ALL)
         print(Style.RESET_ALL + Fore.RED + "                 By Fums & WolfAnto")
@@ -98,82 +98,6 @@ class bot:
         os.startfile("restart.py")  # starts the restart script which reopens this script
         time.sleep(3)
         quit()  # quits this runtime of the script
-
-    def inqueue2(self):  # if in queue after the game (due to different in queue buttons)
-
-        print(Style.RESET_ALL)
-        print(Fore.YELLOW + " [-] DETECTING IF IN QUEUE")
-        time.sleep(.2)
-        now = time.time()
-
-        future = now + 120
-
-        while True:
-
-            if time.time() > future:
-                # detects possible issue with valorant and restarts the game
-                print(Style.RESET_ALL)
-                print(Fore.RED + " [!] FOUND A POSSIBLE ERROR WITH VALORANT")
-                self.startvalorant()
-                break
-
-            q = pyautogui.locateOnScreen("images/inqueue2.png", grayscale=True)
-            q2 = pyautogui.locateOnScreen("images/inqueue2.png", grayscale=True, confidence=0.6)
-
-            if q is not None or q2 is not None:
-                print(Style.RESET_ALL)
-                print(Fore.GREEN + " [√] DETECTED IN QUEUE")
-                self.waitingforgame()
-
-            if q is None or q2 is None:
-                print(Style.RESET_ALL)
-                print(Fore.RED + " [!] DETECTED NOT IN QUEUE")
-                time.sleep(1)
-
-                self.skiprewardbutton()
-
-    def playagain(self):
-        time.sleep(1)
-        now = time.time()
-
-        desynccheck = now + 30
-
-        print(Style.RESET_ALL)
-        print(Fore.YELLOW + " [-] SEARCHING FOR PLAY AGAIN BUTTON")
-        while True:
-
-            if time.time() > desynccheck:
-                # detects possible server -> client desync so presses play button instead (thanks @guwopg0d for the idea)
-                # works by pressing the play button after 30 seconds
-                print(Style.RESET_ALL)
-                print(Fore.RED + " [!] FOUND A POSSIBLE SERVER DESYNC ISSUE")
-                self.playbutton()
-                break
-
-            playagain = pyautogui.locateOnScreen("images/playagain.png", grayscale=True)
-            playagain2 = pyautogui.locateOnScreen("images/playagain.png", confidence=0.6, grayscale=True)
-
-            if playagain is not None or playagain2 is not None:
-                print(Style.RESET_ALL)
-                print(Fore.GREEN + " [√] DETECTED PLAY AGAIN BUTTON")
-
-                if playagain is not None:
-                    pyautogui.moveTo(playagain)
-                    pyautogui.click(playagain)
-                    time.sleep(1)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(1)
-
-                    self.inqueue2()
-
-                if playagain2 is not None:
-                    pyautogui.moveTo(playagain2)
-                    pyautogui.click(playagain2)
-                    time.sleep(1)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(1)
-
-                    self.inqueue2()
 
     def valorantrunning(self):
         found = False
@@ -348,64 +272,6 @@ class bot:
 
                 time.sleep(5)
 
-    def skiprewardbutton(self):
-
-        print(Style.RESET_ALL)
-        print(Fore.YELLOW + " [-] SEARCHING FOR A SKIP BUTTON")
-        time.sleep(3)
-        now = time.time()
-
-        future = now + 120
-
-        while True:
-
-            if time.time() > future:
-                # detects possible issue with valorant and restarts the game
-                print(Style.RESET_ALL)
-                print(Fore.RED + " [!] FOUND A POSSIBLE ERROR WITH VALORANT")
-                self.startvalorant()
-                break
-
-            skip = pyautogui.locateOnScreen("images/skip.png", grayscale=True)
-            skip2 = pyautogui.locateOnScreen("images/skip.png", grayscale=True, confidence=0.6)
-
-            if skip is not None or skip2 is not None:
-
-                if skip is not None:
-                    print(Style.RESET_ALL)
-                    print(Fore.RED + " [!] DETECTED A SKIP BUTTON")
-                    time.sleep(1)
-                    pyautogui.moveTo(skip)
-                    pyautogui.click(skip)
-                    time.sleep(.5)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(1)
-                    pyautogui.moveTo(skip)
-                    pyautogui.click(skip)
-
-                    self.playagain()
-
-                if skip2 is not None:
-                    print(Style.RESET_ALL)
-                    print(Fore.RED + " [!] DETECTED A SKIP BUTTON")
-                    time.sleep(1)
-                    pyautogui.moveTo(skip2)
-                    pyautogui.click(skip2)
-                    time.sleep(.5)
-                    pyautogui.click(x=960, y=540)
-                    time.sleep(1)
-                    pyautogui.moveTo(skip2)
-                    pyautogui.click(skip2)
-
-                    self.playagain()
-
-            if skip is None or skip2 is None:
-                print(Style.RESET_ALL)
-                print(Fore.GREEN + " [√] COULD NOT DETECT A SKIP BUTTON")
-                time.sleep(1)
-
-                self.playagain()
-
     def deathmatchbuttonclicked(self):
 
         print(Style.RESET_ALL)
@@ -519,7 +385,6 @@ class bot:
         if not window.isMaximized:
             window.maximize()
             self.firststart()
-
 
         response = requests.get("https://api.github.com/repos/MrFums/Valbot/releases/latest")
         latest2 = response.json()["name"]
@@ -690,7 +555,6 @@ class bot:
         time.sleep(1)
         print(Style.RESET_ALL)
 
-
         activeactivity = "In a queue"
 
         earned = "{:,}".format(self.xpamount)
@@ -773,7 +637,6 @@ class bot:
 
                 print(Style.RESET_ALL)
                 print(Fore.GREEN + " [√] DETECTED AT END GAME SCREEN")
-
 
                 activeactivity = "In menu"
 
@@ -947,7 +810,7 @@ class bot:
                     self.restartbot()
                     break
 
-                self.skiprewardbutton()
+                self.playbutton()
 
 
 if __name__ == "__main__":
