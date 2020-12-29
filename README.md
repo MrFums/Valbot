@@ -27,6 +27,8 @@ If you have the crash when you load into the bot script / when you press 1 to be
 
 ## Requirements
 
+Only works on 1920 x 1080 resolution. If you wish to add a custom resolution, you need to get your own version of the images from the `images` folder, call them EXACTLY the same name and replace the original files.
+
 Run the batch file as Administator to install the dependencies. 
 Seems to only work on 64bit Windows 10 with Python 3.8 
 
