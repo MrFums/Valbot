@@ -51,7 +51,7 @@ Click on the zip file that says `Valbot-X.X.X` and unzip to where you would like
 
 2- Open `Install_Packages.bat` as admin to install pakcages using pip. Do this after every update to maintain functionality.
 
-3- Open `main.py` and read the bot console.
+3- Open `Valbot.py` and read the bot console.
 
 4- Navigate the menu and read the information.
 
