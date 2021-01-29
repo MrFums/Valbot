@@ -7,10 +7,15 @@ If you have the crash when you load into the bot script / when you press 1 to be
 
 ## Changelog
 
-### [1.7.8] - 19th December 2020
+### [1.8.0] - 29th January 2021
 
 #### Changed
-- Bot will now find another game after completing the first match
+- Support for recent Valorant update / season
+- Window Title
+- Improved Discord Presence
+- Fixed not detecting shortcut in root folder
+- Fixed some minor and rare crashes
+- Fixed play button detected
 
 
 ## Features
