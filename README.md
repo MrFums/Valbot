@@ -7,15 +7,13 @@ If you have the crash when you load into the bot script / when you press 1 to be
 
 ## Changelog
 
-### [1.8.0] - 29th January 2021
+### [1.8.1] - 31st January 2021
 
 #### Changed
-- Support for recent Valorant update / season
-- Window Title
-- Improved Discord Presence
-- Fixed not detecting shortcut in root folder
-- Fixed some minor and rare crashes
-- Fixed play button detected
+
+- Ability to pause at any time! Hold F3 to pause and F4 to resume
+- No longer need to use the valorant player card. You can use any card!
+- Minor bug fixes
 
 
 ## Features
