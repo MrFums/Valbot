@@ -2,31 +2,35 @@ import math
 import os
 import time
 from pathlib import Path
+import pathlib
 import requests
 from colorama import Fore, Style
 from colorama import init
 from pypresence import Presence
 
+
 init()
-os.system('mode con: cols=39 lines=25')
+
 
 def main():
-    
+
     try:
         RPC = Presence(client_id="772841390467711041")
         RPC.connect()
     except Exception:
         pass
-    
-    version = "Valbot v1.7.8"
+    version = "Valbot v1.8.1"
+
     versionstripped = version.replace("Valbot ", "")
 
 
-    activeactivity = "In console"
-
+    activeactivity = "In Launcher"
+    os.system('mode con: cols=39 lines=25')
+    title = "title " + version
+    os.system(title)
     try:
 
-        RPC.update(state=("Running "+ version.replace("Valbot ","")), start=time.time(), large_image="valbot",large_text=version, details=activeactivity)
+        RPC.update(state=("Running "+ version.replace("Valbot ","")), start=time.time(), large_image="valbotnew",large_text=version, details=activeactivity)
 
     except Exception:
         pass
@@ -64,10 +68,8 @@ def main():
         if menu == 1:
 
             print(Style.RESET_ALL)
-            print(Fore.YELLOW, "Make sure you have the")
-            print(Style.BRIGHT, "Valorant Card", Style.NORMAL + "Player Card equipped")
             print(Style.RESET_ALL)
-            print(Fore.YELLOW, "Valorant must be" + Style.BRIGHT, "FULLSCREEN")
+            print(Fore.YELLOW, "Valorant must be" + Style.BRIGHT, "BORDERLESS")
             print(Style.NORMAL, "for the bot to function")
             response = requests.get("https://api.github.com/repos/MrFums/Valbot/releases/latest")
             latest2 = response.json()["name"]
@@ -91,15 +93,16 @@ def main():
                 time.sleep(5)
 
             print(Style.RESET_ALL)
-
-            vallnk = Path("Valorant.lnk")
+            root = str(pathlib.Path(__file__).parent.absolute())
+            fullpath = root + "\Valorant.lnk"
+            vallnk = Path(fullpath)
             if vallnk.is_file():
                 # file exists
                 try:
                     RPC.close()
                 except Exception:
                     pass
-                time.sleep(2)
+                time.sleep(5)
                 os.startfile("bot.py")
                 time.sleep(.5)
                 quit()
@@ -122,11 +125,8 @@ def main():
             print(Fore.WHITE + " 1)", Fore.CYAN + "Setup your Valorant shortcut")
             print("    and discord webhook (optional)", Style.RESET_ALL)
             print("")
-            print(Fore.WHITE + " 2)", Fore.CYAN + "Change your player card to the")
-            print("    Valorant Card Player Card")
-            print("")
-            print(Fore.WHITE + " 3)", Fore.CYAN + "Valorant must be fullscreen")
-            print("    and focused")
+            print(Fore.WHITE + " 2)", Fore.CYAN + "Valorant must be borderless ")
+            print("    fullscreen and focused")
             print("")
             print(Fore.BLUE + " Discord :", Fore.YELLOW + "Fums#0888")
             print(Fore.CYAN, Fore.BLUE + "Github :",Fore.YELLOW + "https://github.com/MrFums", Style.RESET_ALL)
