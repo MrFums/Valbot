@@ -9,3 +9,4 @@ py -m pip install pypiwin32==223
 py -m pip install discord_webhook==0.11.0
 py -m pip install pypresence==4.0.0
 py -m pip install numpy==1.19.3
+py -m pip install keyboard==0.13.5
