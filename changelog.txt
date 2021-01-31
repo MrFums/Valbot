@@ -1,0 +1,15 @@
+2021-01-29 :: Valbot-1.8.0 
+
++ Support for recent Valorant update / season
++ Window Title
++ Improved Discord Presence 
++ Fixed not detecting shortcut in root folder
++ Fixed some minor and rare crashes
++ Fixed play button detected
+
+
+Notes: 
+
+I have tried to make it so the program will work with future updates and won't require an update.
+
+- Fums
