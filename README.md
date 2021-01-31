@@ -1,16 +1,22 @@
 # Valbot
+
+## The BEST Valorant AFK XP Farmer
+
 [![Issues](https://img.shields.io/github/issues/MrFums/Valbot)](https://github.com/MrFums/Valbot/issues)
 [![Forks](https://img.shields.io/github/forks/MrFums/Valbot)](https://github.com/MrFums/Valbot/network)
 [![Stars](https://img.shields.io/github/stars/MrFums/Valbot)](https://github.com/MrFums/Valbot/stargazers)
 
-If you have the crash when you load into the bot script / when you press 1 to begin the bot, you need to uninstall numpy ( `pip uninstall numpy` ) and install an older version of numpy: `pip install numpy==1.19.3`
+[Make sure to join the Discord server for Valbot; it makes it easier for everyone!](https://discord.gg/QFC46XKzxU)
 
 ## Changelog
 
-### [1.7.8] - 19th December 2020
+### [1.8.1] - 31st January 2021
 
 #### Changed
-- Bot will now find another game after completing the first match
+
+- Ability to pause at any time! Hold F3 to pause and F4 to resume
+- No longer need to use the valorant player card. You can use any card!
+- Minor bug fixes
 
 
 ## Features
@@ -26,6 +32,8 @@ If you have the crash when you load into the bot script / when you press 1 to be
 
 
 ## Requirements
+
+Only works on 1920 x 1080 resolution. If you wish to add a custom resolution, you need to get your own version of the images from the `images` folder, call them EXACTLY the same name and replace the original files.
 
 Run the batch file as Administator to install the dependencies. 
 Seems to only work on 64bit Windows 10 with Python 3.8 
@@ -49,7 +57,7 @@ Click on the zip file that says `Valbot-X.X.X` and unzip to where you would like
 
 2- Open `Install_Packages.bat` as admin to install pakcages using pip. Do this after every update to maintain functionality.
 
-3- Open `main.py` and read the bot console.
+3- Open `Valbot.py` and read the bot console.
 
 4- Navigate the menu and read the information.
 
