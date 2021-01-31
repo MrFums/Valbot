@@ -1,5 +1,6 @@
-#Valbot
-##The BEST Valorant AFK XP Farmer
+# Valbot
+
+## The BEST Valorant AFK XP Farmer
 
 [![Issues](https://img.shields.io/github/issues/MrFums/Valbot)](https://github.com/MrFums/Valbot/issues)
 [![Forks](https://img.shields.io/github/forks/MrFums/Valbot)](https://github.com/MrFums/Valbot/network)
