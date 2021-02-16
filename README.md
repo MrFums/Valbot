@@ -8,7 +8,7 @@
 
 [Make sure to join the Discord server for Valbot; it makes it easier for everyone!](https://discord.gg/QFC46XKzxU)
 
-# Note: Updates will NO LONGER be pushed to this repo, instead they will be posted to the discord server.
+# Note: Updates will NO LONGER be pushed to this repo, instead they will be posted to the discord server. For this reason, the current version on this repo will probably NOT work. Join the server to download the latest version.
 
 ## Changelog
 
