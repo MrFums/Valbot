@@ -12,13 +12,58 @@
 
 ## Changelog
 
-### [1.8.1] - 31st January 2021
+##2021-03-06-12: Valbot-1.9.0
 
-#### Changed
++ Now detects if the game gets a cheater in it and acts properly
++ Now auto buys the vandal
 
-- Ability to pause at any time! Hold F3 to pause and F4 to resume
-- No longer need to use the valorant player card. You can use any card!
-- Minor bug fixes
+
+Notes:
+
+I can't actually test if the cheater detection works properly as I don't understand how you fuckers are getting cheaters in deathmatch.
+I'm gonna release this build to github as well, I think the "ban reports" were trolls and / or nothing to do with my program (most of them were asking for free aimbot)
+
+
+##2021-02-06 :: Valbot-1.8.2 
+
++ Fixed bot getting stuck in play button loop
+
+
+Notes:
+
+There is a chance Riot have decided to fuck me in ass and spit on my cheeks so I will not be releasing this build on GitHub.
+From now on if any updates are to come out they will ONLY be released on the Discord server: discord.gg/QFC46XKzxU
+
+
+##2021-01-31 :: Valbot-1.8.1 
+
++ Ability to pause at any time! Hold F3 to pause and F4 to resume
++ No longer need to use the valorant player card. You can use any card!
++ Minor bug fixes
+
+
+Notes: 
+
+I will be making a discord server. Check the repo for the link. The bot should resume to whereabouts you are when you pause.
+
+- Fums
+
+
+##2021-01-29 :: Valbot-1.8.0 
+
++ Support for recent Valorant update / season
++ Window Title
++ Improved Discord Presence 
++ Fixed not detecting shortcut in root folder
++ Fixed some minor and rare crashes
++ Fixed play button detected
+
+
+Notes: 
+
+I have tried to make it so the program will work with future updates and won't require an update.
+
+- Fums
 
 
 ## Features
