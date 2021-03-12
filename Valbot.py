@@ -9,7 +9,7 @@ from colorama import init
 from pypresence import Presence
 
 
-init()
+init() #not a clue what init function its loading but its needed lol
 
 
 def main():
@@ -19,7 +19,7 @@ def main():
         RPC.connect()
     except Exception:
         pass
-    version = "Valbot v1.8.1"
+    version = "Valbot v1.9.0"
 
     versionstripped = version.replace("Valbot ", "")
 
