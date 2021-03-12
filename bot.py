@@ -16,7 +16,7 @@ from colorama import init
 from discord_webhook import DiscordWebhook, DiscordEmbed
 from pypresence import Presence
 
-init()
+init()  # not a clue what init function its loading but its needed lol
 
 # ---------------------------------------------------------------
 
@@ -28,16 +28,19 @@ pyautogui.FAILSAFE = False
 
 class bot:
     def __init__(self):
+
+        self.buymenubutton = "b" # what button you use to open the buy menu to choose weapons
         self.secondsuntilrestart = 3600  # this is how many seconds until the bot will restart. This is to stop the bot from crashing. Decrease this if you have crashes.
         self.xpamount = 0  # how much xp the bot has earnt during runtime
         self.restarted = 0  # how many times the bot has restarted during runtime
         self.gamesplayed = 0  # num of games played during runtime
-        self.version = "Valbot v1.8.1"  # variable str to change valbot version name in outputs
+        self.version = "Valbot v1.9.0"  # variable str to change valbot version name in outputs
         self.foundwebhook = False
         title = "title " + self.version
         os.system(title)
         os.system('mode con: cols=54 lines=18')
-        if os.path.exists("webhook.config"):
+        if os.path.exists(
+                "webhook.config"):  # looks for a webhook file and tells the program if the variable carries the webhook or not
             try:
                 f = open('webhook.config', 'r')
                 self.hookline = f.readline()
@@ -342,8 +345,8 @@ class bot:
                 self.startvalorant()
                 break
 
-            onplay = pyautogui.locateOnScreen("images/onplay.png", grayscale=True)
-            onplay2 = pyautogui.locateOnScreen("images/onplay.png", grayscale=True, confidence=0.5)
+            onplay = pyautogui.locateOnScreen("images/start.png", grayscale=True)
+            onplay2 = pyautogui.locateOnScreen("images/start.png", grayscale=True, confidence=0.5)
 
             if onplay is not None or onplay2 is not None:
 
@@ -611,6 +614,7 @@ class bot:
 
                 earned = "{:,}".format(self.xpamount)
 
+
                 try:
 
                     self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbotnew",
@@ -713,9 +717,73 @@ class bot:
         time.sleep(.5)
         n = randint(20, 35)
         a = 0
+
+        cheater = pyautogui.locateOnScreen("images/cheated_detected.png", grayscale=True)
+        cheater1 = pyautogui.locateOnScreen("images/cheated_detected.png", grayscale=True, confidence=0.6)
+
+        cheatercontinue = pyautogui.locateOnScreen("images/continue_terminated.png", grayscale=True)
+        cheatercontinue1 = pyautogui.locateOnScreen("images/continue_terminated.png", grayscale=True, confidence=0.6)
+        
+
+        pyautogui.keyDown(self.buymenubutton)
+
+        pyautogui.moveTo(907,707)
+        time.sleep(.4)
+        pyautogui.click()
+        time.sleep(.1)
+        pyautogui.keyUp(self.buymenubutton)
+        time.sleep(.1)
+        try:
+            pyautogui.keyUp(self.buymenubutton)
+        except:
+            pass
+
         while a <= n:
             if keyboard.is_pressed('f3'):
                 self.pause()
+
+            if cheater is not None or cheater1 is not None:
+
+                if self.foundwebhook == True:
+                    try:
+                        webhook = DiscordWebhook(
+                            url=self.hookline,
+                            username="Valbot")
+                        embed = DiscordEmbed(color=0xFF0000, title="Cheater Detected",
+                                             description="A cheater was banned in your game\nMatch has been cancelled\nReturning to menu and resuming")
+
+                        embed.set_author(
+                            name=self.version,
+                            url="https://github.com/MrFums/Valbot",
+                            icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/jett.png",
+                        )
+                        embed.set_footer(text=self.version.replace("Valbot", ""))
+                        embed.set_timestamp()
+                        webhook.add_embed(embed)
+                        webhook.execute()
+                    except Exception:
+                        print(Fore.RED + " [!] TRIED TO SEND A WEBHOOK BUT IT IS NOT SETUP")
+
+                while True:
+
+                    if cheatercontinue is not None:
+                        print(Style.RESET_ALL)
+                        print(Fore.RED + " [!] CHEATER DETECTED IN GAME")
+                        pyautogui.moveTo(cheatercontinue)
+                        time.sleep(.1)
+                        pyautogui.click(cheatercontinue)
+                        time.sleep(1)
+                        self.playbutton()
+
+                    if cheatercontinue1 is not None:
+                        print(Style.RESET_ALL)
+                        print(Fore.RED + " [!] CHEATER DETECTED IN GAME")
+                        pyautogui.moveTo(cheatercontinue1)
+                        time.sleep(.1)
+                        pyautogui.click(cheatercontinue1)
+                        time.sleep(1)
+                        self.playbutton()
+
             a += 1
             n2 = randint(1, 6)
             if n2 == 1:

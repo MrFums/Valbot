@@ -1,0 +1,4 @@
+import pyautogui
+
+
+pyautogui.moveTo
