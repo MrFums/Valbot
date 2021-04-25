@@ -1,54 +1,104 @@
-import os
-import time
-from datetime import datetime
-from pathlib import Path
-from random import randint
-from time import sleep
-import pathlib
+print ("VALBOT IS LOADING...")
+print()
+print("WRITTEN BY FUMS")
+print()
+print()
+# https://open.spotify.com/track/152unnv8fuahIUyVnHJutJ?si=oK5FgV8ZQH66chbGCDyl3A
+try:
+    import pathlib
+    import requests
+    import webbrowser
+    import math
+    import keyboard
+    import psutil
+    import pyautogui
+    import pygetwindow as gw
+    import os
+    import time
+    import urllib.request
+    import datetime
+    import random
+    import platform
 
-import keyboard
-import psutil
-import pyautogui
-import pygetwindow as gw
-import requests
-from colorama import Fore, Style
-from colorama import init
-from discord_webhook import DiscordWebhook, DiscordEmbed
-from pypresence import Presence
+    from pypresence import Presence
+    from PIL import Image
+    from pathlib import Path
+    from random import randint
+    from time import sleep
+    from colorama import Fore, Style
+    from colorama import init
+    from discord_webhook import DiscordWebhook, DiscordEmbed
+    from configparser import ConfigParser
+except Exception as e: print(e), print("Try to reinstall packages"), input(), quit()
+
 
 init()  # not a clue what init function its loading but its needed lol
 
 # ---------------------------------------------------------------
 
 start_time = time.time()
-start = datetime.now()
+
 
 pyautogui.FAILSAFE = False
-
 
 class bot:
     def __init__(self):
 
         self.buymenubutton = "b" # what button you use to open the buy menu to choose weapons
-        self.secondsuntilrestart = 3600  # this is how many seconds until the bot will restart. This is to stop the bot from crashing. Decrease this if you have crashes.
-        self.xpamount = 0  # how much xp the bot has earnt during runtime
+        self.xpamount = 0  # how much xp the bot has earned during runtime
         self.restarted = 0  # how many times the bot has restarted during runtime
         self.gamesplayed = 0  # num of games played during runtime
-        self.version = "Valbot v1.9.0"  # variable str to change valbot version name in outputs
+        self.restarttime = time.time() + 3600 # 1 hour after starting bot
+
         self.foundwebhook = False
-        title = "title " + self.version
-        os.system(title)
-        os.system('mode con: cols=54 lines=18')
-        if os.path.exists(
-                "webhook.config"):  # looks for a webhook file and tells the program if the variable carries the webhook or not
+
+        config = ConfigParser(allow_no_value=True)
+        config.read('config.ini')
+
+        if os.path.exists('config.ini'):
             try:
-                f = open('webhook.config', 'r')
-                self.hookline = f.readline()
-                f.close()
+                config = ConfigParser(allow_no_value=True)
+                config.read('config.ini')
+
+                self.hookline = config.get('settings', 'webhook')
                 self.foundwebhook = True
             except Exception:
                 self.foundwebhook = False
 
+        self.versionfix = "Valbot v2.2  " #add two spaces if version number is vx.x and remove spaces if vx.x.x
+        self.versionnumber = self.versionfix.replace("Valbot ", "") #add two spaces if version number is vx.x and remove spaces if vx.x.x
+        self.versionnumber = self.versionnumber.replace("  ", "") #add two spaces if version number is vx.x and remove spaces if vx.x.x
+        self.version = "Valbot " + self.versionnumber  # variable str to change valbot version name in outputs
+        
+        self.PROCNAME = "VALORANT-Win64-Shipping.exe"
+        self.discordbutton = [{"label": "Join Discord", "url": "https://discord.gg/QFC46XKzxU"}]
+        self.computer_name = platform.node()
+
+        # Why take from raw GitHub repo? So I can update the bots detection images without having to release an update.
+        # Change it manually if you wish by reading the valbotReadMe folder called change_resolution.txt
+
+        self.cheaterdetected_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/cheated_detected.png", stream=True).raw)
+        self.continueterminated_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/continue_terminated.png", stream=True).raw)
+        self.deathmatch_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/deathmatch.png", stream=True).raw)
+        self.ingame_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/ingame.png", stream=True).raw)
+        self.inqueue_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/inqueue.png", stream=True).raw)
+        self.ondeathmatch_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/ondeathmatch.png", stream=True).raw)
+        self.play_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/play.png", stream=True).raw)
+        self.playagain_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/playagain.png", stream=True).raw)
+        self.start_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/start.png", stream=True).raw)
+
+
+        #self.cheaterdetected_png = "assets/cheated_detected.png"
+        #self.continueterminated_png = "assets/continue_terminated.png"
+        #self.deathmatch_png = "assets/deathmatch.png"
+        #self.ingame_png = "assets/ingame.png"
+        #self.inqueue_png = "assets/inqueue.png"
+        #self.ondeathmatch_png = "assets/ondeathmatch.png"
+        #self.play_png = "assets/play.png"
+        #self.playagain_png = "assets/playagain.png"
+        #self.start_png = "assets/start.png"
+
+        
         try:  # if cant connect to discord (if it isnt open for example), bot doesnt crash
             self.RPC = Presence(client_id="772841390467711041")  # discord rpc client id
 
@@ -62,56 +112,86 @@ class bot:
         except Exception:
             pass
 
-        print(Fore.RED + """
-          ╔╗  ╔╗╔═══╗╔╗   ╔══╗ ╔═══╗╔════╗
-          ║╚╗╔╝║║╔═╗║║║   ║╔╗║ ║╔═╗║║╔╗╔╗║
-          ╚╗║║╔╝║║ ║║║║   ║╚╝╚╗║║ ║║╚╝║║╚╝
-           ║╚╝║ ║╚═╝║║║ ╔╗║╔═╗║║║ ║║  ║║  
-           ╚╗╔╝ ║╔═╗║║╚═╝║║╚═╝║║╚═╝║  ║║  
-            ╚╝  ╚╝ ╚╝╚═══╝╚═══╝╚═══╝  ╚╝
-                                   """ + Style.NORMAL + Fore.RED, self.version.replace("Valbot ", "") + Style.RESET_ALL)
 
-        print(Style.RESET_ALL)
-        print(Style.RESET_ALL + Fore.RED + "                 By Fums & WolfAnto")
-        print(Style.RESET_ALL)
-        print(Style.RESET_ALL + Fore.RED + "——————————————————————————————————————————————————————")
+        try:
+            config = ConfigParser(allow_no_value=True)
 
-    def restartbot(self):  # restarts the bot after 2 hours
-        print(Style.RESET_ALL)
-        print(Fore.RED + " [!] BOT IS RESTARTING AFTER 2 HOURS")
+            config.read('config.ini')
+
+            self.restarted = config.getint('runtime_values', 'restarted')
+            self.timestarted = config.getfloat('runtime_values', 'starttime')
+            self.gamesplayed = config.getint('runtime_values', 'gamesplayed')
+            self.xpamount = config.getint('runtime_values', 'xpamount')
+
+        except:
+            pass
+        
+    def restartbot(self):  # restarts the bot after 1 hour
+        self.titlescreen()
+        print(Fore.RED + " [!] BOT IS RESTARTING AFTER 1 HOUR")
+
         try:
             self.RPC.close()
         except Exception:
             pass
+        
         if self.foundwebhook == True:
             try:
                 webhook = DiscordWebhook(
                     url=self.hookline,
                     username="Valbot")
-                embed = DiscordEmbed(color=0xFF0000, title="Restart Notification",
-                                     description="Bot has been running for more than 2 hours\nBot will now be restarted\nThis is to prevent crashes")
+                embed = DiscordEmbed(color=0xFF7034, title="Restarting Valbot",
+                                     description="Valbot is restarting.\nThis is to prevent crashes.")
 
                 embed.set_author(
                     name=self.version,
                     url="https://github.com/MrFums/Valbot",
-                    icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/jett.png",
+                    icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbotlogo_22plusnobg.png",
                 )
-                embed.set_footer(text=self.version.replace("Valbot", ""))
+                textforfooter = "[" + self.computer_name + "] by Fums"
+                embed.set_footer(text=textforfooter, icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/fumspfp.png")
                 embed.set_timestamp()
                 webhook.add_embed(embed)
                 webhook.execute()
             except Exception:
                 print(Fore.RED + " [!] TRIED TO SEND A WEBHOOK BUT IT IS NOT SETUP")
+
+
         time.sleep(1)
-        os.startfile("restart.py")  # starts the restart script which reopens this script
+        os.startfile('restart.py')  # starts the restart script which reopens this script
         time.sleep(3)
         quit()  # quits this runtime of the script
+
+    def titlescreen(self):
+
+        os.system('mode con: cols=54 lines=18')
+        title = "title " + self.versionfix
+        os.system(title)
+
+        print(Fore.YELLOW + """
+           ╔╗  ╔╗╔═══╗╔╗   ╔══╗ ╔═══╗╔════╗
+           ║╚╗╔╝║║╔═╗║║║   ║╔╗║ ║╔═╗║║╔╗╔╗║
+           ╚╗║║╔╝║║ ║║║║   ║╚╝╚╗║║ ║║╚╝║║╚╝
+            ║╚╝║ ║╚═╝║║║ ╔╗║╔═╗║║║ ║║  ║║  
+            ╚╗╔╝ ║╔═╗║║╚═╝║║╚═╝║║╚═╝║  ║║  
+             ╚╝  ╚╝ ╚╝╚═══╝╚═══╝╚═══╝  ╚╝""")
+
+        print(Style.RESET_ALL)
+        print(Style.RESET_ALL + Fore.YELLOW + Style.BRIGHT + "           " + self.versionfix + "         Fums#0888")
+        print(Style.RESET_ALL)
+        print(Style.RESET_ALL)
+        print(Style.RESET_ALL + Fore.YELLOW + "——————————————————————————————————————————————————————")
+        print(Style.RESET_ALL)
+        print(Style.RESET_ALL)
+        return
+    
 
     def valorantrunning(self):
         found = False
         print(Fore.YELLOW, "[-] CHECKING IF VALORANT IS RUNNING")
         print(Style.RESET_ALL)
         time.sleep(2)
+        
 
         for proc in psutil.process_iter():
             if proc.name() == "VALORANT-Win64-Shipping.exe":
@@ -124,53 +204,43 @@ class bot:
             self.startvalorant()
         else:
             print(Fore.GREEN, "[√] VALORANT IS RUNNING")
-            time.sleep(2)
+            time.sleep(25)
+            #clicks the play button when you are in launcher to fix some peoples launchers
+            screenWidth, screenHeight = pyautogui.size()
+            pyautogui.click(screenWidth / 2, screenHeight / 2)
+            time.sleep(1)
             self.playbutton()
 
     def startvalorant(self):
-
-        activeactivity = "Loading Valorant"
-
         if self.foundwebhook == True:
             try:
                 webhook = DiscordWebhook(
                     url=self.hookline,
                     username="Valbot")
-                embed = DiscordEmbed(color=0xFF0000, title="Restart Notification",
-                                     description="Possible error with Valorant\nGame will now be restarted")
+                embed = DiscordEmbed(color=0xFF0000, title="Restarting Valorant",
+                                     description="Possible error with Valorant.\nValorant will now be relaunched.\nBot will resume as normal.")
 
                 embed.set_author(
                     name=self.version,
                     url="https://github.com/MrFums/Valbot",
-                    icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/jett.png",
+                    icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbotlogo_22plusnobg.png",
                 )
-                embed.set_footer(text=self.version.replace("Valbot", ""))
+                textforfooter = "[" + self.computer_name + "] by Fums"
+                embed.set_footer(text=textforfooter, icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/fumspfp.png")
                 embed.set_timestamp()
                 webhook.add_embed(embed)
                 webhook.execute()
             except Exception:
                 print(Fore.RED + " [!] TRIED TO SEND A WEBHOOK BUT IT IS NOT SETUP")
 
-        earned = "{:,}".format(self.xpamount)
 
-        try:
-
-            self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbotnew",
-                            large_text=self.version, details=activeactivity)
-
-        except Exception:
-            pass
-
-        PROCNAME = "VALORANT-Win64-Shipping.exe"
         for proc in psutil.process_iter():
             try:
-                if proc.name().lower() == PROCNAME.lower():
+                if proc.name().lower() == self.PROCNAME.lower():
                     proc.kill()
                     print(Fore.YELLOW, "[-] KILLING THE VALORANT PROCESS")
                     time.sleep(10)
-                    return True
-            except (psutil.NoSuchProcess, psutil.AccessDenied, psutil.ZombieProcess):
-                return False
+            except:
                 print(Fore.RED, "[!] COULD NOT KILL THE VALORANT PROCESS")
 
         print(Style.RESET_ALL + Fore.YELLOW, "[-] STARTING VALORANT")
@@ -180,14 +250,18 @@ class bot:
         vallnk = Path(fullpath)
         if vallnk.is_file():
             # file exists
-            time.sleep(5)
+            time.sleep(1)
             os.startfile("Valorant.lnk")
 
         else:
             print(Style.RESET_ALL, Fore.RED + "[!] COULD NOT FIND A VALORANT SHORTCUT")
             print(Style.RESET_ALL)
-        time.sleep(8)
+        time.sleep(15)
         self.restarted += 1
+        #clicks the play button when you are in launcher to fix some peoples launchers
+        screenWidth, screenHeight = pyautogui.size()
+        pyautogui.click(screenWidth / 2, screenHeight / 2)
+        time.sleep(15)
         self.valorantrunning()
 
     def playbutton(self):
@@ -196,17 +270,19 @@ class bot:
 
         future = now + 720
 
-        activeactivity = "At Menu"
+
+        activeactivity = "[" + self.versionnumber + "] - " + "At Menu"
 
         earned = "{:,}".format(self.xpamount)
 
         try:
 
-            self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbotnew",
-                            large_text=self.version, details=activeactivity)
+            self.RPC.update(state=("Earned " + earned + " XP"), start=self.timestarted, large_image="valbot22",
+                            large_text=self.version, details=activeactivity, buttons = self.discordbutton)
 
         except Exception:
             pass
+
         print(Style.RESET_ALL)
         print(Fore.YELLOW + " [-] SEARCHING FOR PLAY BUTTON")
         time.sleep(.5)
@@ -220,8 +296,8 @@ class bot:
                 self.startvalorant()
                 break
 
-            play = pyautogui.locateOnScreen("images/play.png", grayscale=True)
-            play2 = pyautogui.locateOnScreen("images/play.png", confidence=0.6, grayscale=True)
+            play = pyautogui.locateOnScreen(self.play_png, grayscale=True)
+            play2 = pyautogui.locateOnScreen(self.play_png, confidence=0.6, grayscale=True)
 
             if play is not None or play2 is not None:
                 print(Style.RESET_ALL)
@@ -261,8 +337,8 @@ class bot:
                 self.startvalorant()
                 break
 
-            deathmatch = pyautogui.locateOnScreen("images/deathmatch.png", grayscale=True)
-            deathmatch2 = pyautogui.locateOnScreen("images/deathmatch.png", confidence=0.6, grayscale=True)
+            deathmatch = pyautogui.locateOnScreen(self.deathmatch_png, grayscale=True)
+            deathmatch2 = pyautogui.locateOnScreen(self.deathmatch_png, confidence=0.6, grayscale=True)
 
             if deathmatch is not None or deathmatch2 is not None:
                 print(Style.RESET_ALL)
@@ -303,8 +379,8 @@ class bot:
                 self.startvalorant()
                 break
 
-            ondeathmatch = pyautogui.locateOnScreen("images/ondeathmatch.png", grayscale=True)
-            ondeathmatch2 = pyautogui.locateOnScreen("images/ondeathmatch.png", grayscale=True, confidence=0.5)
+            ondeathmatch = pyautogui.locateOnScreen(self.ondeathmatch_png, grayscale=True)
+            ondeathmatch2 = pyautogui.locateOnScreen(self.ondeathmatch_png, grayscale=True, confidence=0.5)
 
             if ondeathmatch is not None or ondeathmatch2 is not None:
 
@@ -345,8 +421,8 @@ class bot:
                 self.startvalorant()
                 break
 
-            onplay = pyautogui.locateOnScreen("images/start.png", grayscale=True)
-            onplay2 = pyautogui.locateOnScreen("images/start.png", grayscale=True, confidence=0.5)
+            onplay = pyautogui.locateOnScreen(self.start_png, grayscale=True)
+            onplay2 = pyautogui.locateOnScreen(self.start_png, grayscale=True, confidence=0.5)
 
             if onplay is not None or onplay2 is not None:
 
@@ -369,24 +445,10 @@ class bot:
                 self.playbutton()
 
     def firststart(self):
-        if os.path.exists("runtime_values"):
-            try:
-                f = open('runtime_values', 'r')
-                for i, line in enumerate(f):
-                    if i == 0:
-                        self.xpamount = int(line.strip())
-                    elif i == 1:
-                        self.gamesplayed = int(line.strip())
-                    elif i == 2:
-                        self.restarted = int(line.strip())
-                f.close()
 
-                if os.path.exists("runtime_values"):
-                    os.remove("runtime_values")
 
-            except Exception:
-                pass
 
+        self.titlescreen()
         foundval = False
         for proc in psutil.process_iter():
             if proc.name() == "VALORANT-Win64-Shipping.exe":
@@ -399,75 +461,12 @@ class bot:
             window.maximize()
             self.firststart()
 
-        response = requests.get("https://api.github.com/repos/MrFums/Valbot/releases/latest")
-        latest2 = response.json()["name"]
-        latest = latest2.replace("Valbot v", "")
-        latest = latest.replace(".", "")
-        latest = int(latest)
-
-        version = self.version.replace("Valbot v", "")
-        version = version.replace(".", "")
-        version = int(version)
-
-        if version < latest:
-            print(Style.RESET_ALL)
-            print(Fore.RED, "[!] YOUR VERSION OF VALBOT (" + self.version.replace("Valbot v", "") + ") IS OUTDATED")
-            print(Style.RESET_ALL)
-            print(Fore.RED,
-                  "[!] PLEASE DOWNLOAD THE LATEST VERSION (" + latest2.replace("Valbot v", "") + ") FROM THE REPO")
-            print(Style.RESET_ALL)
-            if self.foundwebhook == True:
-                try:
-                    webhook = DiscordWebhook(
-                        url=self.hookline,
-                        username="Valbot")
-                    embed = DiscordEmbed(color=0xFF0000, title="Version Notification",
-                                         description="Your version of Valbot is outdated\nPlease download the newer version from the repo\nhttps://github.com/MrFums/Valbot")
-
-                    embed.set_author(
-                        name=self.version,
-                        url="https://github.com/MrFums/Valbot",
-                        icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/jett.png",
-                    )
-                    embed.set_footer(text=self.version.replace("Valbot", ""))
-                    embed.set_timestamp()
-                    webhook.add_embed(embed)
-                    webhook.execute()
-                except Exception:
-                    print(Fore.RED + " [!] TRIED TO SEND A WEBHOOK BUT IT IS NOT SETUP")
-
-            time.sleep(5)
-        else:
-            print(Style.RESET_ALL)
-            print(Fore.GREEN, "[√] RUNNING LATEST VERSION (" + self.version.replace("Valbot v", "") + ") OF VALBOT")
         print(Style.RESET_ALL)
         print(Style.RESET_ALL)
-        print(Fore.RED, Style.BRIGHT + "[!] SCHEDULED TO RESTART EVERY 2 HOURS")
         for i in range(15, -1, -1):
             print(Fore.RED, Style.BRIGHT + "[!] BOT WILL BEGIN IN", i, "SECONDS                  ", end='\r')
             sleep(1)
-
         print(Style.RESET_ALL)
-        if self.foundwebhook:
-            try:
-                webhook = DiscordWebhook(
-                    url=self.hookline,
-                    username="Valbot")
-                embed = DiscordEmbed(color=0xFFD700, title="Start Notification",
-                                     description="Bot is starting in 15 seconds")
-
-                embed.set_author(
-                    name=self.version,
-                    url="https://github.com/MrFums/Valbot",
-                    icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/jett.png",
-                )
-                embed.set_footer(text=self.version.replace("Valbot", ""))
-                embed.set_timestamp()
-                webhook.add_embed(embed)
-                webhook.execute()
-            except Exception:
-                print(Fore.RED + " [!] TRIED TO SEND A WEBHOOK BUT IT IS NOT SETUP")
-
         self.playbutton()
 
     def searchforgame(self):
@@ -489,11 +488,11 @@ class bot:
                 self.startvalorant()
                 break
 
-            startbutton = pyautogui.locateOnScreen("images/start.png", grayscale=True)
-            start2 = pyautogui.locateOnScreen("images/start.png", confidence=0.6, grayscale=True)
+            startbutton = pyautogui.locateOnScreen(self.start_png, grayscale=True)
+            start2 = pyautogui.locateOnScreen(self.start_png, confidence=0.6, grayscale=True)
 
-            again = pyautogui.locateOnScreen("images/playagain.png", grayscale=True)
-            again2 = pyautogui.locateOnScreen("images/playagain.png", confidence=0.6, grayscale=True)
+            again = pyautogui.locateOnScreen(self.playagain_png, grayscale=True)
+            again2 = pyautogui.locateOnScreen(self.playagain_png, confidence=0.6, grayscale=True)
 
             if startbutton is not None or start2 is not None or again is not None or again2 is not None:
                 print(Style.RESET_ALL)
@@ -545,19 +544,17 @@ class bot:
                 self.startvalorant()
                 break
 
-            q = pyautogui.locateOnScreen("images/inqueue.png", grayscale=True)
-            q2 = pyautogui.locateOnScreen("images/inqueue.png", grayscale=True, confidence=0.6)
+            q = pyautogui.locateOnScreen(self.inqueue_png, grayscale=True)
+            q2 = pyautogui.locateOnScreen(self.inqueue_png, grayscale=True, confidence=0.6)
 
             if q is not None or q2 is not None:
                 if q is not None:
                     print(Style.RESET_ALL)
                     print(Fore.GREEN + " [√] DETECTED IN QUEUE")
-                    time.sleep(.5)
                     self.waitingforgame()
                 if q2 is not None:
                     print(Style.RESET_ALL)
                     print(Fore.GREEN + " [√] DETECTED IN QUEUE")
-                    time.sleep(.5)
                     self.waitingforgame()
 
             if q is None:
@@ -569,24 +566,28 @@ class bot:
 
     def waitingforgame(self):
         time.sleep(1)
-        print(Style.RESET_ALL)
 
-        activeactivity = "In Queue"
+
+        activeactivity = "[" + self.versionnumber + "] - " + "In Queue"
 
         earned = "{:,}".format(self.xpamount)
 
         try:
 
-            self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbotnew",
-                            large_text=self.version, details=activeactivity)
+            self.RPC.update(state=("Earned " + earned + " XP"), start=self.timestarted, large_image="valbot22",
+                            large_text=self.version, details=activeactivity, buttons = self.discordbutton)
 
         except Exception:
             pass
+        
+        print(Style.RESET_ALL)
+
+
         print(Fore.YELLOW + " [-] WAITING FOR A GAME")
 
         now = time.time()
 
-        future = now + 900  # if not in game after 15 mins, restart valorant as there may be an error. Change this if
+        future = now + 1320  # if not in game after 22 mins, restart valorant as there may be an error. Change this if
         # your servers are bad (in seconds)
 
         while True:
@@ -599,37 +600,62 @@ class bot:
                 self.startvalorant()
                 break
 
-            ingame = pyautogui.locateOnScreen("images/ingame.png")
-            ingame2 = pyautogui.locateOnScreen("images/ingame.png", confidence=0.6)
+            ingame = pyautogui.locateOnScreen(self.ingame_png)
+            ingame2 = pyautogui.locateOnScreen(self.ingame_png, confidence=0.5)
 
-            defaultcard = pyautogui.locateOnScreen("images/defaultcard.png", grayscale=True)
-            defaultcard2 = pyautogui.locateOnScreen("images/defaultcard.png", grayscale=True, confidence=0.6)
 
-            if ingame is not None or ingame2 is not None or defaultcard is not None or defaultcard2 is not None:
+            if ingame is not None or ingame2 is not None:
                 print(Style.RESET_ALL)
                 print(Fore.GREEN + " [√] DETECTED IN A GAME")
-                time.sleep(15)  # so it doesnt detect the end game screen as soon as it searches
-                pyautogui.click(x=960, y=540)
-                activeactivity = "In Match"
+
+                
+                
+
+                activeactivity = "[" + self.versionnumber + "] - " + "In Match"
 
                 earned = "{:,}".format(self.xpamount)
 
 
                 try:
 
-                    self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbotnew",
-                                    large_text=self.version, details=activeactivity)
+                    self.RPC.update(state=("Earned " + earned + " XP"), start=self.timestarted, large_image="valbot22",
+                                    large_text=self.version, details=activeactivity, buttons = self.discordbutton)
 
                 except Exception:
                     pass
+                
+                pyautogui.click(x=960, y=540)
+
+                if self.foundwebhook == True:
+                    try:
+                        webhook = DiscordWebhook(
+                            url=self.hookline,
+                            username="Valbot")
+                        embed = DiscordEmbed(color=0x90ee90, title="Match Found",
+                                             description="A match has been found.\nWaiting for the match to end.")
+                        embed.set_author(
+                            name=self.version,
+                            url="https://github.com/MrFums/Valbot",
+                            icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbotlogo_22plusnobg.png",
+                        )
+                        textforfooter = "[" + self.computer_name + "] by Fums"
+                        embed.set_footer(text=textforfooter, icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/fumspfp.png")
+                        embed.set_timestamp()
+                        webhook.add_embed(embed)
+                        webhook.execute()
+                    except Exception:
+                        print(Fore.RED + " [!] TRIED TO SEND A WEBHOOK BUT IT IS NOT SETUP")
+
 
                 time.sleep(1)
                 print(Style.RESET_ALL)
                 print(Fore.YELLOW + " [-] WAITING FOR THE GAME TO END")
-                time.sleep(2)
+                time.sleep(35)  # so it doesnt detect the end game screen as soon as it searches
                 print(Style.RESET_ALL)
                 print(Fore.YELLOW + " [-] TO PAUSE THE BOT HOLD F3")
                 print(Fore.YELLOW + " [-] TO RESUME THE BOT HOLD F4")
+                self.deathmatch_duration = time.time()
+                self.deathmatch_duration += 780
                 self.endofgame()
 
     def pause(self):
@@ -642,21 +668,20 @@ class bot:
         pyautogui.keyUp('d')
 
         while True:
-            time.sleep(.25)
+            time.sleep(1)
             try:
                 if keyboard.is_pressed('f4'):
                     print(Style.RESET_ALL)
                     print(Fore.GREEN + " [√] RESUMING BOT")
                     print(Fore.GREEN + " [√] TO PAUSE THE BOT AGAIN HOLD F3")
-                    time.sleep(1)
                     break
             except:
                 pass
 
-        menu = pyautogui.locateOnScreen("images/play.png", grayscale=True)
-        menu2 = pyautogui.locateOnScreen("images/play.png", confidence=0.7, grayscale=True)
-        q = pyautogui.locateOnScreen("images/inqueue.png", grayscale=True)
-        q2 = pyautogui.locateOnScreen("images/inqueue.png", grayscale=True, confidence=0.6)
+        menu = pyautogui.locateOnScreen(self.play_png, grayscale=True)
+        menu2 = pyautogui.locateOnScreen(self.play_png, confidence=0.7, grayscale=True)
+        q = pyautogui.locateOnScreen(self.inqueue_png, grayscale=True)
+        q2 = pyautogui.locateOnScreen(self.inqueue_png, grayscale=True, confidence=0.6)
 
         if menu is not None or menu2 is not None:
             self.playbutton()
@@ -669,43 +694,40 @@ class bot:
 
     def endofgame(self):
 
-        now = time.time()
-
-        future = now + 780
-
         time.sleep(2)
 
         while True:
             if keyboard.is_pressed('f3'):
                 self.pause()
-            if time.time() > future:
+            if time.time() > self.deathmatch_duration:
                 # detects possible issue with valorant and restarts the game
                 print(Style.RESET_ALL)
                 print(Fore.RED + " [!] FOUND A POSSIBLE ERROR WITH VALORANT")
                 self.startvalorant()
                 break
 
-            menu = pyautogui.locateOnScreen("images/play.png", grayscale=True)
-            menu2 = pyautogui.locateOnScreen("images/play.png", confidence=0.7, grayscale=True)
+            menu = pyautogui.locateOnScreen(self.play_png, grayscale=True)
+            menu2 = pyautogui.locateOnScreen(self.play_png, confidence=0.7, grayscale=True)
 
             if menu is not None or menu2 is not None:
-                self.gamesplayed += 1
-                self.xpamount += 900
 
-                print(Style.RESET_ALL)
-                print(Fore.GREEN + " [√] DETECTED AT END GAME SCREEN")
-
-                activeactivity = "At Menu"
+                activeactivity = "[" + self.versionnumber + "] - " + "At Menu"
 
                 earned = "{:,}".format(self.xpamount)
 
                 try:
 
-                    self.RPC.update(state=("Earned " + earned + " XP"), start=time.time(), large_image="valbotnew",
-                                    large_text=self.version, details=activeactivity)
+                    self.RPC.update(state=("Earned " + earned + " XP"), start=self.timestarted, large_image="valbot22",
+                                    large_text=self.version, details=activeactivity, buttons = self.discordbutton)
 
                 except Exception:
                     pass
+                
+                self.gamesplayed += 1
+                self.xpamount += 900
+
+                print(Style.RESET_ALL)
+                print(Fore.GREEN + " [√] DETECTED AT END GAME SCREEN")
 
                 time.sleep(2)
                 self.xpscreen()
@@ -713,30 +735,118 @@ class bot:
             else:
                 self.antiafk()
 
+
+    def xptargethook(self):
+
+        print(Style.RESET_ALL)
+        print(Fore.GREEN + " [!] XP TARGET HAS BEEN REACHED")
+
+        if os.path.exists('config.ini'):
+            config = ConfigParser(allow_no_value=True)
+            config.read('config.ini')
+            try:
+                config.set('settings', 'xptarget', '0')
+                with open('config.ini', 'w+') as configfile:
+                    config.write(configfile)
+
+            except:
+                
+                pass
+        if self.foundwebhook == True:
+            try:
+                desc = "Target of " + str(self.xptarget) + " XP has been reached.\nValbot will resume until stopped."
+                webhook = DiscordWebhook(
+                    url=self.hookline,
+                    username="Valbot")
+                embed = DiscordEmbed(color=0x842bd7, title="XP Target Reached",description=desc)
+
+                embed.set_author(
+                    name=self.version,
+                    url="https://github.com/MrFums/Valbot",
+                    icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbotlogo_22plusnobg.png",
+                )
+                textforfooter = "[" + self.computer_name + "] by Fums"
+                embed.set_footer(text=textforfooter, icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/fumspfp.png")
+                embed.set_timestamp()
+                embed.set_thumbnail(url='https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbotlogo_22plus_curved.png')
+                webhook.add_embed(embed)
+                webhook.execute()
+            except Exception:
+                print(Fore.RED + " [!] TRIED TO SEND A WEBHOOK BUT IT IS NOT SETUP")
+
+
+    def matchlimit(self):
+
+        print(Style.RESET_ALL)
+        print(Fore.RED + " [!] XP LIMIT HAS BEEN REACHED")
+
+        if os.path.exists('config.ini'):
+            config = ConfigParser(allow_no_value=True)
+            config.read('config.ini')
+            try:
+                config.set('settings', 'matchlimit', '0')
+                with open('config.ini', 'w+') as configfile:
+                    config.write(configfile)
+
+            except:
+                pass
+        if self.foundwebhook == True:
+            try:
+                webhook = DiscordWebhook(
+                    url=self.hookline,
+                    username="Valbot")
+                embed = DiscordEmbed(color=0x842bd7, title="XP Limit Reached",
+                                     description="The XP limit has been reached.\nBot has been stopped.")
+                embed.set_author(
+                    name=self.version,
+                    url="https://github.com/MrFums/Valbot",
+                    icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbotlogo_22plusnobg.png",
+                )
+                textforfooter = "[" + self.computer_name + "] by Fums"
+                embed.set_footer(text=textforfooter, icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/fumspfp.png")
+                embed.set_timestamp()
+                embed.set_thumbnail(url='https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbotlogo_22plus_curved.png')
+                webhook.add_embed(embed)
+                webhook.execute()
+            except Exception:
+                print(Fore.RED + " [!] TRIED TO SEND A WEBHOOK BUT IT IS NOT SETUP")
+
+        time.sleep(120)
+        quit()
+
+
     def antiafk(self):
         time.sleep(.5)
         n = randint(20, 35)
         a = 0
 
-        cheater = pyautogui.locateOnScreen("images/cheated_detected.png", grayscale=True)
-        cheater1 = pyautogui.locateOnScreen("images/cheated_detected.png", grayscale=True, confidence=0.6)
+        cheater = pyautogui.locateOnScreen(self.cheaterdetected_png, grayscale=True)
+        cheater1 = pyautogui.locateOnScreen(self.cheaterdetected_png, grayscale=True, confidence=0.6)
 
-        cheatercontinue = pyautogui.locateOnScreen("images/continue_terminated.png", grayscale=True)
-        cheatercontinue1 = pyautogui.locateOnScreen("images/continue_terminated.png", grayscale=True, confidence=0.6)
-        
+        cheatercontinue = pyautogui.locateOnScreen(self.continueterminated_png, grayscale=True)
+        cheatercontinue1 = pyautogui.locateOnScreen(self.continueterminated_png, grayscale=True, confidence=0.6)
+
+
+        weaponselect = [['680','200'],['680','360'],['680','520'],['680','680'],['900','200'],['900','360'],['900','520'],['900','680'],['1180','200'],['1180','360'],['1180','520'],['1180','680']]
+        # stinger, spectre, bucky, judge, bulldog, guardian, phantom, vandal, marshal, operator, ares, odin
+        #each list entity contains the 1920x1080 res pixel coordinates to a gun in the buy menu. Goes from top to bottom of column then moves to next row
+        randomweapon = random.choice(weaponselect)
 
         pyautogui.keyDown(self.buymenubutton)
-
-        pyautogui.moveTo(907,707)
-        time.sleep(.4)
-        pyautogui.click()
-        time.sleep(.1)
+        time.sleep(randint(6, 9) / 10)
         pyautogui.keyUp(self.buymenubutton)
-        time.sleep(.1)
-        try:
-            pyautogui.keyUp(self.buymenubutton)
-        except:
-            pass
+        time.sleep(randint(5, 8) / 10)
+        pyautogui.moveTo(randomweapon)
+        time.sleep(randint(5, 8) / 10)
+        pyautogui.moveTo(randomweapon)
+        time.sleep(randint(5, 8) / 10)
+        pyautogui.click()
+        time.sleep(randint(6, 9) / 100)
+        pyautogui.keyDown(self.buymenubutton)
+        time.sleep(randint(6, 9) / 10)
+        pyautogui.keyUp(self.buymenubutton)
+        time.sleep(randint(6, 9) / 10)
+        
 
         while a <= n:
             if keyboard.is_pressed('f3'):
@@ -750,42 +860,36 @@ class bot:
                             url=self.hookline,
                             username="Valbot")
                         embed = DiscordEmbed(color=0xFF0000, title="Cheater Detected",
-                                             description="A cheater was banned in your game\nMatch has been cancelled\nReturning to menu and resuming")
+                                             description="A cheater was detected in your game.\nMatch has been cancelled.\nRestarting Valorant and resuming.")
 
                         embed.set_author(
                             name=self.version,
                             url="https://github.com/MrFums/Valbot",
-                            icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/jett.png",
+                            icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbotlogo_22plusnobg.png",
                         )
-                        embed.set_footer(text=self.version.replace("Valbot", ""))
+                        textforfooter = "[" + self.computer_name + "] by Fums"
+                        embed.set_footer(text=textforfooter, icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/fumspfp.png")
                         embed.set_timestamp()
                         webhook.add_embed(embed)
                         webhook.execute()
                     except Exception:
                         print(Fore.RED + " [!] TRIED TO SEND A WEBHOOK BUT IT IS NOT SETUP")
 
-                while True:
-
-                    if cheatercontinue is not None:
-                        print(Style.RESET_ALL)
-                        print(Fore.RED + " [!] CHEATER DETECTED IN GAME")
-                        pyautogui.moveTo(cheatercontinue)
-                        time.sleep(.1)
-                        pyautogui.click(cheatercontinue)
-                        time.sleep(1)
-                        self.playbutton()
-
-                    if cheatercontinue1 is not None:
-                        print(Style.RESET_ALL)
-                        print(Fore.RED + " [!] CHEATER DETECTED IN GAME")
-                        pyautogui.moveTo(cheatercontinue1)
-                        time.sleep(.1)
-                        pyautogui.click(cheatercontinue1)
-                        time.sleep(1)
-                        self.playbutton()
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] CHEATER DETECTED IN GAME")
+                time.sleep(1)
+                self.startvalorant()
 
             a += 1
-            n2 = randint(1, 6)
+            n2 = randint(1, 8)
+
+            if time.time() > self.deathmatch_duration:
+                # detects possible issue with valorant and restarts the game
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] FOUND A POSSIBLE ERROR WITH VALORANT")
+                self.startvalorant()
+                break
+
             if n2 == 1:
                 pyautogui.keyDown('w')
                 sleep(randint(2, 6) / 10)
@@ -815,9 +919,47 @@ class bot:
                 pyautogui.keyDown('w')
                 sleep(randint(2, 4) / 10)
                 pyautogui.keyUp('w')
+
+            if n2 == 7:
+                pyautogui.keyDown('3')
+                sleep(randint(2, 4) / 100)
+                pyautogui.keyUp('3')
+                sleep(randint(20, 40) / 100)
+                pyautogui.keyDown('1')
+                sleep(randint(2, 4) / 100)
+                pyautogui.keyUp('1')
+                
+            if n2 == 8:
+                pyautogui.mouseDown(button='left')
+                sleep(randint(2, 4))
+                pyautogui.mouseUp(button='left')
+                
         self.endofgame()
 
     def xpscreen(self):
+
+        runtimeraw = time.time() - start_time
+        runtimeint = int(runtimeraw)
+        runtime = str(datetime.timedelta(seconds=runtimeint))
+        
+        if os.path.exists('config.ini'):
+            try:
+                config = ConfigParser(allow_no_value=True)
+                config.read('config.ini')
+
+                totalxp = config.getint('lifetime_values', 'totalxpamount')
+                totalxp += self.xpamount
+                
+                totalgamesplayed = config.getint('lifetime_values', 'totalgamesplayed')
+                totalgamesplayed += self.gamesplayed
+                
+                runtimeafterestarts = config.getfloat('lifetime_values', 'totalruntime')
+                runtimeafterestarts = int(runtimeraw + runtimeafterestarts)
+                totalruntime = str(datetime.timedelta(seconds=runtimeafterestarts))
+                
+            except Exception:
+                pass
+
         global line
         print(Style.RESET_ALL)
         print(Fore.YELLOW + " [-] SEARCHING FOR THE XP SCREEN")
@@ -827,9 +969,6 @@ class bot:
         now = time.time()
 
         future = now + 600
-
-        restarttime = start_time + self.secondsuntilrestart
-
         while True:
             if keyboard.is_pressed('f3'):
                 self.pause()
@@ -840,44 +979,61 @@ class bot:
                 self.startvalorant()
                 break
 
-            xpscreen = pyautogui.locateOnScreen("images/play.png", grayscale=True)
-            xpscreen2 = pyautogui.locateOnScreen("images/play.png", confidence=0.6, grayscale=True)
+            xpscreen = pyautogui.locateOnScreen(self.play_png, grayscale=True)
+            xpscreen2 = pyautogui.locateOnScreen(self.play_png, confidence=0.6, grayscale=True)
             if xpscreen is not None or xpscreen2 is not None:
                 print(Style.RESET_ALL)
                 print(Fore.GREEN + " [√] DETECTED THE XP SCREEN")
                 time.sleep(2)
 
-                runtime = datetime.now() - start
-                runtime = str(runtime)
-                runtime = runtime[:-7]
 
-                exact = start.strftime("%H:%M:%S")
-                dat = start.strftime("%d %h %Y")
+                if os.path.exists('config.ini'):
+
+                    config = ConfigParser(allow_no_value=True)
+                    config.read('config.ini')
+
+                    config.set('runtime_values', 'restarted', str(self.restarted))
+                    config.set('runtime_values', 'gamesplayed', str(self.gamesplayed))
+                    config.set('runtime_values', 'xpamount', str(self.xpamount))
+                    config.set('runtime_values', 'runtime', str(runtimeint))
+                    
+                    with open('config.ini', 'w+') as configfile:
+                        config.write(configfile)
+
+
+                
+
+                #exact = start.strftime("%H:%M:%S")
+                #dat = start.strftime("%d %h %Y")
+
+                webhookruntime = str(datetime.timedelta(seconds=int(time.time() - self.timestarted)))
                 print(Style.RESET_ALL)
                 print(Style.RESET_ALL)
-
                 print(
                     Style.RESET_ALL + Fore.YELLOW + "——————————————————————————————————————————————————————")
                 print(Style.RESET_ALL)
                 print(Fore.YELLOW + " Earned",
                       Style.BRIGHT + Fore.YELLOW + str(self.xpamount) + " XP" + Style.RESET_ALL + Fore.YELLOW,
-                      "in total")
+                      "this session")
+                try:
+                    print(Fore.YELLOW + " Earned", Style.BRIGHT + Fore.YELLOW + str(totalxp), "XP" + Style.RESET_ALL + Fore.YELLOW,"in total")
+                except:
+                    pass
                 print(Fore.YELLOW + " Bot has been running for",
-                      Style.BRIGHT + Fore.YELLOW + str(runtime) + Style.RESET_ALL + Fore.YELLOW)
-                print(Fore.YELLOW + " Bot was started at", Style.BRIGHT + Fore.YELLOW + str(exact),
-                      Style.RESET_ALL + Fore.YELLOW + "on the" + Style.BRIGHT + Fore.YELLOW,
-                      dat + Style.RESET_ALL + Fore.YELLOW)
-                print(Fore.YELLOW + " Played", Style.BRIGHT + Fore.YELLOW + str(self.gamesplayed),
-                      "games" + Style.RESET_ALL + Fore.YELLOW)
+                      Style.BRIGHT + Fore.YELLOW + str(webhookruntime) + Style.RESET_ALL + Fore.YELLOW)
+                #print(Fore.YELLOW + " Bot was started at", Style.BRIGHT + Fore.YELLOW + str(exact),
+                  #    Style.RESET_ALL + Fore.YELLOW + "on the" + Style.BRIGHT + Fore.YELLOW,
+                 #     dat + Style.RESET_ALL + Fore.YELLOW)
+                print(Fore.YELLOW + " Played", Style.BRIGHT + Fore.YELLOW + str(self.gamesplayed), "games" + Style.RESET_ALL + Fore.YELLOW)
                 print(" Valorant has been", Style.BRIGHT + Fore.YELLOW + "restarted", self.restarted, "times")
                 print(Style.RESET_ALL)
-                print(
-                    Style.RESET_ALL + Fore.YELLOW + "——————————————————————————————————————————————————————")
+                print(Style.RESET_ALL + Fore.YELLOW + "——————————————————————————————————————————————————————")
                 print(Style.RESET_ALL)
                 print(Fore.YELLOW + "                     " + self.version)
                 print(Style.RESET_ALL)
                 print(Style.RESET_ALL)
                 time.sleep(1)
+
 
                 if self.foundwebhook is True:
                     restartstring = (str(self.restarted) + " times")
@@ -885,28 +1041,49 @@ class bot:
                         restartstring = "Not yet restarted"
                     elif self.restarted == 1:
                         restartstring = "1 time"
-                    webhook = DiscordWebhook(
-                        url=self.hookline,
-                        username="Valbot")
+                    try:
+                        webhook = DiscordWebhook(
+                            url=self.hookline,
+                            username="Valbot")
 
-                    embed = DiscordEmbed(color=34343)
-                    embed.set_author(
-                        name=self.version,
-                        url="https://github.com/MrFums/Valbot",
-                        icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/jett.png",
-                    )
-                    embed.set_footer(text=self.version.replace("Valbot", ""))
-                    embed.set_timestamp()
-                    embed.set_thumbnail(
-                        url='https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot18_circle.png')
+                        embed = DiscordEmbed(title='Valbot Summary', description='Valbot has completed a match loop!', color=34343)
+                        embed.set_author(
+                            name=self.version,
+                            url="https://github.com/MrFums/Valbot",
+                            icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbotlogo_22plusnobg.png",
+                        )
+                        textforfooter = "[" + self.computer_name + "] by Fums"
+                        embed.set_footer(text=textforfooter, icon_url="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/fumspfp.png")
+                        embed.set_timestamp()
+                        embed.set_thumbnail(
+                            url='https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbotlogo_22plus_curved.png')
 
-                    embed.add_embed_field(name="Total XP", value=self.xpamount, inline=False)
-                    embed.add_embed_field(name="Games Played", value=self.gamesplayed, inline=False)
-                    embed.add_embed_field(name="Current Runtime", value=runtime, inline=False)
-                    embed.add_embed_field(name="Valorant Restarted", value=restartstring, inline=False)
+                        embed.add_embed_field(name="XP Earned", value=self.xpamount, inline=False)
+                        embed.add_embed_field(name="Games Played", value=self.gamesplayed, inline=False)
+                        try:
 
-                    webhook.add_embed(embed)
-                    webhook.execute()
+                            
+                            embed.add_embed_field(name="Runtime", value=webhookruntime, inline=False)
+                        except:
+                            pass
+                        try:
+                            embed.add_embed_field(name="Total XP Earned", value=totalxp, inline=False)
+                            embed.add_embed_field(name="Total Games Played", value=totalgamesplayed, inline=False)
+
+                            embed.add_embed_field(name="Total Runtime", value=totalruntime, inline=False)
+                        except:
+                            pass
+                        
+                        timestarted_format = time.strftime('%H:%M:%S, %d %B %Y', time.localtime(self.timestarted))
+                        embed.add_embed_field(name="Started At", value=timestarted_format, inline=False)
+
+                        webhook.add_embed(embed)
+                        webhook.execute()
+                    except:
+                        pass
+
+                    #except Exception:
+                     #   print(Fore.RED + " [!] TRIED TO SEND A WEBHOOK BUT IT IS NOT SETUP")
 
                 else:
                     print(Style.RESET_ALL)
@@ -916,28 +1093,69 @@ class bot:
                 pyautogui.click(x=960, y=540)
                 time.sleep(1)
 
-                if time.time() > restarttime:
 
-                    if os.path.exists("runtime_values"):
-                        os.remove("runtime_values")
+                if os.path.exists('config.ini'):
+                    config = ConfigParser(allow_no_value=True)
+                    config.read('config.ini')
 
-                    f = open("runtime_values", "a+")
-                    f.write(str(self.xpamount))
-                    f.write("\n")
-                    f.write(str(self.gamesplayed))
-                    f.write("\n")
-                    f.write(str(self.restarted))
-                    f.close()
+                    try:
+                        self.xptarget = config.getint('settings', 'xptarget')
+                        
+                        
+                        if self.xpamount >= self.xptarget and self.xptarget != 0:
+                            if os.path.exists('config.ini'):
 
-                    # detects possible issue with valorant and restarts the game
-                    print(Style.RESET_ALL)
-                    print(Fore.RED + " [!] BOT IS NOW RESTARTING AFTER 2 HOURS OF RUNTIME")
+                                config = ConfigParser(allow_no_value=True)
+                                config.read('config.ini')
+
+                                config.set('settings', 'xptarget', '0')
+                                
+                                
+                                with open('config.ini', 'w+') as configfile:
+                                    config.write(configfile)
+                            self.xptargethook()
+                        
+
+
+                    except:
+                        pass # could not find xp target in config file
+
+                    
+
+
+                if os.path.exists('config.ini'):
+                    config = ConfigParser(allow_no_value=True)
+                    config.read('config.ini')
+                    try:
+                        matchlimit = config.getint('settings', 'matchlimit')
+
+
+                        if matchlimit != 0: # check if there is a match limit set
+                            matchlimit -= 1 # match limit found so remove 1 from it
+
+                            if matchlimit == 0: # if match limit is now 1, stop bot.
+                                self.matchlimit()
+
+                            else: # if match limit continued tell user how many matches left
+                                config.set('settings', 'matchlimit', str(matchlimit))
+
+                                with open('config.ini', 'w+') as configfile:
+                                    config.write(configfile)
+
+                                print(Style.RESET_ALL)
+                                print(Fore.BLUE + Style.BRIGHT, "[√]" + str(matchlimit) + " MATCHES" + Style.RESET_ALL + Fore.YELLOW, "UNTIL LIMIT REACHED")
+                        else:
+                            print(Style.RESET_ALL)
+                            print(Fore.BLUE + Style.BRIGHT,"[√] NO XP LIMIT FOUND")
+
+                    except:
+                        pass # could not find xp limit in config file
+
+                if time.time() > self.restarttime:
+                    self.titlescreen()
                     self.restartbot()
-                    break
-
+                time.sleep(5)
                 self.playbutton()
 
-
-if __name__ == "__main__":
-    bot = bot()
-    bot.firststart()
+bot = bot()
+bot.firststart()
