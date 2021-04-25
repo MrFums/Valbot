@@ -1,0 +1,64 @@
+2021-04-18 :: Valbot-2.2.0
+
+Huge update again:
+- Added option to limit XP, the bot will stop when reaching this XP
+- Added option to target XP, the bot will notify when it has reached this XP
+- Added back discord webhook support
+- Added back and improved discord rich presence (to toggle, disable game activity in Discord)
+- Added a new config.ini management system
+- Added lifetime stat tracking for all XP earned, gamesplayed, total runtime etc
+- Slightly improved anti afk feature (with more updates to come)
+- Fixed a bunch of bugs when finding games
+- Fixed the bot not recognising if there is a problem with the current deathmatch game
+- Fixed the lag when you pause the bot
+- Fixed buy menu not closing
+- Improved AFK screen warning
+- Improved webhook visuals
+- Improved information screens
+- Improved crash screens if you don't have a package installed
+- Changed default colour from red to yellow (easier to see in the menu)
+- Removed version checking
+- Removed manual bot termination (only on my end, keep on the discord so you know when there is a problem)
+- Bot should now properly run forever until stopped
+
+Notes:
+
+I have tried to fix the most infamous bugs and added some demanded features (back). Valbot Lite is no longer
+needed as I have managed to almost fully optimise the main versions code. Other resolutions from 1920x1080
+will never be supported as there are way too many resolutions to add and support. Again, if there are any 
+issues or you have any suggestions, join my Discord: https://discord.gg/QFC46XKzxU
+
+- Fums
+
+
+
+2021-04-12 :: Valbot-2.1.0 Lite
+
+Fixed the bot stopping running after a certain amount of time.
+Also attempted to fix the launcher play screen, it should work and click play now.
+! I don't have time to check if it works properly so please check for me and tell me on Discord! !
+
+- Fums
+
+
+
+2021-03-20 :: Valbot-2.0.0 Lite
+
+Welcome to Valbot Lite! A much more stable version of my Valbot, all in one place.
+This version of Valbot should be much more optimized than prior releases of the bot.
+Valbot Lite does lack some features, however. Some of these include the Discord Presence and Discord Webhook support.
+Not to worry though, I will (probably) release a normal version of the bot sometime soon with those features implemented.
+
+This new version does come with some improvements though, not necessarily "features" that you would care about though.
+
+Some of these include the ability for the developers to stop the use of the bot if it gets detected while in use. So if the bot gets detected while you
+are AFK, I can manually stop the bot if I require to do so and you do not need to worry! 
+
+In addition to this, I have decided to make it so all the images are hosted online, on GitHub so you no longer need to download them and I can edit
+them in real-time (basically I can release updates to the bot when Valorant gets updated without you needing to do ANYTHING).
+
+
+Unfortunately, I will no longer be supporting monitors / resolutions that are NOT 1920x1080. 
+It is just too much work to go through all of the resolutions just to make it work for such a small amount of users. Sorry.
+
+- Fums
