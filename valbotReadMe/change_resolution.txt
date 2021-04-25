@@ -1,0 +1,53 @@
+Simple text on how to change the bots resolution detection::
+
+
+The base bot only works with 1920x1080 monitors. There is a way to make it work with any resolution:
+
+What you need to do is go inside the assets folder and get your own version of all the images in the
+correct resolution. This will ensure that Valbot can detect the correct pixel match images.
+
+
+Then after doing this you need to go inside bot.py and replace:
+
+	self.cheaterdetected_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/cheated_detected.png", stream=True).raw)
+	self.continueterminated_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/continue_terminated.png", stream=True).raw)
+	self.deathmatch_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/deathmatch.png", stream=True).raw)
+	self.ingame_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/ingame.png", stream=True).raw)
+	self.inqueue_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/inqueue.png", stream=True).raw)
+	self.ondeathmatch_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/ondeathmatch.png", stream=True).raw)
+	self.play_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/play.png", stream=True).raw)
+	self.playagain_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/playagain.png", stream=True).raw)
+	self.start_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/start.png", stream=True).raw)
+        
+
+
+With this:
+
+        self.cheaterdetected_png = "assets/cheated_detected.png"
+        self.continueterminated_png = "assets/continue_terminated.png"
+        self.deathmatch_png = "assets/deathmatch.png"
+        self.ingame_png = "assets/ingame.png"
+        self.inqueue_png = "assets/inqueue.png"
+        self.ondeathmatch_png = "assets/ondeathmatch.png"
+        self.play_png = "assets/play.png"
+        self.playagain_png = "assets/playagain.png"
+        self.start_png = "assets/start.png"
+
+
+
+Where to find the different images:
+
+cheater_detected.png :: When you have a screen that says cheater detected. This is the CHEATER DETECTED text.
+continue_terminated.png :: When you have a screen that says cheater detected. This is the CONTINUE button. (NOT USED IN 2.2+)
+deathmatch.png :: After clicking the play button, it is ONLY the text that says DEATHMATCH
+inqueue.png :: After a game has been found, there will be a countdown before the match starts, it is the party not ready text where the start button / inqueue text normally is
+ondeathmatch.png :: After clicking the play button and then deathmatch, it is the text and lower crest that says DEATHMATCH
+play.png :: The big play button in the main menu
+playagain.png :: When a match has finished and you have the xp screen, it is at the bottom of the screen
+start.png :: After you have clicked the play button, it is as the bottom of the screen and says START
+
+
+
+That is as much help as I can give you with this, I hope this helped to all the non 1920x1080 native users :D
+
+- Fums#0888 
