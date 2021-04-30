@@ -79,19 +79,6 @@ Click on the zip file that says `Valbot-X.X.X` and unzip to where you would like
 8- (Optional) Setup a Discord webhook to get updates to your discord server for when the bot has completed a game.
 
 
-## Help
-
-Make sure when installing python, you check the box next to "Add Python 3.8 to PATH"
-
-![1](https://cdn.discordapp.com/attachments/769626861046202429/769950787304423444/0001_add_Python_to_Path.png)
-
-In addition to this, if your program crashes and / or you have an error message that contains `psutil.AccessDenied`, you must download a different python version. ![image](https://user-images.githubusercontent.com/57535680/101982606-208ac800-3c6d-11eb-8a6a-964ae43c880b.png) [download here](https://www.python.org/ftp/python/3.8.0/python-3.8.0-amd64.exe)
-
-Please raise an Issue [here](https://github.com/MrFums/ValBot/issues/new) if you have any problems. Do NOT message me on Discord, I will redirect you to the [issues](https://github.com/MrFums/ValBot/issues/new)
-
-Please know that I will not be wasting time helping you if you can't read requirements or need help with Python code or installing it, Google is your friend.
-
-
 ## Previews
 
 ![1](https://cdn.discordapp.com/attachments/805228393314516992/837761660265037854/unknown.png)
