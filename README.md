@@ -2,7 +2,7 @@
 	<img
 		width="500"
 		alt="Valbot"
-		src="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbotlogo_22plus.png">
+		src="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/rsz_valbotlogo_22plus.png">
 </p>
 
 
