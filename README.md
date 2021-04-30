@@ -26,13 +26,11 @@
 Only works on 1920 x 1080 resolution. If you wish to add a custom resolution, you need to get your own version of the images from the `images` folder, call them EXACTLY the same name and replace the original files.
 
 Run the batch file as Administator to install the dependencies. 
-Seems to only work on 64bit Windows 10 with Python 3.8 
-
-Install Python 3.8.0 [here](https://www.python.org/downloads/release/python-380/)
+Seems to only work on 64bit Windows 10 with Python 3.9 
 
 For the program to function properly, please copy and paste your OWN Valorant shortcut for the program to function properly. This makes it so if Valorant encounters any issues when AFK, it can restart the game. You should not need to edit any code.
 
-You also need a functioning brain, please have one of these.
+You also need a functioning brain, please have one of these; it's very important.
 
 ### Windows installation
 
@@ -62,7 +60,7 @@ Click on the zip file that says `Valbot-X.X.X` and unzip to where you would like
 
 ## Instructions
 
-1- Install Python 3.8.0.
+1- Install Python 3.9.0.
 
 2- Open `Install_Packages.bat` as admin to install pakcages using pip. Do this after every update to maintain functionality.
 
