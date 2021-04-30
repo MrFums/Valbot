@@ -1,12 +1,6 @@
-<p align="center">
-	<img
-		width="500"
-		alt="Valbot"
-		src="https://raw.githubusercontent.com/MrFums/ValbotAssets/main/rsz_valbotlogo_22plus.png">
-</p>
 
 
-## The BEST Valorant AFK XP Farmer
+# Valbot
 
 [![Issues](https://img.shields.io/github/issues/MrFums/Valbot)](https://github.com/MrFums/Valbot/issues)
 [![Forks](https://img.shields.io/github/forks/MrFums/Valbot)](https://github.com/MrFums/Valbot/network)
@@ -40,12 +34,31 @@ For the program to function properly, please copy and paste your OWN Valorant sh
 
 You also need a functioning brain, please have one of these.
 
+### Windows installation
+
+You will have to have a few things installed before running the sniper. This installation guide assumes that you are on a 64bit Windows system.
+
+First, you will need to install Python. It's recommended to use either version `3.9.0` or `3.8.6`. You must use a Python version above `3.7`. 
+
+### Installing Python
+
+Go to the following link and download Python:
+
+`https://www.python.org/ftp/python/3.9.0/python-3.9.0-amd64.exe`
+
+Once you have opened the installer, make sure that you add Python to path. Your installer should look like this:
+
+<img align="center" src="https://i.imgur.com/iefWNyw.png">
+
+Run through the installer as normal, then download the Valbot files.
+
 
 ## Download
 
 [Download here](https://github.com/MrFums/Valbot/releases/latest)
 
 Click on the zip file that says `Valbot-X.X.X` and unzip to where you would like the bot to be stored. Be advised to not put this in an Admin only folder as the bot must write the folder it is in to store runtime data.
+
 
 ## Instructions
 
