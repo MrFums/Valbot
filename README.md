@@ -5,6 +5,8 @@
 [![Issues](https://img.shields.io/github/issues/MrFums/Valbot)](https://github.com/MrFums/Valbot/issues)
 [![Forks](https://img.shields.io/github/forks/MrFums/Valbot)](https://github.com/MrFums/Valbot/network)
 [![Stars](https://img.shields.io/github/stars/MrFums/Valbot)](https://github.com/MrFums/Valbot/stargazers)
+
+
 [Make sure to join the Discord server for Valbot; it makes it easier for everyone!](https://discord.gg/QFC46XKzxU)
 
 
