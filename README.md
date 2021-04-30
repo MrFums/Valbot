@@ -94,6 +94,7 @@ Please know that I will not be wasting time helping you if you can't read requir
 
 ## Previews
 
-![1](https://cdn.discordapp.com/attachments/655191989305737256/775177788986359838/unknown.png)
-![2](https://cdn.discordapp.com/attachments/655191989305737256/775178143987793930/unknown.png)
-![3](https://cdn.discordapp.com/attachments/655191989305737256/775178335092867092/unknown.png)
+![1](https://cdn.discordapp.com/attachments/805228393314516992/837761660265037854/unknown.png)
+![2](https://cdn.discordapp.com/attachments/805228393314516992/837761751420239912/unknown.png)
+![3](https://cdn.discordapp.com/attachments/805228393314516992/837762587671920717/unknown.png)
+![4](https://cdn.discordapp.com/attachments/805228393314516992/837762620018524170/unknown.png)
