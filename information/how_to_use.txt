@@ -25,7 +25,7 @@ It is very easy to use.
 
 5) Valbot will open another window and you will see a console of what the bot is currently doing.
 
-6) Any issues join the discord server: https:gg.gg/valbotserver
+6) Any issues join the discord server: https://gg.gg/valbotserver
 
 
 - Fums 
