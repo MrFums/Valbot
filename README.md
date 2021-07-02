@@ -7,7 +7,7 @@
 [![Stars](https://img.shields.io/github/stars/MrFums/Valbot)](https://github.com/MrFums/Valbot/stargazers)
 
 
-[Make sure to join the Discord server for Valbot; it makes it easier for everyone!](https://discord.gg/3EzWgZYd5P)
+[New Discord Server Link](https://discord.gg/R4gGHvVYYj)
 
 
 ## Features
