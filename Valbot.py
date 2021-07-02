@@ -58,7 +58,7 @@ def main():
     
     
 
-    version = "Valbot v2.2  "
+    version = "Valbot v2.2.2"
     versionstripped = version.replace("Valbot ", "")
     print(Style.RESET_ALL) 
     os.system('mode con: cols=39 lines=31')
@@ -201,7 +201,7 @@ def main():
             print("    and focused")
             print("")
             print(Fore.BLUE + " Discord :", Fore.YELLOW + "Fums#0888")
-            print(Fore.BLUE + " Discord :", Fore.YELLOW + "discord.gg/QFC46XKzxU")
+            print(Fore.BLUE + " Discord :", Fore.YELLOW + "gg.gg/valbotserver")
             print(Fore.CYAN, Fore.BLUE + "Github :", Fore.YELLOW + "https://github.com/MrFums", Style.RESET_ALL)
             print(Style.RESET_ALL)
             print(Style.BRIGHT, Fore.RED)
@@ -242,7 +242,7 @@ def main():
             os.system('cls' if os.name=='nt' else 'clear')
             print(Style.BRIGHT + Fore.GREEN + " Loading Discord invite...")
             time.sleep(1)
-            webbrowser.open('https://discord.com/invite/QFC46XKzxU')
+            webbrowser.open('http://gg.gg/valbotserver')
             time.sleep(1)
             print(Style.RESET_ALL)
             main()

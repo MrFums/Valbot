@@ -44,6 +44,8 @@ pyautogui.FAILSAFE = False
 class bot:
     def __init__(self):
 
+        forceonline = True #if you want to force load assets online from GitHub, is boolean (True / False). True by default
+
         self.buymenubutton = "b" # what button you use to open the buy menu to choose weapons
         self.xpamount = 0  # how much xp the bot has earned during runtime
         self.restarted = 0  # how many times the bot has restarted during runtime
@@ -65,42 +67,48 @@ class bot:
             except Exception:
                 self.foundwebhook = False
 
-        self.versionfix = "Valbot v2.2  " #add two spaces if version number is vx.x and remove spaces if vx.x.x
+        self.versionfix = "Valbot v2.2.2" #add two spaces if version number is vx.x and remove spaces if vx.x.x
         self.versionnumber = self.versionfix.replace("Valbot ", "") #add two spaces if version number is vx.x and remove spaces if vx.x.x
         self.versionnumber = self.versionnumber.replace("  ", "") #add two spaces if version number is vx.x and remove spaces if vx.x.x
         self.version = "Valbot " + self.versionnumber  # variable str to change valbot version name in outputs
         
         self.PROCNAME = "VALORANT-Win64-Shipping.exe"
-        self.discordbutton = [{"label": "Join Discord", "url": "https://discord.gg/QFC46XKzxU"}]
+        self.discordbutton = [{"label": "Join Discord", "url": "http://gg.gg/valbotserver"}]
         self.computer_name = platform.node()
 
         # Why take from raw GitHub repo? So I can update the bots detection images without having to release an update.
         # Change it manually if you wish by reading the valbotReadMe folder called change_resolution.txt
 
-        self.cheaterdetected_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/cheated_detected.png", stream=True).raw)
-        self.continueterminated_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/continue_terminated.png", stream=True).raw)
-        self.deathmatch_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/deathmatch.png", stream=True).raw)
-        self.ingame_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/ingame.png", stream=True).raw)
-        self.inqueue_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/inqueue.png", stream=True).raw)
-        self.ondeathmatch_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/ondeathmatch.png", stream=True).raw)
-        self.play_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/play.png", stream=True).raw)
-        self.playagain_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/playagain.png", stream=True).raw)
-        self.start_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/start.png", stream=True).raw)
+        
 
+        
+        if forceonline is True:
+            self.cheaterdetected_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/cheated_detected.png", stream=True).raw)
+            self.continueterminated_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/continue_terminated.png", stream=True).raw)
+            self.deathmatch_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/deathmatch.png", stream=True).raw)
+            self.ingame_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/ingame.png", stream=True).raw)
+            self.inqueue_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/inqueue.png", stream=True).raw)
+            self.ondeathmatch_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/ondeathmatch.png", stream=True).raw)
+            self.play_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/play.png", stream=True).raw)
+            self.playagain_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/playagain.png", stream=True).raw)
+            self.start_png = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/start.png", stream=True).raw)
+            self.afkwarning = Image.open(requests.get("https://raw.githubusercontent.com/MrFums/ValbotAssets/main/valbot_assets_1920_1080/afkwarning.png", stream=True).raw)
 
-        #self.cheaterdetected_png = "assets/cheated_detected.png"
-        #self.continueterminated_png = "assets/continue_terminated.png"
-        #self.deathmatch_png = "assets/deathmatch.png"
-        #self.ingame_png = "assets/ingame.png"
-        #self.inqueue_png = "assets/inqueue.png"
-        #self.ondeathmatch_png = "assets/ondeathmatch.png"
-        #self.play_png = "assets/play.png"
-        #self.playagain_png = "assets/playagain.png"
-        #self.start_png = "assets/start.png"
+        else:
+            self.cheaterdetected_png = "assets/cheated_detected.png"
+            self.continueterminated_png = "assets/continue_terminated.png"
+            self.deathmatch_png = "assets/deathmatch.png"
+            self.ingame_png = "assets/ingame.png"
+            self.inqueue_png = "assets/inqueue.png"
+            self.ondeathmatch_png = "assets/ondeathmatch.png"
+            self.play_png = "assets/play.png"
+            self.playagain_png = "assets/playagain.png"
+            self.start_png = "assets/start.png"
+            self.afkwarning = "assets/afkwarning.png"
 
         
         try:  # if cant connect to discord (if it isnt open for example), bot doesnt crash
-            self.RPC = Presence(client_id="772841390467711041")  # discord rpc client id
+            self.RPC = Presence(client_id="860610450404409355")  # discord rpc client id
 
             try:
                 self.RPC.close()
@@ -158,8 +166,8 @@ class bot:
 
 
         time.sleep(1)
-        os.startfile('restart.py')  # starts the restart script which reopens this script
-        time.sleep(3)
+        os.startfile(__file__)  # starts the restart script which reopens this script
+        time.sleep(.5)
         quit()  # quits this runtime of the script
 
     def titlescreen(self):
@@ -277,7 +285,7 @@ class bot:
 
         try:
 
-            self.RPC.update(state=("Earned " + earned + " XP"), start=self.timestarted, large_image="valbot22",
+            self.RPC.update(state=("Earned " + earned + " XP"), start=self.timestarted, large_image="valbotlogo",
                             large_text=self.version, details=activeactivity, buttons = self.discordbutton)
 
         except Exception:
@@ -298,6 +306,25 @@ class bot:
 
             play = pyautogui.locateOnScreen(self.play_png, grayscale=True)
             play2 = pyautogui.locateOnScreen(self.play_png, confidence=0.6, grayscale=True)
+
+            afkwarning = pyautogui.locateOnScreen(self.afkwarning, grayscale=True)
+            afkwarning2 = pyautogui.locateOnScreen(self.afkwarning, confidence=0.6, grayscale=True)
+
+            if afkwarning is not None or afkwarning2 is not None:
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] WARNED FOR AFK")
+
+                if afkwarning is not None:
+                    time.sleep(1)
+                    pyautogui.moveTo(afkwarning)
+                    pyautogui.click(afkwarning)
+                    time.sleep(3)
+
+                if afkwarning2 is not None:
+                    time.sleep(1)
+                    pyautogui.moveTo(afkwarning2)
+                    pyautogui.click(afkwarning2)
+                    time.sleep(3)
 
             if play is not None or play2 is not None:
                 print(Style.RESET_ALL)
@@ -339,6 +366,25 @@ class bot:
 
             deathmatch = pyautogui.locateOnScreen(self.deathmatch_png, grayscale=True)
             deathmatch2 = pyautogui.locateOnScreen(self.deathmatch_png, confidence=0.6, grayscale=True)
+
+            afkwarning = pyautogui.locateOnScreen(self.afkwarning, grayscale=True)
+            afkwarning2 = pyautogui.locateOnScreen(self.afkwarning, confidence=0.6, grayscale=True)
+
+            if afkwarning is not None or afkwarning2 is not None:
+                print(Style.RESET_ALL)
+                print(Fore.RED + " [!] WARNED FOR AFK")
+
+                if afkwarning is not None:
+                    time.sleep(1)
+                    pyautogui.moveTo(afkwarning)
+                    pyautogui.click(afkwarning)
+                    time.sleep(3)
+
+                if afkwarning2 is not None:
+                    time.sleep(1)
+                    pyautogui.moveTo(afkwarning2)
+                    pyautogui.click(afkwarning2)
+                    time.sleep(3)
 
             if deathmatch is not None or deathmatch2 is not None:
                 print(Style.RESET_ALL)
@@ -574,7 +620,7 @@ class bot:
 
         try:
 
-            self.RPC.update(state=("Earned " + earned + " XP"), start=self.timestarted, large_image="valbot22",
+            self.RPC.update(state=("Earned " + earned + " XP"), start=self.timestarted, large_image="valbotlogo",
                             large_text=self.version, details=activeactivity, buttons = self.discordbutton)
 
         except Exception:
@@ -618,7 +664,7 @@ class bot:
 
                 try:
 
-                    self.RPC.update(state=("Earned " + earned + " XP"), start=self.timestarted, large_image="valbot22",
+                    self.RPC.update(state=("Earned " + earned + " XP"), start=self.timestarted, large_image="valbotlogo",
                                     large_text=self.version, details=activeactivity, buttons = self.discordbutton)
 
                 except Exception:
@@ -717,7 +763,7 @@ class bot:
 
                 try:
 
-                    self.RPC.update(state=("Earned " + earned + " XP"), start=self.timestarted, large_image="valbot22",
+                    self.RPC.update(state=("Earned " + earned + " XP"), start=self.timestarted, large_image="valbotlogo",
                                     large_text=self.version, details=activeactivity, buttons = self.discordbutton)
 
                 except Exception:
@@ -1159,3 +1205,27 @@ class bot:
 
 bot = bot()
 bot.firststart()
+#3aa12cb016ae4dd8b7bfa9befe281704
+#592a0701246f4de688fcad1578359aea
+#a5cf473583d4423e90b7ec6d4785e2cd
+#c437acc4ac7d4a8490f591145db28c79
+#1fb947f837ef48b38e394ff5a5be3b50
+#51f7ac6fb0a84fc287e66cfef2e80e74
+#76d2a16aa66446749819a5b2d88ed2f7
+#28523d44db2844eebc7363e3a9c937db
+#b0c9290a30eb41c6aad97287db45a622
+#d0b42728a6134bb9baa4ab0a04ad3666
+#768ae6049c404ba79b6db3c392690ba8
+#d403060bfa29483aa23cffd805e4733a
+#c090e2d60a0345c5a05a7d8d0bef495e
+#9662f64ca2154e1b9953a8910dd2bdbd
+#c9463b4f3637417fac2ba4837d16a551
+#c2847397c0d04eafb28de717ef4f2b9e
+#26c44adbcce34f98bb6ad16dcdf25126
+#cb221ca5629c42eeae0bf5500c60d16e
+#ce0c8df6085e48e7b9d5377847b966de
+#87d77529e8364d91b60c8d43afedfbd8
+#07226ba53435419e984043c12a34eb7f
+#36e82352405f411887c891e461571c04
+#26d14bfd63af4ce2bf6d19acecfd5c69
+#4b3b1ff262e24668be834372a77b8136

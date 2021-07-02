@@ -1,0 +1,35 @@
+Simple text on how to change the bots resolution detection::
+
+
+The base bot only works with 1920x1080 monitors. There is a way to make it work with any resolution:
+
+What you need to do is go inside the assets folder and get your own version of all the images in the
+correct resolution. This will ensure that Valbot can detect the correct pixel match images as some buttons have different dimensions on other resolutions.
+
+
+You will need to turn OFF force load from online in the bot. Do this by going to bot.py and edit it with idle, notepad++ etc.
+Find the line "forceonline = True". It should be around line 47. Change the "True" to "False" without the quotation marks.
+
+This will then use the images used in your assets folder, go into that folder and then change all the images in there to your own versions of the images that you
+screenshot from IN GAME. This means to REPLACE THEM WITH YOUR VERSIONS. You must keep the same KIND of image, ie for the start button, make sure it is the SAME 
+button but YOU took the screenshot. The names MUST be the same aswell.
+
+Below you will find some of the locations of where to find the images.
+
+
+Where to find the different images:
+
+cheater_detected.png :: When you have a screen that says cheater detected. This is the CHEATER DETECTED text.
+continue_terminated.png :: When you have a screen that says cheater detected. This is the CONTINUE button. (NOT USED IN 2.2+)
+deathmatch.png :: After clicking the play button, it is ONLY the text that says DEATHMATCH
+inqueue.png :: After a game has been found, there will be a countdown before the match starts, it is the party not ready text where the start button / inqueue text normally is
+ondeathmatch.png :: After clicking the play button and then deathmatch, it is the text and lower crest that says DEATHMATCH
+play.png :: The big play button in the main menu
+playagain.png :: When a match has finished and you have the xp screen, it is at the bottom of the screen
+start.png :: After you have clicked the play button, it is as the bottom of the screen and says START
+afkwarning.png :: When you get warned for afk in a game, it is the button that says I UNDERSTAND
+
+
+That is as much help as I can give you with this, please dont dm me for help, ask in the help channel.
+
+- Fums#0888 
