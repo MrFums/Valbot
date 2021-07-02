@@ -1,0 +1,38 @@
+HOW TO USE VALBOT SAFELY
+
+It has come to my attention recently that Riot have started looking for people running AFK bots / macros in Deathmatch.
+So how can we avoid getting detected by them?
+
+ 
+1) DO NOT RUN THE BOT FOR A LONG PERIOD OF TIME
+This means try not to run the bot for longer than 12~ hours at a time. To automatically turn off the bot you can set an XP limit, or if you own premium, you can enable the safe-cycle feature. Ask more about it in the relevant channels in the discord.
+ 
+2) PLAY LEGIT GAMES IN BETWEEN
+If you play games in between the AFK session, it will make it seem that your account is active and it isn't just a "bot" account. You must play 2 - 4 deathmatch games LEGIT, or you could play ~4 spike rush or 1-2 unrated games, and make sure to try your best! You need to have a decent K/D to make it seem like you are actually PLAYING the game.
+ 
+3) DO NOT HAVE OPEN "WEIRD" PROGRAMS WHILE RUNNING VALORANT
+Personally, I use a program called "Process Hacker" which is essentially a better Task Manager. I say this because I know some games, such as EFT, have banned players for having this program open in the background due to the program name and that it interferes with running processes. Try and close as many programs as possible.
+ 
+4) DO NOT RUN THE BOT ON A NEW ACCOUNT
+If you want to make an account "comp ready" please don't run the bot on that fresh account. You will get an account ban pretty quickly if you do. Play games legit to get it ready to play comp or to unlock an agent on a fresh account.
+ 
+5) ONLY DOWNLOAD THE LATEST VERSION OF VALBOT
+If you are a normal user, the download will be the most recent release will be on GitHub. As for premium users, the same rule applies and those downloads can be found in their normal place.
+ 
+6) CHANGE THE CODE 
+If you know what you are doing, you can change the code of the Valbot. Doing this will change the file signature and hash, making it different to everyone else. NOTE: I will not help you with any version of Valbot that has been changed in anyway from my release.
+ 
+7) DO NOT USE STRAIGHT AFTER A MAJOR UPDATE
+Wait a few days after a major update (such as a new act update) to see if the methods how Valbot works (external pixel detection and mouse events in the menu) have not been patched or detected. You can check many different forums on the internet or ask in my discord server.
+ 
+8) DO NOT LINK YOUR RIOT ACCOUNT TO DISCORD
+You can connect your Riot account to your discord account for other people to see: DO NOT DO THIS. If you want to keep this connected, join this server on an alt account or keep in connected at your own risk! Very fresh accounts get instantly banned from trying to join this server, DM me on Discord if you have an issue.
+ 
+9) USE THE UNIQUEVALBOT.PY FILE
+Just drop it into your Valbot folder and run it. It will make your file hash and signature different from everyone else; if Riot decide to detect Valbot by this method, then you will not be connected to the version they download from GitHub. You will find this in the most recent releases of Valbot from version 2.2.2+ and all Premium builds.
+ 
+Please remember that you use Valbot at your OWN RISK, that goes for any version. At the end of the day, it is technically not allowed. If you do happen to get banned, please send a message in #🚨ban-reports and DO NOT directly message me complaining.
+
+Discord Server: https://gg.gg/valbotserver
+Discord Server: https://gg.gg/valbotserver
+Discord Server: https://gg.gg/valbotserver

@@ -1,0 +1,31 @@
+[UPDATED 2ND OF JULY 2021]
+
+
+Valbot is an AFK XP Farmer for Valorant.
+It is very easy to use.
+
+
+1) Download from https://github.com/MrFums/Valbot/releases/latest
+
+1b) If you don't have python download it here: https://www.python.org/ftp/python/3.9.0/python-3.9.0-amd64.exe
+
+1c) Make sure to press "ADD TO PATH" when installing
+
+2) Find your shortcut for Valorant and put it in the same folder where Valbot is.
+
+2b) It should look like this (https://ibb.co/Qfn2sdM) or on your desktop, like this (https://ibb.co/t46ScYL)
+
+2c) When finished with this step, it will look like this (https://ibb.co/7NYnFXT) 
+
+3) Go to where your Valbot files are and open PackageInstaller.bat
+
+3b) If all is right, your packages are installed and you can run Valbot.py
+
+4) After doing so you will see some menu options. To start the bot, press 1 and then enter
+
+5) Valbot will open another window and you will see a console of what the bot is currently doing.
+
+6) Any issues join the discord server: https:gg.gg/valbotserver
+
+
+- Fums 
