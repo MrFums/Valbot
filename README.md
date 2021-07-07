@@ -1,6 +1,12 @@
-
-
 # Valbot
+
+**FAIR USE**
+
+Copyright Disclaimer under section 107 of the Copyright Act 1976, allowance is made for “fair use” for purposes such as criticism, comment, news reporting, teaching, scholarship, education and research.
+
+Fair use is a use permitted by copyright statute that might otherwise be infringing. 
+
+Non-profit, educational or personal use tips the balance in favor of fair use. 
 
 [![Issues](https://img.shields.io/github/issues/MrFums/Valbot)](https://github.com/MrFums/Valbot/issues)
 [![Forks](https://img.shields.io/github/forks/MrFums/Valbot)](https://github.com/MrFums/Valbot/network)
@@ -8,7 +14,8 @@
 
 
 ## Discord Server:
-[https://discord.gg/R4gGHvVYYj](https://discord.gg/R4gGHvVYYj)
+[https://discord.gg/R4gGHvVYYj](https://gg.gg/valbotserver)
+
 
 
 ## Features
@@ -26,7 +33,7 @@
 
 ## Requirements
 
-Only works on 1920 x 1080 resolution. If you wish to add a custom resolution, you need to get your own version of the images from the `images` folder, call them EXACTLY the same name and replace the original files.
+Only works on 1920 x 1080 resolution. If you wish to make the bot work with a different resolution other than 1920 x 1080, you need to get your own version of the images for the bot to recognize. Read on how to do this [here](https://github.com/MrFums/Valbot/blob/master/information/change_resolution.txt).
 
 Run the batch file as Administator to install the dependencies. 
 Seems to only work on 64bit Windows 10 with Python 3.9 
@@ -35,9 +42,11 @@ For the program to function properly, please copy and paste your OWN Valorant sh
 
 You also need a functioning brain, please have one of these; it's very important.
 
+You should also read the [saftey precautions](https://github.com/MrFums/Valbot/blob/master/information/safetyprecautions.txt) to keep your account safe while running Valbot.
+
 ### Windows installation
 
-You will have to have a few things installed before running the sniper. This installation guide assumes that you are on a 64bit Windows system.
+You will have to have a few things installed before running Valbot. This installation guide assumes that you are on a 64bit Windows system.
 
 First, you will need to install Python. It's recommended to use either version `3.9.0` or `3.8.6`. You must use a Python version above `3.7`. 
 
@@ -58,14 +67,14 @@ Run through the installer as normal, then download the Valbot files.
 
 [Download here](https://github.com/MrFums/Valbot/releases/latest)
 
-Click on the zip file that says `Valbot-X.X.X` and unzip to where you would like the bot to be stored. Be advised to not put this in an Admin only folder as the bot must write the folder it is in to store runtime data.
+Click on the zip file that says `Valbot-X.X.X` and unzip to where you would like the bot to be stored. Be advised to not put this in an Admin only folder as the bot must write the folder it is in to manage the `config.ini` file it creates.
 
 
 ## Instructions
 
 1- Install Python 3.9.0.
 
-2- Open `Install_Packages.bat` as admin to install pakcages using pip. Do this after every update to maintain functionality.
+2- Open `PackageInstaller.bat` as admin to install pakcages using pip. Do this after every update to maintain functionality.
 
 3- Open `Valbot.py` and read the bot console.
 
