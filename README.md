@@ -14,7 +14,7 @@ Fair use is a use permitted by copyright statute that might otherwise be infring
 Non-profit, educational or personal use tips the balance in favor of fair use. 
 
 ## Discord Server:
-[https://discord.gg/R4gGHvVYYj](https://gg.gg/valbotserver)
+[Valbot Discord Server](https://gg.gg/valbotserver)
 
 
 
