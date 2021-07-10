@@ -54,7 +54,7 @@ First, you will need to install Python. It's recommended to use either version `
 
 Go to the following link and download Python:
 
-`https://www.python.org/ftp/python/3.9.0/python-3.9.0-amd64.exe`
+[https://www.python.org/ftp/python/3.9.0/python-3.9.0-amd64.exe](https://www.python.org/ftp/python/3.9.0/python-3.9.0-amd64.exe)
 
 Once you have opened the installer, make sure that you add Python to path. Your installer should look like this:
 
