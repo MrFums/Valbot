@@ -98,6 +98,28 @@ If you wish to donate or know more, please send me a message on Discord: `Fums#0
 
 The minimum donation amount to gain access to *Valbot Premium* is 7USD / 6EUR / 5GBP __after fees__. Please keep in mind by donating you aren't "buying" access to Valbot Premium; it's merely a way of saying thank you for donating.
 
+### Feature List
+```
+- Random mouse movements
+- Humanised mouse movements
+- Highly improved anti-afk system
+- Most base features are rewritten
+- XP Target (set how much XP you want and you will be tagged in Discord when this has been reached)
+- XP Limit (set how much XP you want and then your computer will be shut down after reaching this)
+- Improved restart function
+- Toggle Discord Rich Presence
+- Fallback image assets incase Valbot can't connect to GitHub
+- Debug Discord webhook
+- Better detections of current stage (kicked from game, invite screen appearing etc)
+- Better front-end (includes submenus for XP options)
+- Safe Cycle (run the bot for x amount of hours and pause for y amount of hours)
+- Mute Valorant when in a match and unmute when in menu
+- Sends a message when AFK in chat
+- Force close Valbot hotkey (F5)
+- Major Bugfixes
+- Major optimization work
+```
+
 
 ## Previews
 
