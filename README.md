@@ -88,6 +88,16 @@ Click on the zip file that says `Valbot-X.X.X` and unzip to where you would like
 
 8- (Optional) Setup a Discord webhook to get updates to your discord server for when the bot has completed a game.
 
+## Valbot Premium
+
+This version of the bot is a variant of Valbot that I work on in my free time. The updates or not guaranteed; think of it as my own private version. As a thank you for donating, you will be given access to this version of the bot and access to the private discord server.
+
+Keep in mind that the premium build is not fully finished and is still being worked on. There is no promise that premium will continue to be updated as it is classed as a closed project. As it is classed as a donation, I will not accept any refund requests under any circumstances.
+
+If you wish to donate or know more, please send me a message on Discord: `Fums#0888`
+
+The minimum donation amount to gain access to *Valbot Premium* is 7USD / 6EUR / 5GBP __after fees__. Please keep in mind by donating you aren't "buying" access to Valbot Premium; it's merely a way of saying thank you for donating.
+
 
 ## Previews
 
