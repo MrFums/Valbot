@@ -19,7 +19,7 @@ print ()
 print (Fore.BLACK)
 input()
 
-if path.exists('bot.py') and path.exists('valbot.py') and path.exists('restart.py'):
+if path.exists('bot.py') and path.exists('valbot.py'):
     try:
         valbotpy = open('bot.py', 'a')
         for i in range(1,randint(2,20)):      
