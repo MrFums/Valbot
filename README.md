@@ -13,6 +13,10 @@ Fair use is a use permitted by copyright statute that might otherwise be infring
 
 Non-profit, educational or personal use tips the balance in favor of fair use. 
 
+## Important Notice:
+
+Valbot is now DEPRECATED. Riot seems to have added, and are constantly improving, their AFK bot detection vectors. Valbot will not receive support or updates for the foreseeable future. Running the program is now considered unsafe and I do NOT recommend it. Some changes will also need to be made to the bot to accomodate the introdouction of the new game launcher; around line 270.
+
 ## Discord Server:
 [Fums Community Server](https://discord.gg/RDgbSsKTS5)
 
