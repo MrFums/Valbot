@@ -1,3 +1,5 @@
+Please note; this project is now no longer updated. Please do not message me or add my discord about it, I wont respond. Thanks
+
 # Valbot
 
 [![Issues](https://img.shields.io/github/issues/MrFums/Valbot)](https://github.com/MrFums/Valbot/issues)
@@ -16,10 +18,6 @@ Non-profit, educational or personal use tips the balance in favor of fair use.
 ## Important Notice:
 
 Valbot is now DEPRECATED. Riot seems to have added, and are constantly improving, their AFK bot detection vectors. Valbot will not receive support or updates for the foreseeable future. Running the program is now considered unsafe and I do NOT recommend it. Some changes will also need to be made to the bot to accomodate the introdouction of the new game launcher; around line 270.
-
-## Discord Server:
-[Fums Community Server](https://discord.gg/RDgbSsKTS5)
-
 
 
 ## Features
@@ -98,7 +96,6 @@ This version of the bot is a variant of Valbot that I work on in my free time. T
 
 Keep in mind that the premium build is not fully finished and is still being worked on. There is no promise that premium will continue to be updated as it is classed as a closed project. As it is classed as a donation, I will not accept any refund requests under any circumstances.
 
-If you wish to donate or know more, please send me a message on Discord: `Fums#0888`
 
 The minimum donation amount to gain access to *Valbot Premium* is 7USD / 6EUR / 5GBP __after fees__. Please keep in mind by donating you aren't "buying" access to Valbot Premium; it's merely a way of saying thank you for donating.
 
