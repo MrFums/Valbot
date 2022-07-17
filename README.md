@@ -1,4 +1,4 @@
-Please note; this project is now no longer updated. Please do not message me or add my discord about it, I wont respond. Thanks
+# Please note; this project is now no longer updated. Please do not message me or add my discord about it, I wont respond. Thanks
 
 # Valbot
 
